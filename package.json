@@ -1,0 +1,16 @@
+{
+  "name": "dependra",
+  "version": "0.0.1",
+  "description": "Source code analysis platform for dependencies, architecture, and code quality. TBD...",
+  "keywords": [
+    "dependency",
+    "scope",
+    "code"
+  ],
+  "license": "ISC",
+  "author": "vtjvlas",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
