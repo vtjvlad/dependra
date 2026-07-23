@@ -1,0 +1,31 @@
+---
+title: MVP backlog
+status: draft
+mvp: true
+source: .dep/.blueprint/80-roadmap
+---
+
+# MVP backlog (0.0.1)
+
+Задачи текущего этапа. Версию пакета **не повышать**.
+
+| ID | Название | Приоритет | dependsOn | Статус |
+|----|----------|-----------|-----------|--------|
+| MVP-001 | Утвердить рабочую спеку `docs/` + `handbook/` | высокий | — | `в работе` |
+| MVP-002 | Каркас `src/`: cli, core, регистрация инспекторов | высокий | MVP-001 | `запланировано` |
+| MVP-003 | ADR: выбор JS AST-парсера | высокий | MVP-001 | `запланировано` |
+| MVP-004 | Модуль `parsers` + загрузка SourceFile | высокий | MVP-002, MVP-003 | `запланировано` |
+| MVP-005 | Инспектор basic-file-information | высокий | MVP-002 | `запланировано` |
+| MVP-006 | Инспектор import-export-analysis | высокий | MVP-004 | `запланировано` |
+| MVP-007 | Инспектор dependency-analysis | высокий | MVP-006 | `запланировано` |
+| MVP-008 | Reporters text + json | высокий | MVP-005 | `запланировано` |
+| MVP-009 | CLI флаги MVP + коды выхода | высокий | MVP-005, MVP-006, MVP-007, MVP-008 | `запланировано` |
+| MVP-010 | Фикстуры и тесты AC | высокий | MVP-009 | `запланировано` |
+| MVP-011 | Обновить handbook/context после стабилизации | средний | MVP-010 | `запланировано` |
+
+Детали спеки:
+
+- [mvp-scope.md](../../docs/20-features/mvp-scope.md)
+- [interface.md](../../docs/50-cli/interface.md)
+
+Шаблон новой задачи: [task-template.md](task-template.md).
