@@ -17,37 +17,54 @@ source: .dep/.blueprint/20-features/unified-project-model.md, 99-terminology
 
 ```js
 /**
+ * @typedef {object} BasicFileInfo
+ * @property {string} name
+ * @property {string} ext
+ * @property {string} format
+ * @property {string|null} mimeType
+ * @property {number} size
+ * @property {string|null} createdAt ISO-8601
+ * @property {string} modifiedAt ISO-8601
+ * @property {string|null} accessedAt ISO-8601
+ * @property {string|null} owner Десятичная строка uid (имя пользователя — deferred)
+ * @property {string|null} group Десятичная строка gid
+ * @property {"javascript"|"unknown"} language
+ * @property {"node"|null} engine
+ * @property {"file"} fileType
+ */
+
+/**
  * @typedef {object} SourceFile
  * @property {string} path Абсолютный путь
- * @property {string} [relativePath] Относительно cwd/проекта
- * @property {string} language "javascript"
+ * @property {string} [relativePath] Относительно cwd
+ * @property {"javascript"} language
  * @property {"esm"|"cjs"|"unknown"} moduleKind
- * @property {string} [sourceText] Текст (если загружен)
- * @property {object} [ast] AST (если построен)
- * @property {BasicFileInfo} [basic] Результат basic-инспектора
+ * @property {string} [sourceText]
+ * @property {object} [ast]
+ * @property {BasicFileInfo} [basic]
  */
 
 /**
  * @typedef {object} ImportRecord
- * @property {string} source Спецификатор из кода ("./x.js", "fs", …)
+ * @property {string|null} source Спецификатор или null, если dynamic import(expr)
  * @property {"static"|"dynamic"|"require"} kind
- * @property {string} [resolvedPath] Разрешённый путь к файлу, если удалось
- * @property {boolean} isExternal Пакет/builtin vs локальный файл
+ * @property {string|null} resolvedPath
+ * @property {boolean} isExternal
  * @property {{ line: number, column: number }} [loc]
  */
 
 /**
  * @typedef {object} ExportRecord
  * @property {"named"|"default"|"all"|"commonjs"} kind
- * @property {string} [name] Имя экспорта (для named)
- * @property {string} [from] Для реэкспорта — спецификатор
+ * @property {string|null} [name]
+ * @property {string|null} [from]
  * @property {{ line: number, column: number }} [loc]
  */
 
 /**
  * @typedef {object} DependencyEdge
- * @property {string} from Абсолютный путь файла-источника
- * @property {string} to Абсолютный путь или спецификатор (если не resolved)
+ * @property {string} from Абсолютный путь источника
+ * @property {string} to Абсолютный путь или спецификатор, если не resolved
  * @property {"imports"|"imported-by"} direction Относительно целевого файла отчёта
  * @property {ImportRecord} [via]
  */
@@ -57,7 +74,7 @@ source: .dep/.blueprint/20-features/unified-project-model.md, 99-terminology
  * @property {string} cwd
  * @property {string} targetPath
  * @property {Object.<string, SourceFile>} files
- * @property {ImportRecord[]} [imports]
+ * @property {ImportRecord[]} [imports] Imports целевого файла (и при необходимости кэша кандидатов)
  * @property {ExportRecord[]} [exports]
  * @property {DependencyEdge[]} [edges]
  */
@@ -65,10 +82,11 @@ source: .dep/.blueprint/20-features/unified-project-model.md, 99-terminology
 
 ## Правила
 
-1. Источники анализа (AST, FS metadata) **дополняют** модель, а не живут изолированно.
-2. Повторное чтение файла / пересборка AST — только при необходимости (изменение, miss в модели).
-3. Инспекторы пишут в согласованные поля; reporters читают модель + результаты инспекторов.
-4. LSP / Tree-sitter / полная семантическая модель — **deferred**; архитектура не должна запрещать их добавление позже.
+1. Источники анализа (AST, FS metadata) **дополняют** модель.
+2. Повторное чтение / пересборка AST — только при необходимости.
+3. Инспекторы пишут в согласованные поля; reporters читают `results` + при необходимости модель.
+4. Имя флага внешнего модуля везде: **`isExternal`** (не `external`).
+5. LSP / Tree-sitter / полная семантика — **deferred**.
 
 ## Пример фрагмента модели
 
@@ -91,10 +109,17 @@ source: .dep/.blueprint/20-features/unified-project-model.md, 99-terminology
       "resolvedPath": "/home/u/proj/src/lib.js",
       "isExternal": false,
       "loc": { "line": 1, "column": 0 }
+    },
+    {
+      "source": null,
+      "kind": "dynamic",
+      "resolvedPath": null,
+      "isExternal": false,
+      "loc": { "line": 4, "column": 0 }
     }
   ],
   "exports": [
-    { "kind": "named", "name": "run", "loc": { "line": 10, "column": 0 } }
+    { "kind": "named", "name": "run", "from": null, "loc": { "line": 10, "column": 0 } }
   ],
   "edges": []
 }
@@ -103,5 +128,6 @@ source: .dep/.blueprint/20-features/unified-project-model.md, 99-terminology
 ## Acceptance criteria
 
 - [ ] MVP-инспекторы опираются на `ProjectModel` / `SourceFile`
-- [ ] Импорты/экспорты представлены `ImportRecord` / `ExportRecord`
-- [ ] Нет параллельных несовместимых структур «на инспектор»
+- [ ] `ImportRecord.source` допускает `null`
+- [ ] Везде используется `isExternal`
+- [ ] `BasicFileInfo` согласован с basic-инспектором

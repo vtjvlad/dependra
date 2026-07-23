@@ -18,8 +18,8 @@ source: .dep/.blueprint/80-roadmap
 | MVP-005 | Инспектор basic-file-information | высокий | MVP-002 | `запланировано` |
 | MVP-006 | Инспектор import-export-analysis | высокий | MVP-004 | `запланировано` |
 | MVP-007 | Инспектор dependency-analysis | высокий | MVP-006 | `запланировано` |
-| MVP-008 | Reporters text + json | высокий | MVP-005 | `запланировано` |
-| MVP-009 | CLI флаги MVP + коды выхода | высокий | MVP-005, MVP-006, MVP-007, MVP-008 | `запланировано` |
+| MVP-008 | Reporters text + json (все MVP-секции) | высокий | MVP-005, MVP-006, MVP-007 | `запланировано` |
+| MVP-009 | CLI флаги MVP + pipeline + коды выхода | высокий | MVP-005, MVP-006, MVP-007, MVP-008 | `запланировано` |
 | MVP-010 | Фикстуры и тесты AC | высокий | MVP-009 | `запланировано` |
 | MVP-011 | Обновить handbook/context после стабилизации | средний | MVP-010 | `запланировано` |
 

@@ -40,10 +40,15 @@ source: .dep/.blueprint/30-architecture/requirements/modules-and-responsibilitie
 
 ## MVP-минимум для реализации
 
-Для `0.0.1` достаточно реально задействовать: `cli`, `core`, `inspectors`, `parsers`, `dependency`/`graph` (можно совместить тонко на старте **только если** границы контрактов сохранены), `reporters`, `utils`. Остальные каталоги — по мере задач roadmap, не «пустышки ради дерева».
+Для `0.0.1` достаточно реально задействовать: `cli`, `core`, `inspectors`, `parsers`, `dependency`/`graph` (тонкое совмещение на старте **только если** публичные границы сохранены), `reporters`, `utils`.
+
+Каталоги из целевого дерева (`metadata`, `plugins`, …) **не создавать пустыми**. Появляются вместе с кодом задач roadmap.
+
+Оркестрация вызовов инспекторов — ответственность `core` по pipeline в [interface.md](../50-cli/interface.md).
 
 ## Acceptance criteria
 
 - [ ] Список ролей согласован с [project-structure.md](project-structure.md)
 - [ ] Инспекторы не содержат CLI-парсинг
 - [ ] CLI не содержит парсинг AST
+- [ ] Нет пустых каталогов модулей «на будущее»

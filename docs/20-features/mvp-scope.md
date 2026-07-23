@@ -23,6 +23,8 @@ source: .dep/.blueprint/20-features/README.md, 00-project/main-rule.md
 
 Язык целевого файла: **JavaScript** (ESM и CJS). Один файл за запуск.
 
+Один инспектор `import-export-analysis` на `--imports`/`--exports`; `--graph` требует prerequisite imports в модели (см. [interface.md](../50-cli/interface.md)). Флаг `--level` не в MVP.
+
 ## Не входит
 
 См. [deferred/README.md](deferred/README.md):

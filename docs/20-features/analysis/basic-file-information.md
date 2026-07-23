@@ -30,16 +30,16 @@ tags: [B]
 | `name` | string | Имя файла |
 | `ext` | string | Расширение (с точкой или `""`) |
 | `format` | string | Краткий формат (`"javascript"`, `"json"`, `"unknown"`, …) |
-| `mimeType` | string \| null | MIME, если определим; иначе null |
+| `mimeType` | string \| null | По карте расширений MVP (ниже); иначе null |
 | `size` | number | Размер в байтах |
 | `createdAt` | string \| null | ISO-8601 birthtime, если доступно |
 | `modifiedAt` | string | ISO-8601 mtime |
 | `accessedAt` | string \| null | ISO-8601 atime, если доступно |
-| `owner` | string \| null | uid/имя владельца, если доступно на платформе |
-| `group` | string \| null | gid/имя группы, если доступно |
-| `language` | string | Для MVP: `"javascript"` \| `"unknown"` |
-| `engine` | string \| null | Для MVP: `"node"` если JS, иначе null |
-| `fileType` | string | `"file"` (симлинки: следовать или пометить — см. правила) |
+| `owner` | string \| null | Десятичная строка **uid** (`"1000"`); резолв имени — deferred |
+| `group` | string \| null | Десятичная строка **gid**; резолв имени — deferred |
+| `language` | `"javascript"` \| `"unknown"` | |
+| `engine` | `"node"` \| null | `"node"` если language = javascript |
+| `fileType` | `"file"` | Симлинки: следовать к цели (см. правила) |
 
 ### Пример
 
@@ -61,12 +61,27 @@ tags: [B]
 }
 ```
 
+## MIME и format (MVP)
+
+Только по расширению (без magic-bytes):
+
+| ext | format | mimeType |
+|-----|--------|----------|
+| `.js`, `.mjs`, `.cjs` | `javascript` | `text/javascript` |
+| `.json` | `json` | `application/json` |
+| `.md` | `markdown` | `text/markdown` |
+| иное / пусто | `unknown` | `null` |
+
+`language`: `javascript` для `.js`/`.mjs`/`.cjs`, иначе `unknown`.
+
 ## Правила
 
 1. Путь нормализуется; относительный путь разрешается от `cwd`.
 2. Если birthtime недоступен — `createdAt: null`, не ошибка.
-3. Симлинк на файл: анализировать цель; при необходимости позже добавить `isSymlink` (не блокер MVP).
-4. Каталог вместо файла — ошибка `validation` / `NOT_A_FILE`.
+3. Симлинк на файл: `stat`/`read` цели; поле `isSymlink` — deferred.
+4. Каталог вместо файла — `NOT_A_FILE`.
+5. `owner`/`group`: строка от `uid`/`gid` через `String(n)`; если платформа не даёт — `null` (не ошибка).
+6. Типы полей согласованы с `BasicFileInfo` в [project-model.md](../../20-architecture/project-model.md).
 
 ## Ошибки
 
@@ -84,5 +99,6 @@ tags: [B]
 ## Acceptance criteria
 
 - [ ] Все поля таблицы присутствуют в JSON-выводе
-- [ ] Для `.js` / `.mjs` / `.cjs` `language` = `"javascript"`
+- [ ] Для `.js` / `.mjs` / `.cjs` — `language` = `"javascript"`, MIME из таблицы
+- [ ] `owner`/`group` — десятичные строки uid/gid или null
 - [ ] Ошибка на каталоге и отсутствующем пути

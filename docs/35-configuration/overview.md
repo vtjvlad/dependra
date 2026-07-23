@@ -31,6 +31,8 @@ source: .dep/.blueprint/35-configurations
 | `pathMode` | `"relative"` |
 | `output` | `"text"` (`--json` → `"json"`) |
 
+Параметр / флаг `level` в MVP **отсутствует** (см. [analysis-levels.md](../40-development/analysis-levels.md)).
+
 ## Долгосрочная модель (справочно, deferred)
 
 Иерархия blueprint: defaults → global → project → user → profile → CLI. Типы параметров и валидация по схеме — когда появятся config-файлы.

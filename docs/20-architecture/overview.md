@@ -31,7 +31,14 @@ Dependra строится как **модульная** система: масш
 - [project-structure.md](project-structure.md) — дерево `src/`
 - [limitations.md](limitations.md) — запреты
 
+## Pipeline (кратко)
+
+`cli` → `core` (порядок инспекторов, prerequisites) → `inspectors` / `parsers` → `reporters`.
+
+Полный порядок и правила `results`: [../50-cli/interface.md](../50-cli/interface.md).
+
 ## Acceptance criteria
 
 - [ ] Новые фичи оформляются модулями/инспекторами с контрактом
 - [ ] Ядро не знает внутренностей инспекторов
+- [ ] Graph не запускается без подготовки imports в модели

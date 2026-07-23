@@ -20,7 +20,7 @@ source: .dep/.blueprint/20-features/priority-tags.md
 | `-D` | deep | Глубокая |
 | `-F` | full | Полная |
 | `-I` | intelligence | С использованием ИИ |
-| `-E` | (visual/enhance) | Визуализация / enhancement (в blueprint) |
+| `-E` | enhance / visual | Визуализация (Mermaid/Graphviz) и file-enhancement в blueprint; **не** CLI-флаг MVP |
 
 ## Для MVP (0.0.1)
 

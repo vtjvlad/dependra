@@ -36,6 +36,7 @@ source: .dep/.blueprint/90-context/project-context-spec.md
 2. ADR, roadmap и context живут в `handbook/`.
 3. `.dep/.blueprint` — архив/макет, не рабочий источник правок.
 4. Версия пакета на этом этапе — `0.0.1`, не повышать.
-5. MVP: один JS-файл, basic + imports/exports + graph, CLI + JSON.
+5. MVP: один JS-файл; basic + imports/exports + graph; CLI + JSON; один инспектор import-export; pipeline prerequisites для graph; без `--level`.
+6. Единое поле внешнего модуля: `isExternal`. `ImportRecord.source` может быть `null`.
 
 Изменения этого списка — только с approve владельца.
