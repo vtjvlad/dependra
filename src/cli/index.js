@@ -5,15 +5,14 @@ import { isAbsolute, resolve } from "node:path";
 import { createAnalysisContext, runPipeline } from "../core/index.js";
 import { registerBuiltInInspectors } from "../inspectors/index.js";
 import { formatReport } from "../reporters/index.js";
+import { PACKAGE_VERSION, formatCliVersion } from "../version.js";
 import { parseArgs } from "./parse-args.js";
 
 registerBuiltInInspectors();
 
-const PACKAGE_VERSION = "0.0.1";
-
 const HELP = `dependra <file> [options]
 
-Минимальный CLI анализа одного JS-файла (MVP 0.0.1).
+Минимальный CLI анализа одного JS-файла (Dependra v${PACKAGE_VERSION}).
 
 Options:
   --basic              Базовая информация о файле
@@ -49,7 +48,7 @@ async function main() {
   }
 
   if (parsed.version) {
-    process.stdout.write(`${PACKAGE_VERSION}\n`);
+    process.stdout.write(`${formatCliVersion()}\n`);
     return 0;
   }
 

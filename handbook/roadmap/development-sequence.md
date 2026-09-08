@@ -57,7 +57,7 @@ source: .dep/.blueprint/80-roadmap/development-sequence.md, 00-project/main-rule
 
 1. Доработка по AC из docs
 2. Обновление `handbook/context` — **MVP-011 сделано**
-3. Переход к S02 (версия пакета остаётся `0.0.1`)
+3. Переход к S02 (версия пакета `0.0.2`; дальше **не повышать** без решения владельца)
 
 Задачи: [mvp-backlog.md](mvp-backlog.md) (`MVP-001`…`011` — все `завершено`).
 

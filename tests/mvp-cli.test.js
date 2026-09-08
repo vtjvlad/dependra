@@ -36,10 +36,10 @@ function runCli(args, opts = {}) {
 }
 
 describe("MVP CLI AC", () => {
-  it("--version prints 0.0.1", async () => {
+  it("--version prints Dependra v0.0.2", async () => {
     const { code, stdout } = await runCli(["--version"]);
     assert.equal(code, 0);
-    assert.equal(stdout.trim(), "0.0.1");
+    assert.equal(stdout.trim(), "Dependra v0.0.2");
   });
 
   it("missing file exits 1", async () => {
@@ -57,7 +57,7 @@ describe("MVP CLI AC", () => {
     const { code, stdout } = await runCli([APP, "--basic", "--json"]);
     assert.equal(code, 0);
     const report = JSON.parse(stdout);
-    assert.equal(report.version, "0.0.1");
+    assert.equal(report.version, "0.0.2");
     const data = report.results["basic-file-information"].data;
     for (const key of [
       "name",
@@ -187,6 +187,6 @@ describe("MVP CLI AC", () => {
     assert.equal(code, 0);
     assert.equal(stderr, "");
     const report = JSON.parse(stdout);
-    assert.equal(report.version, "0.0.1");
+    assert.equal(report.version, "0.0.2");
   });
 });

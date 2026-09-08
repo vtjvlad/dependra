@@ -9,7 +9,7 @@ source: .dep/.blueprint/50-user/cli-flags.md
 
 ## Цель
 
-Минимальный командный интерфейс для запуска MVP-операций. Версия пакета: `0.0.1`.
+Минимальный командный интерфейс для запуска MVP-операций. Версия пакета: `0.0.2`.
 
 ## Entrypoint
 
@@ -38,7 +38,7 @@ dependra <file> [options]
 | `--json` | Вывод JSON вместо текста |
 | `--path-mode <name\|relative\|absolute>` | Режим путей для graph (default: `relative`) |
 | `--help` | Справка |
-| `--version` | Версия пакета (`0.0.1`) |
+| `--version` | Версия пакета: `Dependra v0.0.2` |
 
 **Не в MVP:** `--level` (уровни — только концептуальная карта, см. [analysis-levels.md](../40-development/analysis-levels.md)).
 
@@ -117,7 +117,7 @@ dependra <file> [options]
 - [ ] Каждый флаг операции включает только свою **секцию отчёта** (кроме default-all)
 - [ ] `--imports` и `--exports` дают один ключ `import-export-analysis` с отфильтрованным `data`
 - [ ] `--graph` без `--imports` не добавляет import-export в `results`, но reverse/forward graph работает
-- [ ] `--version` печатает `0.0.1`
+- [ ] `--version` печатает `Dependra v0.0.2`
 - [ ] `--json` даёт валидный JSON по схеме отчёта
 - [ ] Коды выхода соответствуют таблице
 - [ ] Нет флага `--level` в MVP

@@ -7,7 +7,7 @@ source: .dep/.blueprint/90-context/project-context-spec.md
 
 # Индекс контекста проекта
 
-Версия пакета: **0.0.1** (не повышать без решения владельца).
+Версия пакета: **0.0.2** (не повышать без решения владельца).
 
 | Секция | Статус | Где смотреть |
 |--------|--------|--------------|
@@ -23,7 +23,7 @@ source: .dep/.blueprint/90-context/project-context-spec.md
 | Ограничения проекта | Accepted | [limitations.md](../../docs/20-architecture/limitations.md) |
 | MVP scope | Accepted, S01 реализован | [mvp-scope.md](../../docs/20-features/mvp-scope.md) |
 | Полный roadmap (S01–S10) | S01 `завершено` | [roadmap](../roadmap/README.md), [todo-checklist](../roadmap/todo-checklist.md) |
-| Текущие договорённости | Актуальны | S01 закрыт; следующий этап = **S02** |
+| Текущие договорённости | Актуальны | S01 закрыт; следующий этап = **S02**; пакет = `0.0.2` |
 | Долгосрочные цели | В roadmap | [stages S02–S10](../roadmap/stages/README.md) |
 | Особенности реализации | Задокументировано | раздел ниже |
 | Требования к качеству | `npm test` (13 AC) | `tests/mvp-*.test.js`, `tests/fixtures/mvp/` |
@@ -44,7 +44,7 @@ src/
 
 Entrypoint: `node src/cli/index.js <file> [options]`  
 Флаги MVP: `--basic` `--imports` `--exports` `--graph` `--json` `--path-mode` `--help` `--version`.  
-Default без op-флагов: все четыре операции. Версия пакета: `0.0.1`.
+Default без op-флагов: все четыре операции. Версия пакета: `0.0.2`. `--version` → `Dependra v0.0.2`.
 
 ## Соглашения по именованию (S01)
 
@@ -58,7 +58,7 @@ Default без op-флагов: все четыре операции. Верси
 1. Рабочая продуктовая спека — `docs/` (`status: accepted` для MVP).
 2. ADR, roadmap, context — `handbook/`.
 3. `.dep/.blueprint` — архив, не источник правок.
-4. Версия на S01/S02 старте — `0.0.1`, не бампать без решения владельца.
+4. Версия пакета — `0.0.2`; **не повышать** без approve владельца. `--version` → `Dependra v…`.
 5. MVP: один JS-файл; basic + imports/exports + graph; один инспектор import-export; pipeline prerequisites для graph; без `--level`.
 6. `ImportRecord.source` может быть `null` (dynamic import).
 7. Roadmap: `S01`–`S10`; сводный чеклист — `todo-checklist.md`.

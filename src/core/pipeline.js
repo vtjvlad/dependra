@@ -1,13 +1,12 @@
 import { getInspector } from "./registry.js";
 import { ensureTargetSourceFile, ParserError } from "../parsers/index.js";
+import { PACKAGE_VERSION } from "../version.js";
 
 /**
  * @typedef {import('./types.js').AnalysisContext} AnalysisContext
  * @typedef {import('./types.js').InspectorResult} InspectorResult
  * @typedef {import('./types.js').AnalysisReport} AnalysisReport
  */
-
-const PACKAGE_VERSION = "0.0.1";
 
 const ID_BASIC = "basic-file-information";
 const ID_IMPORT_EXPORT = "import-export-analysis";

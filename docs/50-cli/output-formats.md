@@ -15,7 +15,7 @@ source: .dep/.blueprint/50-user/cli-flags.md, 35-configurations/output-settings.
 
 ```json
 {
-  "version": "0.0.1",
+  "version": "0.0.2",
   "target": "/abs/path/to/file.js",
   "cwd": "/abs/cwd",
   "options": {
@@ -59,7 +59,7 @@ source: .dep/.blueprint/50-user/cli-flags.md, 35-configurations/output-settings.
 
 ```json
 {
-  "version": "0.0.1",
+  "version": "0.0.2",
   "target": "/abs/proj/src/app.js",
   "cwd": "/abs/proj",
   "options": {
@@ -133,7 +133,7 @@ src/main.js          src/lib.js
 
 ## Acceptance criteria
 
-- [ ] JSON валиден и содержит `version: "0.0.1"`
+- [ ] JSON валиден и содержит `version: "0.0.2"`
 - [ ] stderr не ломает парсинг JSON из stdout
 - [ ] Text/JSON содержат секции только для включённых операций
 - [ ] При только `--imports` в `data` нет поля `exports`
