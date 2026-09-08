@@ -170,12 +170,14 @@ describe("MVP CLI AC", () => {
     );
   });
 
-  it("text report has # graph columns", async () => {
+  it("text report has graph columns and flow sketch", async () => {
     const { code, stdout } = await runCli(["src/app.js", "--graph"]);
     assert.equal(code, 0);
-    assert.match(stdout, /# graph/);
+    assert.match(stdout, /schematic/);
+    assert.match(stdout, /┌─.*graph/);
     assert.match(stdout, /imported-by/);
     assert.match(stdout, /imports/);
+    assert.match(stdout, /flow/);
   });
 
   it("json stdout is valid even with stderr diagnostics unused", async () => {

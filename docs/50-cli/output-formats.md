@@ -96,33 +96,61 @@ source: .dep/.blueprint/50-user/cli-flags.md, 35-configurations/output-settings.
 
 ## Text
 
-Секции только для включённых операций:
+Секции только для включённых операций. Layout — **schematic** (рамочные блоки в `reporters`): смысл секций обязателен, оформление — за reporters.
+
+Идея вывода:
 
 ```
-# basic
-name: app.js
-...
+dependra 0.0.2 · schematic
+target  src/app.js
+cwd     /abs/proj
 
-# imports
-- ./lib.js
-- fs
+┌─ file ─────────────────────────────────────────┐
+│  app.js                                        │
+│  src/app.js                                    │
+│  javascript  ·  text/javascript  ·  112 B      │
+└────────────────────────────────────────────────┘
 
-# exports
-- named: run
+┌─ imports · esm ────────────────────────────────┐
+│  →  fs                              external   │
+│  →  ./lib.js                                   │
+└────────────────────────────────────────────────┘
 
-# graph
-imported-by          imports
--------------------  -------------------
-src/main.js          src/lib.js
-                     fs
+┌─ exports ──────────────────────────────────────┐
+│  ◆  run                             named      │
+│  ★  default                         default    │
+└────────────────────────────────────────────────┘
+
+┌─ graph ────────────────────────────────────────┐
+│  path-mode relative                            │
+│  flow … (мини-схема) + колонки imported-by/imports │
+└────────────────────────────────────────────────┘
 ```
 
-- `# imports` — только при `options.imports`
-- `# exports` — только при `options.exports`
-- `# graph` — только при `options.graph`
-- `# basic` — только при `options.basic`
+- секция **imports** — только при `options.imports`
+- секция **exports** — только при `options.exports`
+- секция **graph** — только при `options.graph`
+- секция **file** (basic) — только при `options.basic`
 
-Точный layout text — за `reporters`; смысл секций обязателен.
+ANSI-цвет: только если stdout — TTY и не задан `NO_COLOR`. Баннер dependra — внизу text-отчёта и `--help`.
+
+## Секции S02
+
+Флаги и pipeline: [s02-flags.md](s02-flags.md). В text — отдельные рамки; в JSON — ключи инспекторов и поля `options.additional` / `options.entities`.
+
+```
+┌─ additional ───────────────────────────────────┐
+│  abs / rel / mode / privilege hints / copies   │
+└────────────────────────────────────────────────┘
+
+┌─ entities ─────────────────────────────────────┐
+│  path-mode … · export/import symbol rows       │
+└────────────────────────────────────────────────┘
+```
+
+- **additional** — только при `options.additional` (`-a` / `--additional`)
+- **entities** — только при `options.entities` (`-en` / `--entities`)
+- не входят в default-all S01
 
 ## Правила
 
@@ -138,3 +166,4 @@ src/main.js          src/lib.js
 - [ ] Text/JSON содержат секции только для включённых операций
 - [ ] При только `--imports` в `data` нет поля `exports`
 - [ ] При только `--graph` нет ключа `import-export-analysis` в `results`
+- [ ] Секции S02 `additional` / `entities` появляются только при `-a` / `-en`

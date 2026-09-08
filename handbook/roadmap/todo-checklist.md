@@ -46,8 +46,9 @@ source: handbook/roadmap/stages
 Детали: [stages/02-deepen-analysis.md](stages/02-deepen-analysis.md)
 
 ### S02-A — Спека
-- [ ] S02-001: спека additional-file-information в docs
-- [ ] S02-002: спека exported-entities (deep) в docs
+- [x] S02-001: спека additional-file-information в docs
+- [x] S02-002: спека exported-entities (deep) в docs
+- [x] CLI S02: short `-a` / `-en`, schematic help/sections ([s02-flags.md](../../docs/50-cli/s02-flags.md))
 
 ### S02-B — Инспекторы
 - [ ] S02-003: additional file fields

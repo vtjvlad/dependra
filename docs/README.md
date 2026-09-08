@@ -37,7 +37,7 @@ source: .dep/.blueprint/README.md
 - [20-features/](20-features/mvp-scope.md) — MVP-фичи и отложенный функционал
 - [35-configuration/](35-configuration/overview.md) — конфигурация (минимум для MVP)
 - [40-development/](40-development/coding-principles.md) — принципы разработки
-- [50-cli/](50-cli/interface.md) — интерфейс командной строки
+- [50-cli/](50-cli/interface.md) — интерфейс командной строки (S01 + [s02-flags.md](50-cli/s02-flags.md))
 
 Шаблон документа: [`_template.md`](_template.md).
 

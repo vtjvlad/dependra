@@ -28,15 +28,28 @@ source: .dep/.blueprint/20-features/additional-file-information---B, exported-en
 
 ## Источники
 
-- Blueprint: [`.dep/.blueprint/20-features/additional-file-information---B/`](../../../.dep/.blueprint/20-features/additional-file-information---B/README.md)
-- Blueprint: [`.dep/.blueprint/20-features/exported-entities---M/`](../../../.dep/.blueprint/20-features/exported-entities---M/README.md)
-- Promote в `docs/20-features/analysis/` по [`_template.md`](../../../docs/_template.md)
+- Рабочая спека (S02-A):
+  - [`docs/20-features/analysis/additional-file-information.md`](../../../docs/20-features/analysis/additional-file-information.md)
+  - [`docs/20-features/analysis/exported-entities.md`](../../../docs/20-features/analysis/exported-entities.md)
+  - [`docs/50-cli/s02-flags.md`](../../../docs/50-cli/s02-flags.md) — long/short, help, schematic
+  - Short-алгоритм (общий с S01): [`docs/50-cli/interface.md`](../../../docs/50-cli/interface.md#короткие-флаги)
+- Blueprint (архив): [`.dep/.blueprint/20-features/additional-file-information---B/`](../../../.dep/.blueprint/20-features/additional-file-information---B/README.md)
+- Blueprint (архив): [`.dep/.blueprint/20-features/exported-entities---M/`](../../../.dep/.blueprint/20-features/exported-entities---M/README.md)
+
+## CLI / short (сводка)
+
+| Long | Short | Заметка |
+|------|-------|---------|
+| `--additional` | `-a` | `a` свободна |
+| `--entities` | `-en` | `-e` = exports (S01); вторая буква |
+
+Не в default-all. Оформление help/text — schematic, как S01 (`operations · s02`, секции `additional` / `entities`).
 
 ## Подэтапы
 
 | ID | Название | Статус |
 |----|----------|--------|
-| S02-A | Спека в `docs/` | `в работе` |
+| S02-A | Спека в `docs/` | `завершено` |
 | S02-B | Инспекторы + модель | `запланировано` |
 | S02-C | CLI / reporters | `запланировано` |
 | S02-D | Тесты + стабилизация | `запланировано` |
@@ -45,19 +58,19 @@ source: .dep/.blueprint/20-features/additional-file-information---B, exported-en
 
 | ID | Название | Приоритет | dependsOn | Статус |
 |----|----------|-----------|-----------|--------|
-| S02-001 | Спека additional-file-information в docs | высокий | S01 | `запланировано` |
-| S02-002 | Спека exported-entities (deep) в docs | высокий | S01 | `запланировано` |
+| S02-001 | Спека additional-file-information в docs | высокий | S01 | `завершено` |
+| S02-002 | Спека exported-entities (deep) в docs | высокий | S01 | `завершено` |
 | S02-003 | Инспектор / расширение basic → additional fields | высокий | S02-001 | `запланировано` |
 | S02-004 | Инспектор exported-entities | высокий | S02-002, parsers S01 | `запланировано` |
-| S02-005 | CLI флаги и секции отчёта | высокий | S02-003, S02-004 | `запланировано` |
+| S02-005 | CLI флаги и секции отчёта (`-a`, `-en`, schematic) | высокий | S02-003, S02-004 | `запланировано` |
 | S02-006 | Фикстуры и тесты AC | высокий | S02-005 | `запланировано` |
 | S02-007 | Approve владельца → S03/S04 | средний | S02-006 | `запланировано` |
 
 ## Чеклист этапа
 
-- [ ] S02-A: спеки additional + exported-entities в `docs/` (шаблон)
+- [x] S02-A: спеки additional + exported-entities + s02-flags в `docs/` (шаблон)
 - [ ] S02-B: инспекторы реализованы, модель расширена
-- [ ] S02-C: CLI/reporters отдают новые секции
+- [ ] S02-C: CLI/reporters отдают новые секции (`-a`, `-en`, schematic)
 - [ ] S02-D: тесты AC зелёные
 - [ ] Exit criteria + approve владельца
 

@@ -13,4 +13,6 @@ source: .dep/.blueprint/20-features
 - [analysis/basic-file-information.md](analysis/basic-file-information.md)
 - [analysis/import-export-analysis.md](analysis/import-export-analysis.md)
 - [analysis/dependency-analysis.md](analysis/dependency-analysis.md)
+- [analysis/additional-file-information.md](analysis/additional-file-information.md) — S02
+- [analysis/exported-entities.md](analysis/exported-entities.md) — S02
 - [deferred/README.md](deferred/README.md) — отложенное
