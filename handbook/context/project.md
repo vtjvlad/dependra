@@ -22,8 +22,9 @@ source: .dep/.blueprint/90-context/project-context-spec.md
 | Выбор AST-парсера | Ожидает ADR | [handbook/adr](../adr/README.md), [external-tools](../../docs/10-technology/external-tools.md) |
 | Ограничения проекта | Задокументировано (draft) | [docs/20-architecture/limitations.md](../../docs/20-architecture/limitations.md) |
 | MVP scope | Задокументировано (draft) | [docs/20-features/mvp-scope.md](../../docs/20-features/mvp-scope.md) |
-| Текущие договорённости | Частично | docs/ + handbook/; версия = 0.0.1; handbook отдельно от docs |
-| Долгосрочные цели | Ожидает | blueprint / будущие этапы roadmap |
+| Полный roadmap (S01–S10) | Задокументировано (draft) | [handbook/roadmap](../roadmap/README.md), [todo-checklist](../roadmap/todo-checklist.md) |
+| Текущие договорённости | Частично | docs/ + handbook/; версия = 0.0.1; handbook отдельно от docs; активный этап = S01 |
+| Долгосрочные цели | В roadmap | [stages S02–S10](../roadmap/stages/README.md); детали фич — blueprint / deferred |
 | Особенности реализации | Ожидает | появятся с кодом |
 | Требования к качеству | Ожидает | — |
 | Взаимодействие модулей | Задокументировано (draft) | [inspector-contract](../../docs/20-architecture/inspector-contract.md), [modules](../../docs/20-architecture/modules.md) |
@@ -36,7 +37,8 @@ source: .dep/.blueprint/90-context/project-context-spec.md
 2. ADR, roadmap и context живут в `handbook/`.
 3. `.dep/.blueprint` — архив/макет, не рабочий источник правок.
 4. Версия пакета на этом этапе — `0.0.1`, не повышать.
-5. MVP: один JS-файл; basic + imports/exports + graph; CLI + JSON; один инспектор import-export; pipeline prerequisites для graph; без `--level`.
+5. MVP (S01): один JS-файл; basic + imports/exports + graph; CLI + JSON; один инспектор import-export; pipeline prerequisites для graph; без `--level`.
 6. Единое поле внешнего модуля: `isExternal`. `ImportRecord.source` может быть `null`.
+7. Полный roadmap: этапы `S01`–`S10` в `handbook/roadmap/`; сводный чеклист — `todo-checklist.md`; deferred привязан к целевым этапам.
 
 Изменения этого списка — только с approve владельца.

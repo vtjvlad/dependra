@@ -16,7 +16,7 @@ source: .dep/.blueprint/70-adr, 80-roadmap, 90-context
 | Раздел | Назначение |
 |--------|------------|
 | [`adr/`](adr/README.md) | Журнал архитектурных решений |
-| [`roadmap/`](roadmap/README.md) | Процесс разработки и backlog MVP |
+| [`roadmap/`](roadmap/README.md) | Полный roadmap S01–S10, backlog, TODO-чеклист |
 | [`context/`](context/README.md) | Постоянный контекст проекта |
 
 ## Правила обновления

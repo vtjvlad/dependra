@@ -7,32 +7,123 @@ source: .dep/.blueprint/80-roadmap/development-sequence.md, 00-project/main-rule
 
 # Последовательность разработки
 
-## Этап A — Спека (текущий)
+Полная цепочка больших этапов `S01`–`S10`. Детали — в [stages/](stages/), задачи S01 — в [mvp-backlog.md](mvp-backlog.md).
+
+## Обзор
+
+| Этап | Суть | dependsOn |
+|------|------|-----------|
+| [S01](stages/01-mvp-core.md) | MVP core: спека → каркас → инспекторы B/M → стабилизация | — |
+| [S02](stages/02-deepen-analysis.md) | Углубление анализа B/M | S01 |
+| [S03](stages/03-validation.md) | Validation (D) | S02 |
+| [S04](stages/04-environment-runtime.md) | Environment / runtime (P+U) | S02 |
+| [S05](stages/05-visualization-config.md) | Visualization + config (E) | S03 |
+| [S06](stages/06-quality-ai.md) | Quality + AI explain (F+I) | S03 |
+| [S07](stages/07-modifications.md) | Modifications / enhancement | S05, S06 |
+| [S08](stages/08-tui-surfaces.md) | TUI и поверхности | S07 |
+| [S09](stages/09-multilang.md) | Multi-language + LSP/Tree-sitter | S08 |
+| [S10](stages/10-platform-monorepo.md) | Platform / monorepo / releases | S09 |
+
+Параллели: S04 ∥ S03 (после S02); S05 ∥ S06 (после S03).
+
+---
+
+## S01 — MVP core (текущий)
+
+Внутренние подэтапы (бывшие A–D):
+
+### S01-A — Спека
 
 1. Рабочая спека в `docs/` (MVP до уровня реализации)
 2. Handbook: ADR-процесс, backlog, context
 3. Review владельцем → перевод ключевых docs в `accepted`
 
-## Этап B — Каркас кода (после accept спеки)
+### S01-B — Каркас кода (после accept спеки)
 
 1. Инициализация `src/` по мере нужды (`cli`, `core`, `inspectors`, `parsers`, `reporters`, …)
 2. ADR: выбор AST-парсера
 3. Контракт инспектора в коде + пустой/smoke CLI
 
-## Этап C — MVP-инспекторы
+### S01-C — MVP-инспекторы
 
 1. `basic-file-information`
 2. `import-export-analysis`
 3. `dependency-analysis`
 4. Text + JSON reporters
-5. Тесты на фикстурах
+5. CLI pipeline + тесты на фикстурах
 
-## Этап D — Стабилизация
+### S01-D — Стабилизация
 
 1. Доработка по AC из docs
 2. Обновление `handbook/context` (после approve)
-3. Решение о следующем этапе (не путать с bump версии — версия остаётся `0.0.1`, пока владелец не решит иначе)
+3. Решение о переходе к S02 (версия пакета остаётся `0.0.1`, пока владелец не решит иначе)
 
-## Вне последовательности сейчас
+Задачи: [mvp-backlog.md](mvp-backlog.md) (`MVP-001`…`011`).
 
-Build-system monorepo, TUI, modifications, multi-language — только через новый этап roadmap.
+---
+
+## S02 — Углубление анализа B/M
+
+1. Спека additional-file-information + exported-entities в `docs/`
+2. Инспекторы и расширение модели
+3. CLI / reporters / тесты
+4. Approve → S03 / S04
+
+## S03 — Validation (D)
+
+1. Спека validation
+2. Инспектор + diagnostics в reporters
+3. Тесты (cycles, unused, broken imports)
+4. Approve (нужен до безопасных modifications)
+
+## S04 — Environment / runtime (P+U)
+
+1. Спека кластеров P и U
+2. Инспекторы P (environment, commands, env-validation)
+3. Инспекторы U (runtime deps, file I/O ops)
+4. CLI / тесты / approve
+
+## S05 — Visualization + config (E)
+
+1. Спека viz + profiles/`--level` + config files + metadata extractors
+2. Реализация визуализации и конфигурации
+3. Тесты / approve
+
+## S06 — Quality + AI explain (F+I)
+
+1. Спека code-quality
+2. Инспектор quality
+3. Опциональный AI-adapter (объяснения; ядро без AI)
+4. Тесты / approve
+
+## S07 — Modifications
+
+1. Спека safety (preview/backup/undo/dry-run)
+2. Safety-каркас
+3. Code/import ops → env installs → comments → AI mods
+4. Тесты / approve
+
+## S08 — TUI и поверхности
+
+1. Спека TUI над core API
+2. TUI MVP
+3. Контракты future surfaces (Web/REST/IDE) без полной реализации всех UI
+4. Approve
+
+## S09 — Multi-language
+
+1. Спека language-backend adapters
+2. Первый язык beyond JS + опционально Tree-sitter/LSP
+3. Тесты / approve
+
+## S10 — Platform / monorepo
+
+1. Спека monorepo layout + build/release pipeline
+2. Разбиение на `apps/` / `packages/` по реальной нужде
+3. CI / artifacts / approve
+
+---
+
+## Вне последовательности до своего этапа
+
+Build-system monorepo, полный TUI, modifications, multi-language — только через соответствующий `S0N`, не «заодно» с S01.
