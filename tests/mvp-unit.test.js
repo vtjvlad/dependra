@@ -20,6 +20,8 @@ describe("MVP inspectors unit", () => {
       imports: false,
       exports: false,
       graph: true,
+      additional: false,
+      entities: false,
       json: true,
       pathMode: "relative",
     });
@@ -34,6 +36,8 @@ describe("MVP inspectors unit", () => {
       imports: true,
       exports: false,
       graph: false,
+      additional: false,
+      entities: false,
       json: true,
       pathMode: "relative",
     });
@@ -50,6 +54,8 @@ describe("MVP inspectors unit", () => {
       imports: true,
       exports: true,
       graph: true,
+      additional: false,
+      entities: false,
       json: true,
       pathMode: "relative",
     });

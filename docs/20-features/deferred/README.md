@@ -14,8 +14,8 @@ source: .dep/.blueprint/20-features
 
 | Раздел blueprint | Тег | Целевой этап | Заметка |
 |------------------|-----|--------------|---------|
-| additional-file-information | B | [S02](../../../handbook/roadmap/stages/02-deepen-analysis.md) | Расширение basic |
-| exported-entities (глубокий) | M | [S02](../../../handbook/roadmap/stages/02-deepen-analysis.md) | Сверх export records MVP |
+| additional-file-information | B | [S02](../../../handbook/roadmap/stages/02-deepen-analysis.md) | Спека: [analysis/additional-file-information.md](../analysis/additional-file-information.md); CLI: [s02-flags.md](../../50-cli/s02-flags.md) |
+| exported-entities (глубокий) | M | [S02](../../../handbook/roadmap/stages/02-deepen-analysis.md) | Спека: [analysis/exported-entities.md](../analysis/exported-entities.md); short `-en` |
 | validation | D | [S03](../../../handbook/roadmap/stages/03-validation.md) | Проверка корректности |
 | file-environment-analysis | P | [S04](../../../handbook/roadmap/stages/04-environment-runtime.md) | Окружение файла |
 | commands | P | [S04](../../../handbook/roadmap/stages/04-environment-runtime.md) | Доступные команды |
