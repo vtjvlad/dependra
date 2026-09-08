@@ -16,12 +16,12 @@ source: .dep/.blueprint/20-features
 |------------------|-----|--------------|---------|
 | additional-file-information | B | [S02](../../../handbook/roadmap/stages/02-deepen-analysis.md) | Спека: [analysis/additional-file-information.md](../analysis/additional-file-information.md); CLI: [s02-flags.md](../../50-cli/s02-flags.md) |
 | exported-entities (глубокий) | M | [S02](../../../handbook/roadmap/stages/02-deepen-analysis.md) | Спека: [analysis/exported-entities.md](../analysis/exported-entities.md); short `-en` |
-| validation | D | [S03](../../../handbook/roadmap/stages/03-validation.md) | Проверка корректности |
-| file-environment-analysis | P | [S04](../../../handbook/roadmap/stages/04-environment-runtime.md) | Окружение файла |
-| commands | P | [S04](../../../handbook/roadmap/stages/04-environment-runtime.md) | Доступные команды |
-| environment-validation | P | [S04](../../../handbook/roadmap/stages/04-environment-runtime.md) | Проверка окружения |
-| runtime-dependency-analysis | U | [S04](../../../handbook/roadmap/stages/04-environment-runtime.md) | Зависимости runtime |
-| file-operations | U | [S04](../../../handbook/roadmap/stages/04-environment-runtime.md) | I/O-анализ |
+| validation | D | [S03](../../../handbook/roadmap/stages/03-validation.md) | Спека: [analysis/validation.md](../analysis/validation.md); CLI: [s03-flags.md](../../50-cli/s03-flags.md); short `-va` |
+| file-environment-analysis | P | [S04](../../../handbook/roadmap/stages/04-environment-runtime.md) | Спека: [analysis/file-environment-analysis.md](../analysis/file-environment-analysis.md); `-env` |
+| commands | P | [S04](../../../handbook/roadmap/stages/04-environment-runtime.md) | Спека: [analysis/commands.md](../analysis/commands.md); `-c` |
+| environment-validation | P | [S04](../../../handbook/roadmap/stages/04-environment-runtime.md) | Спека: [analysis/environment-validation.md](../analysis/environment-validation.md); `-ec` |
+| runtime-dependency-analysis | U | [S04](../../../handbook/roadmap/stages/04-environment-runtime.md) | Спека: [analysis/runtime-dependency-analysis.md](../analysis/runtime-dependency-analysis.md); `-r` |
+| file-operations | U | [S04](../../../handbook/roadmap/stages/04-environment-runtime.md) | Спека: [analysis/file-operations.md](../analysis/file-operations.md); `-io` |
 | visualization | E | [S05](../../../handbook/roadmap/stages/05-visualization-config.md) | Mermaid/Graphviz и др. |
 | metadata | U | [S05](../../../handbook/roadmap/stages/05-visualization-config.md) | Расширенные метаданные |
 | code-quality-analysis | F | [S06](../../../handbook/roadmap/stages/06-quality-ai.md) | Качество кода |

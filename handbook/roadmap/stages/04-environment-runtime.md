@@ -10,7 +10,7 @@ source: .dep/.blueprint/20-features (P/U clusters)
 | Поле | Значение |
 |------|----------|
 | **ID** | S04 |
-| **Статус** | `запланировано` |
+| **Статус** | `в работе` |
 | **dependsOn** | S02 |
 
 ## Цель / границы
@@ -26,43 +26,55 @@ source: .dep/.blueprint/20-features (P/U clusters)
 
 ## Источники
 
-- [file-environment-analysis---P](../../../.dep/.blueprint/20-features/file-environment-analysis---P/README.md)
-- [commands---P](../../../.dep/.blueprint/20-features/commands---P/README.md)
-- [environment-validation---P](../../../.dep/.blueprint/20-features/environment-validation---P/README.md)
-- [runtime-dependency-analysis---U](../../../.dep/.blueprint/20-features/runtime-dependency-analysis---U/README.md)
-- [file-operations---U](../../../.dep/.blueprint/20-features/file-operations---U/README.md)
+- Рабочие спеки (S04-A):
+  - P: [`file-environment-analysis.md`](../../../docs/20-features/analysis/file-environment-analysis.md), [`commands.md`](../../../docs/20-features/analysis/commands.md), [`environment-validation.md`](../../../docs/20-features/analysis/environment-validation.md)
+  - U: [`runtime-dependency-analysis.md`](../../../docs/20-features/analysis/runtime-dependency-analysis.md), [`file-operations.md`](../../../docs/20-features/analysis/file-operations.md)
+  - CLI: [`docs/50-cli/s04-flags.md`](../../../docs/50-cli/s04-flags.md)
+- Blueprint (архив): см. `.dep/.blueprint/20-features/*---P|U`
+
+## CLI / short (сводка)
+
+| Long | Short | Секция |
+|------|-------|--------|
+| `--environment` | `-env` | environment |
+| `--commands` | `-c` | commands |
+| `--env-check` | `-ec` | env-check |
+| `--runtime` | `-r` | runtime |
+| `--io` | `-io` | io |
+
+Не в default-all. Help: `operations · s04`. Только анализ (без install/мутаций).
 
 ## Подэтапы
 
 | ID | Название | Статус |
 |----|----------|--------|
-| S04-A | Спека кластеров P и U | `запланировано` |
-| S04-B | Инспекторы P | `запланировано` |
-| S04-C | Инспекторы U | `запланировано` |
-| S04-D | CLI / тесты / approve | `запланировано` |
+| S04-A | Спека кластеров P и U | `завершено` |
+| S04-B | Инспекторы P | `завершено` |
+| S04-C | Инспекторы U | `завершено` |
+| S04-D | CLI / тесты / approve | `в работе` |
 
 ## Задачи
 
 | ID | Название | Приоритет | dependsOn | Статус |
 |----|----------|-----------|-----------|--------|
-| S04-001 | Спека P-кластера в docs | высокий | S02 | `запланировано` |
-| S04-002 | Спека U-кластера в docs | высокий | S02 | `запланировано` |
-| S04-003 | Инспектор file-environment | высокий | S04-001 | `запланировано` |
-| S04-004 | Инспектор commands | средний | S04-001 | `запланировано` |
-| S04-005 | Инспектор environment-validation | высокий | S04-001 | `запланировано` |
-| S04-006 | Инспектор runtime-dependency-analysis | высокий | S04-002 | `запланировано` |
-| S04-007 | Инспектор file-operations (I/O) | средний | S04-002 | `запланировано` |
-| S04-008 | CLI флаги + reporters | высокий | S04-003…007 | `запланировано` |
-| S04-009 | Фикстуры и тесты AC | высокий | S04-008 | `запланировано` |
+| S04-001 | Спека P-кластера в docs | высокий | S02 | `завершено` |
+| S04-002 | Спека U-кластера в docs | высокий | S02 | `завершено` |
+| S04-003 | Инспектор file-environment | высокий | S04-001 | `завершено` |
+| S04-004 | Инспектор commands | средний | S04-001 | `завершено` |
+| S04-005 | Инспектор environment-validation | высокий | S04-001 | `завершено` |
+| S04-006 | Инспектор runtime-dependency-analysis | высокий | S04-002 | `завершено` |
+| S04-007 | Инспектор file-operations (I/O) | средний | S04-002 | `завершено` |
+| S04-008 | CLI флаги + reporters | высокий | S04-003…007 | `завершено` |
+| S04-009 | Фикстуры и тесты AC | высокий | S04-008 | `завершено` |
 | S04-010 | Approve владельца | средний | S04-009 | `запланировано` |
 
 ## Чеклист этапа
 
-- [ ] S04-A: спеки P и U в `docs/`
-- [ ] S04-B: environment / commands / env-validation
-- [ ] S04-C: runtime deps / file I/O ops
-- [ ] S04-D: CLI, тесты, approve
-- [ ] Exit criteria выполнены
+- [x] S04-A: спеки P и U + s04-flags в `docs/`
+- [x] S04-B: environment / commands / env-validation
+- [x] S04-C: runtime deps / file I/O ops
+- [x] S04-D: CLI, тесты AC
+- [ ] Exit criteria + approve
 
 ## Exit criteria
 

@@ -57,32 +57,33 @@ source: .dep/.blueprint/80-roadmap/development-sequence.md, 00-project/main-rule
 
 1. Доработка по AC из docs
 2. Обновление `handbook/context` — **MVP-011 сделано**
-3. Переход к S02 (версия пакета `0.0.2`; дальше **не повышать** без решения владельца)
+3. Переход к S02 (версия пакета `0.0.33`; дальше **не повышать** без решения владельца)
 
 Задачи: [mvp-backlog.md](mvp-backlog.md) (`MVP-001`…`011` — все `завершено`).
 
 ---
 
-## S02 — Углубление анализа B/M (текущий)
+## S02 — Углубление анализа B/M (`завершено`)
 
 1. Спека additional-file-information + exported-entities в `docs/`
 2. Инспекторы и расширение модели
 3. CLI / reporters / тесты
-4. Approve → S03 / S04
+4. Approve → S03 / S04 — **сделано**
 
-## S03 — Validation (D)
+## S03 — Validation (D) (в работе · ждёт approve)
 
-1. Спека validation
-2. Инспектор + diagnostics в reporters
-3. Тесты (cycles, unused, broken imports)
-4. Approve (нужен до безопасных modifications)
+1. Спека validation — **сделано**
+2. Инспектор + diagnostics в reporters — **сделано**
+3. Тесты (cycles, unused, broken imports) — **сделано**
+4. Approve владельца ← **сейчас** (нужен до S05/S06 и безопасных modifications)
 
-## S04 — Environment / runtime (P+U)
+## S04 — Environment / runtime (P+U) (в работе · ждёт approve)
 
-1. Спека кластеров P и U
-2. Инспекторы P (environment, commands, env-validation)
-3. Инспекторы U (runtime deps, file I/O ops)
-4. CLI / тесты / approve
+1. Спека кластеров P и U — **сделано**
+2. Инспекторы P — **сделано**
+3. Инспекторы U — **сделано**
+4. CLI / тесты — **сделано**
+5. Approve владельца ← **сейчас**
 
 ## S05 — Visualization + config (E)
 

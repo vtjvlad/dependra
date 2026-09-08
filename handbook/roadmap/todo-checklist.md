@@ -11,7 +11,7 @@ source: handbook/roadmap/stages
 Детали, `dependsOn` и exit criteria — в [stages/](stages/) и [mvp-backlog.md](mvp-backlog.md).  
 При закрытии пункта синхронизируй статус в файле этапа / backlog.
 
-**Активный этап:** S02.
+**Активный этап:** S03 / S04 — реализация готова, ждут approve.
 
 ---
 
@@ -59,8 +59,8 @@ source: handbook/roadmap/stages
 
 ### S02-D — Тесты
 - [x] S02-006: фикстуры и тесты AC
-- [ ] S02-007: approve → S03/S04
-- [ ] Exit criteria S02
+- [x] S02-007: approve → S03/S04
+- [x] Exit criteria S02
 
 ---
 
@@ -69,20 +69,20 @@ source: handbook/roadmap/stages
 Детали: [stages/03-validation.md](stages/03-validation.md)
 
 ### S03-A — Спека
-- [ ] S03-001: спека validation в docs
+- [x] S03-001: спека validation в docs (`validation.md` + `s03-flags.md`)
 
 ### S03-B — Инспектор
-- [ ] S03-002: cycles
-- [ ] S03-003: unused imports/exports
-- [ ] S03-004: broken imports / path errors
+- [x] S03-002: cycles
+- [x] S03-003: unused imports/exports
+- [x] S03-004: broken imports / path errors
 
 ### S03-C — Reporters
-- [ ] S03-005: diagnostics в text/JSON
+- [x] S03-005: diagnostics в text/JSON
 
 ### S03-D — Тесты
-- [ ] S03-006: фикстуры и тесты AC
+- [x] S03-006: фикстуры и тесты AC
 - [ ] S03-007: approve → S05/S06
-- [ ] Exit criteria S03
+- [ ] Exit criteria S03 (ждёт approve)
 
 ---
 
@@ -91,23 +91,23 @@ source: handbook/roadmap/stages
 Детали: [stages/04-environment-runtime.md](stages/04-environment-runtime.md)
 
 ### S04-A — Спека
-- [ ] S04-001: спека P-кластера в docs
-- [ ] S04-002: спека U-кластера в docs
+- [x] S04-001: спека P-кластера в docs (environment, commands, env-validation + s04-flags)
+- [x] S04-002: спека U-кластера в docs (runtime, file-operations / io)
 
 ### S04-B — Инспекторы P
-- [ ] S04-003: file-environment
-- [ ] S04-004: commands
-- [ ] S04-005: environment-validation
+- [x] S04-003: file-environment
+- [x] S04-004: commands
+- [x] S04-005: environment-validation
 
 ### S04-C — Инспекторы U
-- [ ] S04-006: runtime-dependency-analysis
-- [ ] S04-007: file-operations (I/O)
+- [x] S04-006: runtime-dependency-analysis
+- [x] S04-007: file-operations (I/O)
 
 ### S04-D — CLI / тесты
-- [ ] S04-008: CLI флаги + reporters
-- [ ] S04-009: фикстуры и тесты AC
+- [x] S04-008: CLI флаги + reporters
+- [x] S04-009: фикстуры и тесты AC
 - [ ] S04-010: approve владельца
-- [ ] Exit criteria S04
+- [ ] Exit criteria S04 (ждёт approve)
 
 ---
 

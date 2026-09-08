@@ -10,7 +10,7 @@ source: .dep/.blueprint/20-features/additional-file-information---B, exported-en
 | Поле | Значение |
 |------|----------|
 | **ID** | S02 |
-| **Статус** | `в работе` |
+| **Статус** | `завершено` |
 | **dependsOn** | S01 |
 
 ## Цель / границы
@@ -64,7 +64,7 @@ source: .dep/.blueprint/20-features/additional-file-information---B, exported-en
 | S02-004 | Инспектор exported-entities | высокий | S02-002, parsers S01 | `завершено` |
 | S02-005 | CLI флаги и секции отчёта (`-a`, `-en`, schematic) | высокий | S02-003, S02-004 | `завершено` |
 | S02-006 | Фикстуры и тесты AC | высокий | S02-005 | `завершено` |
-| S02-007 | Approve владельца → S03/S04 | средний | S02-006 | `запланировано` |
+| S02-007 | Approve владельца → S03/S04 | средний | S02-006 | `завершено` |
 
 ## Чеклист этапа
 
@@ -72,7 +72,7 @@ source: .dep/.blueprint/20-features/additional-file-information---B, exported-en
 - [x] S02-B: инспекторы реализованы, модель расширена
 - [x] S02-C: CLI/reporters отдают новые секции (`-a`, `-en`, schematic)
 - [x] S02-D: тесты AC зелёные
-- [ ] Exit criteria + approve владельца (S02-007)
+- [x] Exit criteria + approve владельца (S02-007)
 
 ## Exit criteria
 

@@ -8,6 +8,12 @@
  * @property {boolean} graph
  * @property {boolean} additional
  * @property {boolean} entities
+ * @property {boolean} validate
+ * @property {boolean} environment
+ * @property {boolean} commands
+ * @property {boolean} envCheck
+ * @property {boolean} runtime
+ * @property {boolean} io
  * @property {boolean} json
  * @property {"name"|"relative"|"absolute"} pathMode
  *

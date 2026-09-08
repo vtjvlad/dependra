@@ -15,7 +15,7 @@ source: .dep/.blueprint/50-user/cli-flags.md, 35-configurations/output-settings.
 
 ```json
 {
-  "version": "0.0.2",
+  "version": "0.0.33",
   "target": "/abs/path/to/file.js",
   "cwd": "/abs/cwd",
   "options": {
@@ -59,7 +59,7 @@ source: .dep/.blueprint/50-user/cli-flags.md, 35-configurations/output-settings.
 
 ```json
 {
-  "version": "0.0.2",
+  "version": "0.0.33",
   "target": "/abs/proj/src/app.js",
   "cwd": "/abs/proj",
   "options": {
@@ -101,7 +101,7 @@ source: .dep/.blueprint/50-user/cli-flags.md, 35-configurations/output-settings.
 Идея вывода:
 
 ```
-dependra 0.0.2 · schematic
+dependra 0.0.33 · schematic
 target  src/app.js
 cwd     /abs/proj
 
@@ -152,6 +152,34 @@ ANSI-цвет: только если stdout — TTY и не задан `NO_COLOR
 - **entities** — только при `options.entities` (`-en` / `--entities`)
 - не входят в default-all S01
 
+## Секции S03
+
+Флаги и pipeline: [s03-flags.md](s03-flags.md). В text — рамка `diagnostics`; в JSON — ключ `validation` и поле `options.validate`.
+
+```
+┌─ diagnostics ──────────────────────────────────┐
+│  summary · CYCLE / UNUSED_* / BROKEN_IMPORT …  │
+└────────────────────────────────────────────────┘
+```
+
+- **diagnostics** — только при `options.validate` (`-va` / `--validate`)
+- не входит в default-all S01
+
+## Секции S04
+
+Флаги и pipeline: [s04-flags.md](s04-flags.md).
+
+| options.* | results key | text title |
+|-----------|-------------|------------|
+| `environment` | `file-environment-analysis` | `environment` |
+| `commands` | `commands` | `commands` |
+| `envCheck` | `environment-validation` | `env-check` |
+| `runtime` | `runtime-dependency-analysis` | `runtime` |
+| `io` | `file-operations` | `io` |
+
+- только при явном флаге; не в default-all
+- операции **только анализ** (нет install / записи FS)
+
 ## Правила
 
 1. JSON — в stdout; диагностики CLI при `--json` — в stderr.
@@ -161,9 +189,11 @@ ANSI-цвет: только если stdout — TTY и не задан `NO_COLOR
 
 ## Acceptance criteria
 
-- [ ] JSON валиден и содержит `version: "0.0.2"`
+- [ ] JSON валиден и содержит `version: "0.0.33"`
 - [ ] stderr не ломает парсинг JSON из stdout
 - [ ] Text/JSON содержат секции только для включённых операций
 - [ ] При только `--imports` в `data` нет поля `exports`
 - [ ] При только `--graph` нет ключа `import-export-analysis` в `results`
 - [ ] Секции S02 `additional` / `entities` появляются только при `-a` / `-en`
+- [ ] Секция S03 `diagnostics` / ключ `validation` только при `-va` / `--validate`
+- [ ] Секции S04 появляются только при `-env`/`-c`/`-ec`/`-r`/`-io`

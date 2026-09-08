@@ -13,6 +13,12 @@ const ID_IMPORT_EXPORT = "import-export-analysis";
 const ID_DEPENDENCY = "dependency-analysis";
 const ID_ADDITIONAL = "additional-file-information";
 const ID_ENTITIES = "exported-entities";
+const ID_VALIDATION = "validation";
+const ID_ENVIRONMENT = "file-environment-analysis";
+const ID_COMMANDS = "commands";
+const ID_ENV_CHECK = "environment-validation";
+const ID_RUNTIME = "runtime-dependency-analysis";
+const ID_IO = "file-operations";
 
 /**
  * @param {string} id
@@ -68,7 +74,7 @@ async function runInspector(id, ctx) {
 }
 
 /**
- * Оркестрация pipeline по docs/50-cli/interface.md + s02-flags.md.
+ * Оркестрация pipeline по docs/50-cli/interface.md + s02–s04-flags.md.
  *
  * @param {AnalysisContext} ctx
  * @returns {Promise<{ report: AnalysisReport, exitCode: number, prerequisiteErrors: string[] }>}
@@ -81,9 +87,9 @@ export async function runPipeline(ctx) {
   const prerequisiteErrors = [];
 
   const needImportExport =
-    options.imports || options.exports || options.graph;
+    options.imports || options.exports || options.graph || options.validate;
   const reportImportExport = options.imports || options.exports;
-  const needAst = needImportExport || options.entities;
+  const needAst = needImportExport || options.entities || options.io;
 
   if (options.basic) {
     results[ID_BASIC] = await runInspector(ID_BASIC, ctx);
@@ -111,7 +117,7 @@ export async function runPipeline(ctx) {
       importExportResult = parserErrorResult(ID_IMPORT_EXPORT, loadError);
       if (reportImportExport) {
         results[ID_IMPORT_EXPORT] = importExportResult;
-      } else if (options.graph) {
+      } else if (options.graph || options.validate) {
         prerequisiteErrors.push(
           `${ID_IMPORT_EXPORT}: ${loadError.message}`,
         );
@@ -130,7 +136,10 @@ export async function runPipeline(ctx) {
           ...importExportResult,
           data,
         };
-      } else if (options.graph && importExportResult.status === "error") {
+      } else if (
+        (options.graph || options.validate) &&
+        importExportResult.status === "error"
+      ) {
         prerequisiteErrors.push(
           `${ID_IMPORT_EXPORT}: ${importExportResult.error?.message ?? "error"}`,
         );
@@ -159,6 +168,40 @@ export async function runPipeline(ctx) {
     }
   }
 
+  if (options.validate) {
+    if (loadError) {
+      results[ID_VALIDATION] = parserErrorResult(ID_VALIDATION, loadError);
+      prerequisiteErrors.push(`${ID_VALIDATION}: ${loadError.message}`);
+    } else {
+      results[ID_VALIDATION] = await runInspector(ID_VALIDATION, ctx);
+    }
+  }
+
+  if (options.environment) {
+    results[ID_ENVIRONMENT] = await runInspector(ID_ENVIRONMENT, ctx);
+  }
+
+  if (options.commands) {
+    results[ID_COMMANDS] = await runInspector(ID_COMMANDS, ctx);
+  }
+
+  if (options.envCheck) {
+    results[ID_ENV_CHECK] = await runInspector(ID_ENV_CHECK, ctx);
+  }
+
+  if (options.runtime) {
+    results[ID_RUNTIME] = await runInspector(ID_RUNTIME, ctx);
+  }
+
+  if (options.io) {
+    if (loadError) {
+      results[ID_IO] = parserErrorResult(ID_IO, loadError);
+      prerequisiteErrors.push(`${ID_IO}: ${loadError.message}`);
+    } else {
+      results[ID_IO] = await runInspector(ID_IO, ctx);
+    }
+  }
+
   /** @type {AnalysisReport} */
   const report = {
     version: PACKAGE_VERSION,
@@ -171,6 +214,12 @@ export async function runPipeline(ctx) {
       graph: options.graph,
       additional: Boolean(options.additional),
       entities: Boolean(options.entities),
+      validate: Boolean(options.validate),
+      environment: Boolean(options.environment),
+      commands: Boolean(options.commands),
+      envCheck: Boolean(options.envCheck),
+      runtime: Boolean(options.runtime),
+      io: Boolean(options.io),
       pathMode: options.pathMode,
     },
     results,

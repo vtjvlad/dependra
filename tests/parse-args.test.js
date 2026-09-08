@@ -67,11 +67,67 @@ describe("parseArgs short flags", () => {
     assert.equal(long.options.entities, true);
   });
 
-  it("default-all is S01 only without S02 flags", () => {
+  it("default-all is S01 only without S02/S03 flags", () => {
     const parsed = parseArgs(["file.js"]);
     assert.equal(parsed.options.basic, true);
     assert.equal(parsed.options.graph, true);
     assert.equal(parsed.options.additional, false);
     assert.equal(parsed.options.entities, false);
+    assert.equal(parsed.options.validate, false);
+  });
+
+  it("-va and --validate are S03 shorts; -v stays version", () => {
+    const va = parseArgs(["file.js", "-va"]);
+    assert.equal(va.error, null);
+    assert.equal(va.options.validate, true);
+    assert.equal(va.options.basic, false);
+    assert.equal(va.version, false);
+
+    const long = parseArgs(["file.js", "--validate"]);
+    assert.equal(long.options.validate, true);
+    assert.deepEqual(va.options, long.options);
+
+    const ver = parseArgs(["-v"]);
+    assert.equal(ver.version, true);
+    assert.equal(ver.options.validate, false);
+  });
+
+  it("S04 shorts and default-all exclusion", () => {
+    const parsed = parseArgs(["file.js"]);
+    assert.equal(parsed.options.environment, false);
+    assert.equal(parsed.options.commands, false);
+    assert.equal(parsed.options.envCheck, false);
+    assert.equal(parsed.options.runtime, false);
+    assert.equal(parsed.options.io, false);
+    assert.equal(parsed.options.basic, true);
+
+    const env = parseArgs(["file.js", "-env"]);
+    assert.equal(env.options.environment, true);
+    assert.equal(env.options.basic, false);
+    assert.equal(env.options.envCheck, false);
+
+    const ec = parseArgs(["file.js", "-ec"]);
+    assert.equal(ec.options.envCheck, true);
+    assert.equal(ec.options.environment, false);
+
+    const rest = parseArgs(["file.js", "-c", "-r", "-io"]);
+    assert.equal(rest.options.commands, true);
+    assert.equal(rest.options.runtime, true);
+    assert.equal(rest.options.io, true);
+    assert.equal(rest.options.basic, false);
+
+    const longs = parseArgs([
+      "file.js",
+      "--environment",
+      "--commands",
+      "--env-check",
+      "--runtime",
+      "--io",
+    ]);
+    assert.equal(longs.options.environment, true);
+    assert.equal(longs.options.commands, true);
+    assert.equal(longs.options.envCheck, true);
+    assert.equal(longs.options.runtime, true);
+    assert.equal(longs.options.io, true);
   });
 });

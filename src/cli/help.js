@@ -84,6 +84,36 @@ export function formatHelp(opts = {}) {
 
   lines.push(
     ...frameSection(
+      "operations · s03",
+      [
+        flagRow("-va, --validate", "cycles, unused, broken", col, pal),
+        "",
+        pal.dim("только явное включение (не в default-all)"),
+      ],
+      pal,
+    ),
+    "",
+  );
+
+  lines.push(
+    ...frameSection(
+      "operations · s04",
+      [
+        flagRow("-env, --environment", "ссылки, скрипты, entry", col, pal),
+        flagRow("-c, --commands", "утилиты файла (PATH)", col, pal),
+        flagRow("-ec, --env-check", "наличие node/npm/…", col, pal),
+        flagRow("-r, --runtime", "чем запускать файл", col, pal),
+        flagRow("-io, --io", "fs read/write/… (AST)", col, pal),
+        "",
+        pal.dim("только явное включение (не в default-all)"),
+      ],
+      pal,
+    ),
+    "",
+  );
+
+  lines.push(
+    ...frameSection(
       "output",
       [
         flagRow("-j, --json", "JSON вместо schematic text", col, pal),

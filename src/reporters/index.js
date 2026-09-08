@@ -387,6 +387,240 @@ function formatEntitiesSection(result, pal) {
 }
 
 /**
+ * @param {InspectorResult} result
+ * @param {Palette} pal
+ * @returns {string[]}
+ */
+function formatDiagnosticsSection(result, pal) {
+  if (result.status === "error") {
+    return frameSection(
+      "diagnostics",
+      [pal.red(`✖ ${result.error?.code}: ${result.error?.message}`)],
+      pal,
+    );
+  }
+  const d = result.data ?? {};
+  const summary = d.summary ?? { error: 0, warning: 0, info: 0 };
+  /** @type {string[]} */
+  const body = [
+    pal.dim(`path-mode ${d.pathMode ?? "relative"}`),
+    `${pal.red(`${summary.error ?? 0} error`)} · ${pal.yellow(`${summary.warning ?? 0} warnings`)}`,
+  ];
+  const list = Array.isArray(d.diagnostics) ? d.diagnostics : [];
+  if (list.length === 0) {
+    body.push(pal.dim("∅  none"));
+  } else {
+    for (const item of list) {
+      const mark =
+        item.severity === "error"
+          ? pal.red("✖")
+          : item.severity === "warning"
+            ? pal.yellow("⚠")
+            : pal.dim("·");
+      let ctx = "";
+      if (item.code === "CYCLE" && Array.isArray(item.paths)) {
+        ctx = item.paths.join(" → ");
+      } else if (item.display) {
+        ctx = String(item.display);
+      } else if (item.source) {
+        ctx = String(item.source);
+      } else if (item.name) {
+        ctx = String(item.name);
+      }
+      const loc =
+        item.loc != null
+          ? pal.dim(`  :${item.loc.line}:${item.loc.column}`)
+          : "";
+      body.push(
+        `${mark} ${String(item.code).padEnd(14)} ${ctx}${loc}`,
+      );
+    }
+  }
+  if (Array.isArray(d.skipped) && d.skipped.length > 0) {
+    body.push("");
+    body.push(pal.dim(`skipped ${d.skipped.length} unreadable candidate(s)`));
+  }
+  return frameSection("diagnostics", body, pal);
+}
+
+/**
+ * @param {InspectorResult} result
+ * @param {Palette} pal
+ * @returns {string[]}
+ */
+function formatEnvironmentSection(result, pal) {
+  if (result.status === "error") {
+    return frameSection(
+      "environment",
+      [pal.red(`✖ ${result.error?.code}: ${result.error?.message}`)],
+      pal,
+    );
+  }
+  const d = result.data ?? {};
+  const syn = d.symlink ?? {};
+  const hl = d.hardLink ?? {};
+  /** @type {string[]} */
+  const body = [
+    `${pal.dim("symlink")}  ${syn.isSymlink ? pal.yellow("yes") : "no"}${syn.target ? ` → ${syn.target}` : ""}`,
+    `${pal.dim("nlink")}    ${hl.nlink ?? "—"}  ·  inode ${hl.inode ?? "—"}`,
+    `${pal.dim("scripts")}`,
+  ];
+  const scripts = Array.isArray(d.scripts) ? d.scripts : [];
+  if (scripts.length === 0) body.push(pal.dim("  ∅  none"));
+  else {
+    for (const s of scripts) {
+      body.push(`${pal.cyan("→")}  ${s.display}  ${pal.dim(s.kind)}`);
+    }
+  }
+  body.push(pal.dim("entry"));
+  const entries = Array.isArray(d.entryPoints) ? d.entryPoints : [];
+  if (entries.length === 0) body.push(pal.dim("  ∅  none"));
+  else {
+    for (const e of entries) {
+      body.push(`${pal.green("◆")}  ${e.display}  ${pal.dim(e.kind)}`);
+    }
+  }
+  return frameSection("environment", body, pal);
+}
+
+/**
+ * @param {InspectorResult} result
+ * @param {Palette} pal
+ * @returns {string[]}
+ */
+function formatCommandsSection(result, pal) {
+  if (result.status === "error") {
+    return frameSection(
+      "commands",
+      [pal.red(`✖ ${result.error?.code}: ${result.error?.message}`)],
+      pal,
+    );
+  }
+  const list = Array.isArray(result.data?.commands) ? result.data.commands : [];
+  /** @type {string[]} */
+  const body = [];
+  if (list.length === 0) body.push(pal.dim("∅  none"));
+  else {
+    const parts = list.map((c) =>
+      c.available ? `${c.name} ${pal.green("✓")}` : `${c.name} ${pal.dim("✗")}`,
+    );
+    // wrap roughly
+    let line = "";
+    for (const p of parts) {
+      const next = line ? `${line} · ${p}` : p;
+      if (visibleWidth(next) > 70 && line) {
+        body.push(line);
+        line = p;
+      } else {
+        line = next;
+      }
+    }
+    if (line) body.push(line);
+  }
+  return frameSection("commands", body, pal);
+}
+
+/**
+ * @param {InspectorResult} result
+ * @param {Palette} pal
+ * @returns {string[]}
+ */
+function formatEnvCheckSection(result, pal) {
+  if (result.status === "error") {
+    return frameSection(
+      "env-check",
+      [pal.red(`✖ ${result.error?.code}: ${result.error?.message}`)],
+      pal,
+    );
+  }
+  const tools = Array.isArray(result.data?.tools) ? result.data.tools : [];
+  const missing = Array.isArray(result.data?.missing) ? result.data.missing : [];
+  /** @type {string[]} */
+  const body = [];
+  for (const t of tools) {
+    const mark = t.available ? pal.green("✓") : pal.red("✗");
+    const ver = t.version ? pal.dim(` ${t.version}`) : "";
+    const req = t.required ? "" : pal.dim(" (optional)");
+    body.push(`${mark}  ${t.name}${ver}${req}`);
+  }
+  if (missing.length > 0) {
+    body.push("");
+    body.push(pal.yellow(`missing: ${missing.join(", ")}`));
+  }
+  if (body.length === 0) body.push(pal.dim("∅  none"));
+  return frameSection("env-check", body, pal);
+}
+
+/**
+ * @param {InspectorResult} result
+ * @param {Palette} pal
+ * @returns {string[]}
+ */
+function formatRuntimeSection(result, pal) {
+  if (result.status === "error") {
+    return frameSection(
+      "runtime",
+      [pal.red(`✖ ${result.error?.code}: ${result.error?.message}`)],
+      pal,
+    );
+  }
+  const d = result.data ?? {};
+  const rt = d.runtime;
+  /** @type {string[]} */
+  const body = [`${pal.dim("language")}  ${d.language ?? "unknown"}`];
+  if (!rt) {
+    body.push(pal.dim("runtime   ∅"));
+  } else {
+    const avail = rt.available ? pal.green("✓") : pal.red("✗");
+    body.push(
+      `${pal.dim("runtime")}   ${rt.kind} ${pal.bold(rt.name)} ${avail}`,
+    );
+    if (rt.version) body.push(`${pal.dim("version")}   ${rt.version}`);
+    if (rt.commandHint) {
+      body.push(`${pal.dim("hint")}      ${pal.cyan(rt.commandHint)}`);
+    }
+    if (rt.shebang) body.push(`${pal.dim("shebang")}   ${rt.shebang}`);
+  }
+  return frameSection("runtime", body, pal);
+}
+
+/**
+ * @param {InspectorResult} result
+ * @param {Palette} pal
+ * @returns {string[]}
+ */
+function formatIoSection(result, pal) {
+  if (result.status === "error") {
+    return frameSection(
+      "io",
+      [pal.red(`✖ ${result.error?.code}: ${result.error?.message}`)],
+      pal,
+    );
+  }
+  const d = result.data ?? {};
+  const ops = Array.isArray(d.operations) ? d.operations : [];
+  const sum = d.summary ?? {};
+  /** @type {string[]} */
+  const body = [
+    pal.dim(
+      `read ${sum.read ?? 0} · write ${sum.write ?? 0} · create ${sum.create ?? 0} · delete ${sum.delete ?? 0} · change ${sum.change ?? 0}`,
+    ),
+  ];
+  if (ops.length === 0) body.push(pal.dim("∅  none"));
+  else {
+    for (const op of ops) {
+      const path = op.display ?? op.pathLiteral ?? pal.dim("(dynamic)");
+      const loc =
+        op.loc != null ? pal.dim(`  :${op.loc.line}:${op.loc.column}`) : "";
+      body.push(
+        `${String(op.kind).padEnd(7)} ${pal.cyan(op.api)}${padTo(String(op.api), 18)}${path}${loc}`,
+      );
+    }
+  }
+  return frameSection("io", body, pal);
+}
+
+/**
  * Текстовый отчёт — schematic layout.
  *
  * @param {AnalysisReport} report
@@ -438,6 +672,36 @@ export function formatTextReport(report, styleOpts = {}) {
   const entities = report.results["exported-entities"];
   if (opts.entities && entities) {
     lines.push(...formatEntitiesSection(entities, pal), "");
+  }
+
+  const validation = report.results.validation;
+  if (opts.validate && validation) {
+    lines.push(...formatDiagnosticsSection(validation, pal), "");
+  }
+
+  const environment = report.results["file-environment-analysis"];
+  if (opts.environment && environment) {
+    lines.push(...formatEnvironmentSection(environment, pal), "");
+  }
+
+  const commands = report.results.commands;
+  if (opts.commands && commands) {
+    lines.push(...formatCommandsSection(commands, pal), "");
+  }
+
+  const envCheck = report.results["environment-validation"];
+  if (opts.envCheck && envCheck) {
+    lines.push(...formatEnvCheckSection(envCheck, pal), "");
+  }
+
+  const runtime = report.results["runtime-dependency-analysis"];
+  if (opts.runtime && runtime) {
+    lines.push(...formatRuntimeSection(runtime, pal), "");
+  }
+
+  const io = report.results["file-operations"];
+  if (opts.io && io) {
+    lines.push(...formatIoSection(io, pal), "");
   }
 
   if (report.prerequisiteErrors?.length) {

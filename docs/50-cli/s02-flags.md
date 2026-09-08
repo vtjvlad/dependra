@@ -11,7 +11,7 @@ source: handbook/roadmap/stages/02-deepen-analysis.md, docs/50-cli/interface.md
 
 Зафиксировать новые operation-флаги этапа **S02** в тех же правилах, что и S01: long/short, pipeline/`results`, schematic-секции и help.
 
-Версия пакета остаётся `0.0.2` (не повышать без approve).
+Версия пакета остаётся `0.0.33` (не повышать без approve).
 
 ## Правила short (наследство S01)
 

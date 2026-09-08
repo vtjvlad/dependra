@@ -15,4 +15,10 @@ source: .dep/.blueprint/20-features
 - [analysis/dependency-analysis.md](analysis/dependency-analysis.md)
 - [analysis/additional-file-information.md](analysis/additional-file-information.md) — S02
 - [analysis/exported-entities.md](analysis/exported-entities.md) — S02
+- [analysis/validation.md](analysis/validation.md) — S03
+- [analysis/file-environment-analysis.md](analysis/file-environment-analysis.md) — S04 P
+- [analysis/commands.md](analysis/commands.md) — S04 P
+- [analysis/environment-validation.md](analysis/environment-validation.md) — S04 P
+- [analysis/runtime-dependency-analysis.md](analysis/runtime-dependency-analysis.md) — S04 U
+- [analysis/file-operations.md](analysis/file-operations.md) — S04 U
 - [deferred/README.md](deferred/README.md) — отложенное
