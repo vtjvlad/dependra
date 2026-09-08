@@ -28,7 +28,7 @@ source: .dep/.blueprint/80-roadmap/development-sequence.md, 00-project/main-rule
 
 ---
 
-## S01 — MVP core (текущий)
+## S01 — MVP core (`завершено`)
 
 Внутренние подэтапы (бывшие A–D):
 
@@ -49,21 +49,21 @@ source: .dep/.blueprint/80-roadmap/development-sequence.md, 00-project/main-rule
 
 1. `basic-file-information` — **MVP-005 сделано**
 2. `import-export-analysis` — **MVP-006 сделано**
-3. `dependency-analysis`
-4. Text + JSON reporters
-5. CLI pipeline + тесты на фикстурах
+3. `dependency-analysis` — **MVP-007 сделано**
+4. Text + JSON reporters — **MVP-008 сделано**
+5. CLI pipeline + тесты на фикстурах — **MVP-009/010 сделано**
 
 ### S01-D — Стабилизация
 
 1. Доработка по AC из docs
-2. Обновление `handbook/context` (после approve)
-3. Решение о переходе к S02 (версия пакета остаётся `0.0.1`, пока владелец не решит иначе)
+2. Обновление `handbook/context` — **MVP-011 сделано**
+3. Переход к S02 (версия пакета остаётся `0.0.1`)
 
-Задачи: [mvp-backlog.md](mvp-backlog.md) (`MVP-001`…`011`).
+Задачи: [mvp-backlog.md](mvp-backlog.md) (`MVP-001`…`011` — все `завершено`).
 
 ---
 
-## S02 — Углубление анализа B/M
+## S02 — Углубление анализа B/M (текущий)
 
 1. Спека additional-file-information + exported-entities в `docs/`
 2. Инспекторы и расширение модели

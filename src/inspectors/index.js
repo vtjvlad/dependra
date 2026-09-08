@@ -1,5 +1,6 @@
 import { registerInspector } from "../core/registry.js";
 import { basicFileInformationInspector } from "./basic-file-information.js";
+import { dependencyAnalysisInspector } from "./dependency-analysis.js";
 import { importExportAnalysisInspector } from "./import-export-analysis.js";
 
 /**
@@ -9,4 +10,5 @@ import { importExportAnalysisInspector } from "./import-export-analysis.js";
 export function registerBuiltInInspectors() {
   registerInspector(basicFileInformationInspector);
   registerInspector(importExportAnalysisInspector);
+  registerInspector(dependencyAnalysisInspector);
 }

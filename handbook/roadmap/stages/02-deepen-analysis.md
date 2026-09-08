@@ -10,7 +10,7 @@ source: .dep/.blueprint/20-features/additional-file-information---B, exported-en
 | Поле | Значение |
 |------|----------|
 | **ID** | S02 |
-| **Статус** | `запланировано` |
+| **Статус** | `в работе` |
 | **dependsOn** | S01 |
 
 ## Цель / границы
@@ -36,7 +36,7 @@ source: .dep/.blueprint/20-features/additional-file-information---B, exported-en
 
 | ID | Название | Статус |
 |----|----------|--------|
-| S02-A | Спека в `docs/` | `запланировано` |
+| S02-A | Спека в `docs/` | `в работе` |
 | S02-B | Инспекторы + модель | `запланировано` |
 | S02-C | CLI / reporters | `запланировано` |
 | S02-D | Тесты + стабилизация | `запланировано` |

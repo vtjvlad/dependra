@@ -7,40 +7,62 @@ source: .dep/.blueprint/90-context/project-context-spec.md
 
 # Индекс контекста проекта
 
-Версия пакета: **0.0.1**.
+Версия пакета: **0.0.1** (не повышать без решения владельца).
 
 | Секция | Статус | Где смотреть |
 |--------|--------|--------------|
-| Общая концепция | Задокументировано | [docs/00-project/overview.md](../../docs/00-project/overview.md) |
-| Главное правило | Задокументировано | [docs/00-project/main-rule.md](../../docs/00-project/main-rule.md) |
+| Общая концепция | Accepted | [docs/00-project/overview.md](../../docs/00-project/overview.md) |
+| Главное правило | Accepted | [docs/00-project/main-rule.md](../../docs/00-project/main-rule.md) |
 | Архитектурная модель | Accepted | [docs/20-architecture/](../../docs/20-architecture/overview.md) |
-| Принятые соглашения | Ожидает | — |
+| Принятые соглашения | Зафиксировано ниже | этот файл |
 | Правила кодирования | Accepted | [docs/40-development/coding-principles.md](../../docs/40-development/coding-principles.md) |
-| Структура проекта | Accepted | [docs/20-architecture/project-structure.md](../../docs/20-architecture/project-structure.md) |
-| Соглашения по именованию | Ожидает | — |
-| Принятые технологии | Accepted | [docs/10-technology/stack.md](../../docs/10-technology/stack.md) |
-| Выбор AST-парсера | ADR-0001 (Acorn) | [ADR-0001](../adr/ADR-0001-js-ast-parser.md), [external-tools](../../docs/10-technology/external-tools.md) |
-| Ограничения проекта | Accepted | [docs/20-architecture/limitations.md](../../docs/20-architecture/limitations.md) |
-| MVP scope | Accepted | [docs/20-features/mvp-scope.md](../../docs/20-features/mvp-scope.md) |
-| Полный roadmap (S01–S10) | Задокументировано | [handbook/roadmap](../roadmap/README.md), [todo-checklist](../roadmap/todo-checklist.md) |
-| Текущие договорённости | Частично | docs accepted; S01-C; следующая задача = MVP-007 |
-| Долгосрочные цели | В roadmap | [stages S02–S10](../roadmap/stages/README.md); детали фич — blueprint / deferred |
-| Особенности реализации | basic + import-export | `src/inspectors/basic-file-information`, `import-export-analysis` (+ resolve); далее dependency-analysis / reporters |
-| Требования к качеству | Ожидает | — |
+| Структура проекта | Accepted + реализовано | [project-structure.md](../../docs/20-architecture/project-structure.md), `src/` |
+| Соглашения по именованию | Зафиксировано ниже | этот файл |
+| Принятые технологии | Accepted | [stack.md](../../docs/10-technology/stack.md) |
+| Выбор AST-парсера | ADR-0001 (Acorn) | [ADR-0001](../adr/ADR-0001-js-ast-parser.md) |
+| Ограничения проекта | Accepted | [limitations.md](../../docs/20-architecture/limitations.md) |
+| MVP scope | Accepted, S01 реализован | [mvp-scope.md](../../docs/20-features/mvp-scope.md) |
+| Полный roadmap (S01–S10) | S01 `завершено` | [roadmap](../roadmap/README.md), [todo-checklist](../roadmap/todo-checklist.md) |
+| Текущие договорённости | Актуальны | S01 закрыт; следующий этап = **S02** |
+| Долгосрочные цели | В roadmap | [stages S02–S10](../roadmap/stages/README.md) |
+| Особенности реализации | Задокументировано | раздел ниже |
+| Требования к качеству | `npm test` (13 AC) | `tests/mvp-*.test.js`, `tests/fixtures/mvp/` |
 | Взаимодействие модулей | Accepted | [inspector-contract](../../docs/20-architecture/inspector-contract.md), [modules](../../docs/20-architecture/modules.md) |
 | Требования к документации | Частично | docs = спека, handbook = процесс; blueprint = архив |
 | Принятые проектные решения (ADR) | ADR-0001 | [handbook/adr](../adr/README.md) |
 
-## Краткие договорённости (подтверждённые в работе над спекой)
+## Реализация S01 (факт)
 
-1. Рабочая продуктовая спека живёт в `docs/` (MVP docs: `status: accepted`).
-2. ADR, roadmap и context живут в `handbook/`.
-3. `.dep/.blueprint` — архив/макет, не рабочий источник правок.
-4. Версия пакета на этом этапе — `0.0.1`, не повышать.
-5. MVP (S01): один JS-файл; basic + imports/exports + graph; CLI + JSON; один инспектор import-export; pipeline prerequisites для graph; без `--level`.
-6. Единое поле внешнего модуля: `isExternal`. `ImportRecord.source` может быть `null`.
-7. Полный roadmap: этапы `S01`–`S10` в `handbook/roadmap/`; сводный чеклист — `todo-checklist.md`; deferred привязан к целевым этапам.
-8. JS AST-парсер MVP: **Acorn** ([ADR-0001](../adr/ADR-0001-js-ast-parser.md)); доступ только через будущий модуль `parsers`.
-9. Entrypoint: `node src/cli/index.js` (ESM, `"type": "module"`).
+```
+src/
+  cli/          argv, help/version, валидация файла, запуск pipeline + reporters
+  core/         context, registry, pipeline (prerequisites import→graph)
+  parsers/      Acorn за адаптером; loadSourceFile / ensureTargetSourceFile
+  inspectors/   basic-file-information, import-export-analysis, dependency-analysis
+  reporters/    text + JSON по флагам секций
+```
+
+Entrypoint: `node src/cli/index.js <file> [options]`  
+Флаги MVP: `--basic` `--imports` `--exports` `--graph` `--json` `--path-mode` `--help` `--version`.  
+Default без op-флагов: все четыре операции. Версия пакета: `0.0.1`.
+
+## Соглашения по именованию (S01)
+
+- Инспекторы: kebab-case id = имя файла (`basic-file-information`).
+- Поле внешнего модуля: всегда `isExternal` (не `external`).
+- Опции отчёта JSON: `basic`, `imports`, `exports`, `graph`, `pathMode`.
+- Коды ошибок: `SCREAMING_SNAKE` (`PARSE_FAILED`, `MODEL_INCOMPLETE`, …).
+
+## Краткие договорённости
+
+1. Рабочая продуктовая спека — `docs/` (`status: accepted` для MVP).
+2. ADR, roadmap, context — `handbook/`.
+3. `.dep/.blueprint` — архив, не источник правок.
+4. Версия на S01/S02 старте — `0.0.1`, не бампать без решения владельца.
+5. MVP: один JS-файл; basic + imports/exports + graph; один инспектор import-export; pipeline prerequisites для graph; без `--level`.
+6. `ImportRecord.source` может быть `null` (dynamic import).
+7. Roadmap: `S01`–`S10`; сводный чеклист — `todo-checklist.md`.
+8. Парсер: **Acorn** только через `parsers` (ADR-0001).
+9. Тесты: `npm test` (= `node --test tests/**/*.test.js`).
 
 Изменения этого списка — только с approve владельца.

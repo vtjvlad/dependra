@@ -4,6 +4,7 @@ import { existsSync, statSync } from "node:fs";
 import { isAbsolute, resolve } from "node:path";
 import { createAnalysisContext, runPipeline } from "../core/index.js";
 import { registerBuiltInInspectors } from "../inspectors/index.js";
+import { formatReport } from "../reporters/index.js";
 import { parseArgs } from "./parse-args.js";
 
 registerBuiltInInspectors();
@@ -18,7 +19,7 @@ Options:
   --basic              Базовая информация о файле
   --imports            Импорты
   --exports            Экспорты
-  --graph              Граф зависимостей
+  --graph              Зависимости (imported-by / imports)
   --json               Вывод JSON
   --path-mode <mode>   name|relative|absolute (default: relative)
   --help               Справка
@@ -30,46 +31,6 @@ Options:
 Entrypoint:
   node src/cli/index.js <file> [options]
 `;
-
-/**
- * @param {import('../core/types.js').AnalysisReport} report
- * @param {boolean} asJson
- */
-function printReport(report, asJson) {
-  if (asJson) {
-    process.stdout.write(`${JSON.stringify(report, null, 2)}\n`);
-    return;
-  }
-
-  const lines = [
-    `dependra ${report.version}`,
-    `target: ${report.target}`,
-    `cwd: ${report.cwd}`,
-    "",
-  ];
-
-  const ids = Object.keys(report.results);
-  if (ids.length === 0) {
-    lines.push("(нет секций результатов)");
-  } else {
-    for (const id of ids) {
-      const r = report.results[id];
-      lines.push(`[${id}] ${r.status}`);
-      if (r.status === "error" && r.error) {
-        lines.push(`  ${r.error.code}: ${r.error.message}`);
-      }
-    }
-  }
-
-  if (report.prerequisiteErrors?.length) {
-    lines.push("", "prerequisite errors:");
-    for (const msg of report.prerequisiteErrors) {
-      lines.push(`  ${msg}`);
-    }
-  }
-
-  process.stdout.write(`${lines.join("\n")}\n`);
-}
 
 /**
  * @returns {Promise<number>}
@@ -129,7 +90,9 @@ async function main() {
       process.stderr.write(`${msg}\n`);
     }
 
-    printReport(report, parsed.options.json);
+    process.stdout.write(
+      formatReport(report, { json: parsed.options.json }),
+    );
     return exitCode;
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);

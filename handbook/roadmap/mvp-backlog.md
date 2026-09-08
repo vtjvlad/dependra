@@ -17,11 +17,11 @@ source: .dep/.blueprint/80-roadmap
 | MVP-004 | Модуль `parsers` + загрузка SourceFile | высокий | MVP-002, MVP-003 | `завершено` |
 | MVP-005 | Инспектор basic-file-information | высокий | MVP-002 | `завершено` |
 | MVP-006 | Инспектор import-export-analysis | высокий | MVP-004 | `завершено` |
-| MVP-007 | Инспектор dependency-analysis | высокий | MVP-006 | `запланировано` |
-| MVP-008 | Reporters text + json (все MVP-секции) | высокий | MVP-005, MVP-006, MVP-007 | `запланировано` |
-| MVP-009 | CLI флаги MVP + pipeline + коды выхода | высокий | MVP-005, MVP-006, MVP-007, MVP-008 | `запланировано` |
-| MVP-010 | Фикстуры и тесты AC | высокий | MVP-009 | `запланировано` |
-| MVP-011 | Обновить handbook/context после стабилизации | средний | MVP-010 | `запланировано` |
+| MVP-007 | Инспектор dependency-analysis | высокий | MVP-006 | `завершено` |
+| MVP-008 | Reporters text + json (все MVP-секции) | высокий | MVP-005, MVP-006, MVP-007 | `завершено` |
+| MVP-009 | CLI флаги MVP + pipeline + коды выхода | высокий | MVP-005, MVP-006, MVP-007, MVP-008 | `завершено` |
+| MVP-010 | Фикстуры и тесты AC | высокий | MVP-009 | `завершено` |
+| MVP-011 | Обновить handbook/context после стабилизации | средний | MVP-010 | `завершено` |
 
 Детали спеки:
 

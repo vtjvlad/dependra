@@ -8,7 +8,7 @@ source: .dep/.blueprint/80-roadmap
 # Roadmap
 
 Полный процесс разработки Dependra: большие этапы `S01`–`S10`, подэтапы и задачи.  
-Активный этап сейчас: **S01 (MVP core)**. Версию пакета на S01 **не повышать** (`0.0.1`).
+Активный этап сейчас: **S02 (Углубление анализа B/M)**. S01 (MVP core) — `завершено`. Версию пакета **не повышать** (`0.0.1`), пока владелец не решит иначе.
 
 ## Документы
 
@@ -24,8 +24,8 @@ source: .dep/.blueprint/80-roadmap
 
 | ID | Название | Статус | dependsOn | Файл |
 |----|----------|--------|-----------|------|
-| S01 | MVP core | `в работе` | — | [stages/01-mvp-core.md](stages/01-mvp-core.md) |
-| S02 | Углубление анализа B/M | `запланировано` | S01 | [stages/02-deepen-analysis.md](stages/02-deepen-analysis.md) |
+| S01 | MVP core | `завершено` | — | [stages/01-mvp-core.md](stages/01-mvp-core.md) |
+| S02 | Углубление анализа B/M | `в работе` | S01 | [stages/02-deepen-analysis.md](stages/02-deepen-analysis.md) |
 | S03 | Validation (D) | `запланировано` | S02 | [stages/03-validation.md](stages/03-validation.md) |
 | S04 | Environment / runtime (P+U) | `запланировано` | S02 | [stages/04-environment-runtime.md](stages/04-environment-runtime.md) |
 | S05 | Visualization + config (E) | `запланировано` | S03 | [stages/05-visualization-config.md](stages/05-visualization-config.md) |

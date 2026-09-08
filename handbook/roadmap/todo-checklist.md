@@ -11,7 +11,7 @@ source: handbook/roadmap/stages
 Детали, `dependsOn` и exit criteria — в [stages/](stages/) и [mvp-backlog.md](mvp-backlog.md).  
 При закрытии пункта синхронизируй статус в файле этапа / backlog.
 
-**Активный этап:** S01.
+**Активный этап:** S02.
 
 ---
 
@@ -30,14 +30,14 @@ source: handbook/roadmap/stages
 ### S01-C — Инспекторы + reporters + CLI
 - [x] MVP-005: инспектор basic-file-information
 - [x] MVP-006: инспектор import-export-analysis
-- [ ] MVP-007: инспектор dependency-analysis
-- [ ] MVP-008: reporters text + json
-- [ ] MVP-009: CLI флаги MVP + pipeline + коды выхода
-- [ ] MVP-010: фикстуры и тесты AC
+- [x] MVP-007: инспектор dependency-analysis
+- [x] MVP-008: reporters text + json
+- [x] MVP-009: CLI флаги MVP + pipeline + коды выхода
+- [x] MVP-010: фикстуры и тесты AC
 
 ### S01-D — Стабилизация
-- [ ] MVP-011: обновить handbook/context после стабилизации
-- [ ] Exit criteria S01 + approve → S02
+- [x] MVP-011: обновить handbook/context после стабилизации
+- [x] Exit criteria S01 + approve → S02
 
 ---
 

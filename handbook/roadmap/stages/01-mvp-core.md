@@ -10,7 +10,7 @@ source: .dep/.blueprint/80-roadmap, docs/20-features/mvp-scope.md
 | Поле | Значение |
 |------|----------|
 | **ID** | S01 |
-| **Статус** | `в работе` |
+| **Статус** | `завершено` |
 | **dependsOn** | — |
 | **Версия** | `0.0.1` (не повышать) |
 
@@ -37,8 +37,8 @@ source: .dep/.blueprint/80-roadmap, docs/20-features/mvp-scope.md
 |----|----------|--------|--------|
 | S01-A | Спека | `завершено` | MVP-001 |
 | S01-B | Каркас + ADR парсера | `завершено` | MVP-002, MVP-003, MVP-004 |
-| S01-C | Инспекторы + reporters + CLI | `в работе` | MVP-005…010 |
-| S01-D | Стабилизация | `запланировано` | MVP-011 |
+| S01-C | Инспекторы + reporters + CLI | `завершено` | MVP-005…010 |
+| S01-D | Стабилизация | `завершено` | MVP-011 |
 
 ## Задачи
 
@@ -64,10 +64,10 @@ source: .dep/.blueprint/80-roadmap, docs/20-features/mvp-scope.md
 
 - [x] S01-A: ключевые docs в `review`/`accepted` (MVP-001)
 - [x] S01-B: каркас `src/`, ADR парсера, parsers (MVP-002…004)
-- [ ] S01-C: три инспектора, reporters, CLI pipeline (MVP-005…009)
-- [ ] S01-C: фикстуры и тесты AC (MVP-010)
-- [ ] S01-D: context обновлён (MVP-011)
-- [ ] Exit criteria выполнены, approve владельца на переход к S02
+- [x] S01-C: три инспектора, reporters, CLI pipeline (MVP-005…009)
+- [x] S01-C: фикстуры и тесты AC (MVP-010)
+- [x] S01-D: context обновлён (MVP-011)
+- [x] Exit criteria выполнены, approve владельца на переход к S02
 
 ## Exit criteria
 
