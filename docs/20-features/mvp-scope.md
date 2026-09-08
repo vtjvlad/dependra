@@ -44,5 +44,5 @@ source: .dep/.blueprint/20-features/README.md, 00-project/main-rule.md
 
 ## Acceptance criteria
 
-- [ ] Реализация не тянет deferred-фичи «заодно»
+- [?] Реализация не тянет deferred-фичи «заодно»
 - [ ] Backlog в handbook отражает только MVP-задачи текущего этапа
