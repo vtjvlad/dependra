@@ -96,33 +96,43 @@ source: .dep/.blueprint/50-user/cli-flags.md, 35-configurations/output-settings.
 
 ## Text
 
-Секции только для включённых операций:
+Секции только для включённых операций. Layout — **schematic** (рамочные блоки в `reporters`): смысл секций обязателен, оформление — за reporters.
+
+Идея вывода:
 
 ```
-# basic
-name: app.js
-...
+dependra 0.0.2 · schematic
+target  src/app.js
+cwd     /abs/proj
 
-# imports
-- ./lib.js
-- fs
+┌─ file ─────────────────────────────────────────┐
+│  app.js                                        │
+│  src/app.js                                    │
+│  javascript  ·  text/javascript  ·  112 B      │
+└────────────────────────────────────────────────┘
 
-# exports
-- named: run
+┌─ imports · esm ────────────────────────────────┐
+│  →  fs                              external   │
+│  →  ./lib.js                                   │
+└────────────────────────────────────────────────┘
 
-# graph
-imported-by          imports
--------------------  -------------------
-src/main.js          src/lib.js
-                     fs
+┌─ exports ──────────────────────────────────────┐
+│  ◆  run                             named      │
+│  ★  default                         default    │
+└────────────────────────────────────────────────┘
+
+┌─ graph ────────────────────────────────────────┐
+│  path-mode relative                            │
+│  flow … (мини-схема) + колонки imported-by/imports │
+└────────────────────────────────────────────────┘
 ```
 
-- `# imports` — только при `options.imports`
-- `# exports` — только при `options.exports`
-- `# graph` — только при `options.graph`
-- `# basic` — только при `options.basic`
+- секция **imports** — только при `options.imports`
+- секция **exports** — только при `options.exports`
+- секция **graph** — только при `options.graph`
+- секция **file** (basic) — только при `options.basic`
 
-Точный layout text — за `reporters`; смысл секций обязателен.
+ANSI-цвет: только если stdout — TTY и не задан `NO_COLOR`.
 
 ## Правила
 
