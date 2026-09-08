@@ -43,8 +43,9 @@ src/
 ```
 
 Entrypoint: `node src/cli/index.js <file> [options]`  
-Флаги MVP: `--basic` `--imports` `--exports` `--graph` `--json` `--path-mode` `--help` `--version`.  
-Default без op-флагов: все четыре операции. Версия пакета: `0.0.2`. `--version` → `Dependra v0.0.2`.
+npm `bin`: `dependra`, `fds`, `deps`, `dep` (один entrypoint).  
+Флаги MVP: `--basic|-b` `--imports|-i` `--exports|-e` `--graph|-g` `--json|-j` `--path-mode|-p` `--help|-h` `--version|-v`.  
+Default без op-флагов: все четыре операции. Версия пакета: `0.0.2`. `--version`/`-v` → `Dependra v0.0.2`.
 
 ## Соглашения по именованию (S01)
 

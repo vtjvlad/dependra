@@ -189,4 +189,17 @@ describe("MVP CLI AC", () => {
     const report = JSON.parse(stdout);
     assert.equal(report.version, "0.0.2");
   });
+
+  it("-g -j smoke matches --graph --json", async () => {
+    const short = JSON.parse(
+      (await runCli(["src/app.js", "-g", "-j"])).stdout,
+    );
+    const long = JSON.parse(
+      (await runCli(["src/app.js", "--graph", "--json"])).stdout,
+    );
+    assert.deepEqual(Object.keys(short.results), ["dependency-analysis"]);
+    assert.deepEqual(Object.keys(long.results), ["dependency-analysis"]);
+    assert.equal(short.results["dependency-analysis"].status, "ok");
+    assert.equal(long.results["dependency-analysis"].status, "ok");
+  });
 });

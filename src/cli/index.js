@@ -10,25 +10,25 @@ import { parseArgs } from "./parse-args.js";
 
 registerBuiltInInspectors();
 
-const HELP = `dependra <file> [options]
+const HELP = `dependra|fds|deps|dep <file> [options]
 
 Минимальный CLI анализа одного JS-файла (Dependra v${PACKAGE_VERSION}).
 
 Options:
-  --basic              Базовая информация о файле
-  --imports            Импорты
-  --exports            Экспорты
-  --graph              Зависимости (imported-by / imports)
-  --json               Вывод JSON
-  --path-mode <mode>   name|relative|absolute (default: relative)
-  --help               Справка
-  --version            Версия пакета
+  -b, --basic              Базовая информация о файле
+  -i, --imports            Импорты
+  -e, --exports            Экспорты
+  -g, --graph              Зависимости (imported-by / imports)
+  -j, --json               Вывод JSON
+  -p, --path-mode <mode>   name|relative|absolute (default: relative)
+  -h, --help               Справка
+  -v, --version            Версия пакета
 
-Если ни один из --basic|--imports|--exports|--graph не указан,
+Если ни один из -b|--basic|-i|--imports|-e|--exports|-g|--graph не указан,
 выполняются все четыре операции.
 
-Entrypoint:
-  node src/cli/index.js <file> [options]
+Команды (npm bin): dependra, fds, deps, dep
+Entrypoint: node src/cli/index.js <file> [options]
 `;
 
 /**

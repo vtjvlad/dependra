@@ -47,34 +47,35 @@ export function parseArgs(argv) {
       result.version = true;
       continue;
     }
-    if (arg === "--basic") {
+    if (arg === "--basic" || arg === "-b") {
       result.options.basic = true;
       sawOp = true;
       continue;
     }
-    if (arg === "--imports") {
+    if (arg === "--imports" || arg === "-i") {
       result.options.imports = true;
       sawOp = true;
       continue;
     }
-    if (arg === "--exports") {
+    if (arg === "--exports" || arg === "-e") {
       result.options.exports = true;
       sawOp = true;
       continue;
     }
-    if (arg === "--graph") {
+    if (arg === "--graph" || arg === "-g") {
       result.options.graph = true;
       sawOp = true;
       continue;
     }
-    if (arg === "--json") {
+    if (arg === "--json" || arg === "-j") {
       result.options.json = true;
       continue;
     }
-    if (arg === "--path-mode") {
+    if (arg === "--path-mode" || arg === "-p") {
       const value = argv[i + 1];
-      if (!value || value.startsWith("--")) {
-        result.error = "Флаг --path-mode требует значение: name|relative|absolute";
+      if (!value || value.startsWith("-")) {
+        result.error =
+          "Флаг --path-mode/-p требует значение: name|relative|absolute";
         return result;
       }
       if (!PATH_MODES.has(value)) {
@@ -87,7 +88,7 @@ export function parseArgs(argv) {
       i += 1;
       continue;
     }
-    if (arg.startsWith("--")) {
+    if (arg.startsWith("-")) {
       result.error = `Неизвестный флаг: ${arg}`;
       return result;
     }
