@@ -61,7 +61,21 @@ export function formatHelp(opts = {}) {
         flagRow("-e, --exports", "экспорты (AST)", col, pal),
         flagRow("-g, --graph", "imported-by  │  imports", col, pal),
         "",
-        pal.dim("без operation-флагов → все четыре"),
+        pal.dim("без operation-флагов → все четыре S01"),
+      ],
+      pal,
+    ),
+    "",
+  );
+
+  lines.push(
+    ...frameSection(
+      "operations · s02",
+      [
+        flagRow("-a, --additional", "пути, права, копии", col, pal),
+        flagRow("-en, --entities", "символы import/export", col, pal),
+        "",
+        pal.dim("только явное включение (не в default-all)"),
       ],
       pal,
     ),

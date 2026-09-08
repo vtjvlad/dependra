@@ -1,5 +1,5 @@
 /**
- * Разбор argv CLI (docs/50-cli/interface.md).
+ * Разбор argv CLI (docs/50-cli/interface.md, s02-flags.md).
  *
  * @typedef {import('../core/types.js').AnalysisOptions} AnalysisOptions
  *
@@ -28,13 +28,16 @@ export function parseArgs(argv) {
       imports: false,
       exports: false,
       graph: false,
+      additional: false,
+      entities: false,
       json: false,
       pathMode: "relative",
     },
     error: null,
   };
 
-  let sawOp = false;
+  let sawS01Op = false;
+  let sawS02Op = false;
 
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
@@ -49,22 +52,32 @@ export function parseArgs(argv) {
     }
     if (arg === "--basic" || arg === "-b") {
       result.options.basic = true;
-      sawOp = true;
+      sawS01Op = true;
       continue;
     }
     if (arg === "--imports" || arg === "-i") {
       result.options.imports = true;
-      sawOp = true;
+      sawS01Op = true;
       continue;
     }
     if (arg === "--exports" || arg === "-e") {
       result.options.exports = true;
-      sawOp = true;
+      sawS01Op = true;
       continue;
     }
     if (arg === "--graph" || arg === "-g") {
       result.options.graph = true;
-      sawOp = true;
+      sawS01Op = true;
+      continue;
+    }
+    if (arg === "--additional" || arg === "-a") {
+      result.options.additional = true;
+      sawS02Op = true;
+      continue;
+    }
+    if (arg === "--entities" || arg === "-en") {
+      result.options.entities = true;
+      sawS02Op = true;
       continue;
     }
     if (arg === "--json" || arg === "-j") {
@@ -99,7 +112,8 @@ export function parseArgs(argv) {
     result.targetPath = arg;
   }
 
-  if (!sawOp) {
+  // Default-all: только когда нет ни S01, ни S02 operation-флагов
+  if (!sawS01Op && !sawS02Op) {
     result.options.basic = true;
     result.options.imports = true;
     result.options.exports = true;

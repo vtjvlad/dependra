@@ -6,6 +6,8 @@
  * @property {boolean} imports
  * @property {boolean} exports
  * @property {boolean} graph
+ * @property {boolean} additional
+ * @property {boolean} entities
  * @property {boolean} json
  * @property {"name"|"relative"|"absolute"} pathMode
  *

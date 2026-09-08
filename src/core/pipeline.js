@@ -11,6 +11,8 @@ import { PACKAGE_VERSION } from "../version.js";
 const ID_BASIC = "basic-file-information";
 const ID_IMPORT_EXPORT = "import-export-analysis";
 const ID_DEPENDENCY = "dependency-analysis";
+const ID_ADDITIONAL = "additional-file-information";
+const ID_ENTITIES = "exported-entities";
 
 /**
  * @param {string} id
@@ -50,7 +52,23 @@ function parserErrorResult(id, err) {
 }
 
 /**
- * Оркестрация pipeline по docs/50-cli/interface.md.
+ * @param {string} id
+ * @param {AnalysisContext} ctx
+ * @returns {Promise<InspectorResult>}
+ */
+async function runInspector(id, ctx) {
+  const inspector = getInspector(id);
+  if (!inspector) {
+    return missingInspectorResult(
+      id,
+      `Инспектор "${id}" ещё не зарегистрирован`,
+    );
+  }
+  return inspector.analyze(ctx);
+}
+
+/**
+ * Оркестрация pipeline по docs/50-cli/interface.md + s02-flags.md.
  *
  * @param {AnalysisContext} ctx
  * @returns {Promise<{ report: AnalysisReport, exitCode: number, prerequisiteErrors: string[] }>}
@@ -65,17 +83,10 @@ export async function runPipeline(ctx) {
   const needImportExport =
     options.imports || options.exports || options.graph;
   const reportImportExport = options.imports || options.exports;
+  const needAst = needImportExport || options.entities;
 
   if (options.basic) {
-    const inspector = getInspector(ID_BASIC);
-    if (!inspector) {
-      results[ID_BASIC] = missingInspectorResult(
-        ID_BASIC,
-        `Инспектор "${ID_BASIC}" ещё не зарегистрирован`,
-      );
-    } else {
-      results[ID_BASIC] = await inspector.analyze(ctx);
-    }
+    results[ID_BASIC] = await runInspector(ID_BASIC, ctx);
   }
 
   /** @type {InspectorResult|undefined} */
@@ -83,7 +94,7 @@ export async function runPipeline(ctx) {
   /** @type {ParserError|null} */
   let loadError = null;
 
-  if (needImportExport) {
+  if (needAst) {
     try {
       await ensureTargetSourceFile(ctx);
     } catch (err) {
@@ -106,41 +117,23 @@ export async function runPipeline(ctx) {
         );
       }
     } else {
-      const inspector = getInspector(ID_IMPORT_EXPORT);
-      if (!inspector) {
-        importExportResult = missingInspectorResult(
-          ID_IMPORT_EXPORT,
-          `Инспектор "${ID_IMPORT_EXPORT}" ещё не зарегистрирован`,
+      importExportResult = await runInspector(ID_IMPORT_EXPORT, ctx);
+      if (reportImportExport) {
+        const data = importExportResult.data
+          ? { ...importExportResult.data }
+          : undefined;
+        if (data && importExportResult.status === "ok") {
+          if (!options.imports) delete data.imports;
+          if (!options.exports) delete data.exports;
+        }
+        results[ID_IMPORT_EXPORT] = {
+          ...importExportResult,
+          data,
+        };
+      } else if (options.graph && importExportResult.status === "error") {
+        prerequisiteErrors.push(
+          `${ID_IMPORT_EXPORT}: ${importExportResult.error?.message ?? "error"}`,
         );
-        if (reportImportExport) {
-          results[ID_IMPORT_EXPORT] = importExportResult;
-        } else if (options.graph) {
-          prerequisiteErrors.push(
-            `${ID_IMPORT_EXPORT}: ${importExportResult.error?.message ?? "missing"}`,
-          );
-        }
-      } else {
-        importExportResult = await inspector.analyze(ctx);
-        if (reportImportExport) {
-          const data = importExportResult.data
-            ? { ...importExportResult.data }
-            : undefined;
-          if (data && importExportResult.status === "ok") {
-            if (!options.imports) delete data.imports;
-            if (!options.exports) delete data.exports;
-          }
-          results[ID_IMPORT_EXPORT] = {
-            ...importExportResult,
-            data,
-          };
-        } else if (
-          options.graph &&
-          importExportResult.status === "error"
-        ) {
-          prerequisiteErrors.push(
-            `${ID_IMPORT_EXPORT}: ${importExportResult.error?.message ?? "error"}`,
-          );
-        }
       }
     }
   }
@@ -149,15 +142,20 @@ export async function runPipeline(ctx) {
     if (loadError) {
       results[ID_DEPENDENCY] = parserErrorResult(ID_DEPENDENCY, loadError);
     } else {
-      const inspector = getInspector(ID_DEPENDENCY);
-      if (!inspector) {
-        results[ID_DEPENDENCY] = missingInspectorResult(
-          ID_DEPENDENCY,
-          `Инспектор "${ID_DEPENDENCY}" ещё не зарегистрирован`,
-        );
-      } else {
-        results[ID_DEPENDENCY] = await inspector.analyze(ctx);
-      }
+      results[ID_DEPENDENCY] = await runInspector(ID_DEPENDENCY, ctx);
+    }
+  }
+
+  if (options.additional) {
+    results[ID_ADDITIONAL] = await runInspector(ID_ADDITIONAL, ctx);
+  }
+
+  if (options.entities) {
+    if (loadError) {
+      results[ID_ENTITIES] = parserErrorResult(ID_ENTITIES, loadError);
+      prerequisiteErrors.push(`${ID_ENTITIES}: ${loadError.message}`);
+    } else {
+      results[ID_ENTITIES] = await runInspector(ID_ENTITIES, ctx);
     }
   }
 
@@ -171,6 +169,8 @@ export async function runPipeline(ctx) {
       imports: options.imports,
       exports: options.exports,
       graph: options.graph,
+      additional: Boolean(options.additional),
+      entities: Boolean(options.entities),
       pathMode: options.pathMode,
     },
     results,

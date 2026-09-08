@@ -51,14 +51,14 @@ source: handbook/roadmap/stages
 - [x] CLI S02: short `-a` / `-en`, schematic help/sections ([s02-flags.md](../../docs/50-cli/s02-flags.md))
 
 ### S02-B — Инспекторы
-- [ ] S02-003: additional file fields
-- [ ] S02-004: инспектор exported-entities
+- [x] S02-003: additional file fields
+- [x] S02-004: инспектор exported-entities
 
 ### S02-C — CLI / reporters
-- [ ] S02-005: CLI флаги и секции отчёта
+- [x] S02-005: CLI флаги и секции отчёта
 
 ### S02-D — Тесты
-- [ ] S02-006: фикстуры и тесты AC
+- [x] S02-006: фикстуры и тесты AC
 - [ ] S02-007: approve → S03/S04
 - [ ] Exit criteria S02
 

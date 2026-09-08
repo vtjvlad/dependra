@@ -302,6 +302,91 @@ function formatGraphSection(result, report, pal) {
 }
 
 /**
+ * @param {InspectorResult} result
+ * @param {Palette} pal
+ * @returns {string[]}
+ */
+function formatAdditionalSection(result, pal) {
+  if (result.status === "error") {
+    return frameSection(
+      "additional",
+      [pal.red(`✖ ${result.error?.code}: ${result.error?.message}`)],
+      pal,
+    );
+  }
+  const d = result.data ?? {};
+  const perms = d.permissions ?? {};
+  const hints = d.privilegeHints ?? {};
+  /** @type {string[]} */
+  const body = [
+    `${pal.dim("abs")}    ${d.absolutePath ?? "—"}`,
+    `${pal.dim("rel")}    ${d.relativePath ?? "—"}`,
+    `${pal.dim("mode")}   ${perms.modeString ?? "—"}  ·  ${perms.modeOctal ?? ""}  ·  uid ${perms.uid ?? "—"}`,
+    `${pal.dim("priv")}   read ${hints.read ?? "?"} · write ${hints.write ?? "?"} · chmod ${hints.chmod ?? "?"} · delete ${hints.delete ?? "?"}`,
+    `${pal.dim("copies")}`,
+  ];
+  const copies = Array.isArray(d.copies) ? d.copies : [];
+  if (copies.length === 0) {
+    body.push(pal.dim("  ∅  none"));
+  } else {
+    for (const c of copies) {
+      body.push(
+        `${pal.cyan("→")}  ${c.display}${padTo(String(c.display), 28)}${pal.dim(`score ${c.score}`)}`,
+      );
+    }
+  }
+  if (d.details?.scanWarning) {
+    body.push("");
+    body.push(pal.yellow(`warning: ${d.details.scanWarning}`));
+  }
+  return frameSection("additional", body, pal);
+}
+
+/**
+ * @param {InspectorResult} result
+ * @param {Palette} pal
+ * @returns {string[]}
+ */
+function formatEntitiesSection(result, pal) {
+  if (result.status === "error") {
+    return frameSection(
+      "entities",
+      [pal.red(`✖ ${result.error?.code}: ${result.error?.message}`)],
+      pal,
+    );
+  }
+  const d = result.data ?? {};
+  /** @type {string[]} */
+  const body = [pal.dim(`path-mode ${d.pathMode ?? "relative"}`)];
+  const exported = Array.isArray(d.exported) ? d.exported : [];
+  const imported = Array.isArray(d.imported) ? d.imported : [];
+
+  if (exported.length === 0) {
+    body.push(pal.dim("export  ∅  none"));
+  } else {
+    for (const exp of exported) {
+      body.push(
+        `export  ${pal.green("◆")}  ${exp.display ?? exp.name}${padTo(String(exp.display ?? exp.name), 20)}${pal.dim(String(exp.kind))}`,
+      );
+    }
+  }
+  if (imported.length === 0) {
+    body.push(pal.dim("import  ∅  none"));
+  } else {
+    for (const imp of imported) {
+      const from = imp.from ? pal.dim(`  ← ${imp.from}`) : "";
+      body.push(
+        `import  ${pal.cyan("→")}  ${imp.name ?? "*"}${from}${padTo(`${imp.name ?? "*"}${imp.from ? `  ← ${imp.from}` : ""}`, 22)}${pal.dim(String(imp.kind))}`,
+      );
+      if (imp.display && imp.display !== imp.name && d.pathMode !== "name") {
+        body.push(pal.dim(`             ${imp.display}`));
+      }
+    }
+  }
+  return frameSection("entities", body, pal);
+}
+
+/**
  * Текстовый отчёт — schematic layout.
  *
  * @param {AnalysisReport} report
@@ -340,12 +425,19 @@ export function formatTextReport(report, styleOpts = {}) {
     );
   }
 
-  // When only basic ran above and IE added trailing "", fine.
-  // Ensure single blank before graph if needed — trim later.
-
   const graph = report.results["dependency-analysis"];
   if (opts.graph && graph) {
     lines.push(...formatGraphSection(graph, report, pal), "");
+  }
+
+  const additional = report.results["additional-file-information"];
+  if (opts.additional && additional) {
+    lines.push(...formatAdditionalSection(additional, pal), "");
+  }
+
+  const entities = report.results["exported-entities"];
+  if (opts.entities && entities) {
+    lines.push(...formatEntitiesSection(entities, pal), "");
   }
 
   if (report.prerequisiteErrors?.length) {
