@@ -13,38 +13,53 @@ source: .dep/.blueprint/50-user/cli-flags.md
 
 ## Entrypoint
 
-Пока нет `bin` в npm:
-
 ```
 node src/cli/index.js <file> [options]
 ```
 
-Имя файла entrypoint может быть уточнено при MVP-002; контракт argv — здесь. Поле `bin` / команда `dependra` — после стабилизации CLI (не bump версии).
+После `npm link` / install доступны команды из `package.json` → `bin`:
+
+```
+dependra <file> [options]
+fds <file> [options]
+deps <file> [options]
+dep <file> [options]
+```
+
+Все четыре имени указывают на один и тот же entrypoint. Версию пакета не повышать без approve владельца.
 
 ## Синтаксис
 
 ```
-dependra <file> [options]
+dependra|fds|deps|dep <file> [options]
 ```
 
 ## Флаги MVP
 
-| Флаг | Действие |
-|------|----------|
-| `--basic` | Операция basic (−B) → инспектор `basic-file-information` |
-| `--imports` | Операция imports → инспектор `import-export-analysis` (в отчёте — секция imports) |
-| `--exports` | Операция exports → тот же инспектор (в отчёте — секция exports) |
-| `--graph` | Операция graph → инспектор `dependency-analysis` |
-| `--json` | Вывод JSON вместо текста |
-| `--path-mode <name\|relative\|absolute>` | Режим путей для graph (default: `relative`) |
-| `--help` | Справка |
-| `--version` | Версия пакета: `Dependra v0.0.2` |
+| Long | Short | Действие |
+|------|-------|----------|
+| `--basic` | `-b` | Операция basic → инспектор `basic-file-information` |
+| `--imports` | `-i` | Операция imports → инспектор `import-export-analysis` (в отчёте — секция imports) |
+| `--exports` | `-e` | Операция exports → тот же инспектор (в отчёте — секция exports) |
+| `--graph` | `-g` | Операция graph → инспектор `dependency-analysis` |
+| `--json` | `-j` | Вывод JSON вместо текста |
+| `--path-mode <name\|relative\|absolute>` | `-p <…>` | Режим путей для graph (default: `relative`) |
+| `--help` | `-h` | Справка |
+| `--version` | `-v` | Версия пакета: `Dependra v0.0.2` |
+
+### Короткие флаги
+
+- Short = первая буква имени long-опции (`--basic` → `-b`).
+- При коллизии первых букв у более значимой опции — **заглавная** буква; у менее значимой — строчная.
+- Приоритет значимости (выше → uppercase при коллизии): `graph` > `imports` > `exports` > `basic` > `json` > `path-mode` > `help` > `version`.
+- У текущих MVP-флагов буквы не пересекаются → все short-формы lowercase.
+- Кластеры вроде `-bg` не поддерживаются: только отдельные аргументы (`-b -g`).
 
 **Не в MVP:** `--level` (уровни — только концептуальная карта, см. [analysis-levels.md](../40-development/analysis-levels.md)).
 
-Если не указан ни один из `--basic|--imports|--exports|--graph`, по умолчанию: **все четыре операции**.
+Если не указан ни один из `--basic|-b|--imports|-i|--exports|-e|--graph|-g`, по умолчанию: **все четыре операции**.
 
-Комбинации флагов разрешены.
+Комбинации флагов разрешены (long и short взаимозаменяемы).
 
 ## Соответствие флагов и `results`
 
@@ -117,7 +132,9 @@ dependra <file> [options]
 - [ ] Каждый флаг операции включает только свою **секцию отчёта** (кроме default-all)
 - [ ] `--imports` и `--exports` дают один ключ `import-export-analysis` с отфильтрованным `data`
 - [ ] `--graph` без `--imports` не добавляет import-export в `results`, но reverse/forward graph работает
-- [ ] `--version` печатает `Dependra v0.0.2`
-- [ ] `--json` даёт валидный JSON по схеме отчёта
+- [ ] `--version` / `-v` печатает `Dependra v0.0.2`
+- [ ] `--json` / `-j` даёт валидный JSON по схеме отчёта
+- [ ] Короткие флаги `-b|-i|-e|-g|-j|-p` эквивалентны long-формам
 - [ ] Коды выхода соответствуют таблице
 - [ ] Нет флага `--level` в MVP
+- [ ] npm `bin` содержит `dependra`, `fds`, `deps`, `dep`
