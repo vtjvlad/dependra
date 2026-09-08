@@ -1,4 +1,5 @@
 import { getInspector } from "./registry.js";
+import { ensureTargetSourceFile, ParserError } from "../parsers/index.js";
 
 /**
  * @typedef {import('./types.js').AnalysisContext} AnalysisContext
@@ -31,9 +32,26 @@ function missingInspectorResult(id, message) {
 }
 
 /**
+ * @param {string} id
+ * @param {ParserError} err
+ * @returns {InspectorResult}
+ */
+function parserErrorResult(id, err) {
+  return {
+    inspectorId: id,
+    status: "error",
+    error: {
+      category: err.category,
+      code: err.code,
+      message: err.message,
+      retryable: false,
+      details: err.details,
+    },
+  };
+}
+
+/**
  * Оркестрация pipeline по docs/50-cli/interface.md.
- * Пока инспекторы не зарегистрированы (до MVP-005+), запрошенные секции
- * получают явный configuration-error — без пустых заглушек-модулей.
  *
  * @param {AnalysisContext} ctx
  * @returns {Promise<{ report: AnalysisReport, exitCode: number, prerequisiteErrors: string[] }>}
@@ -63,55 +81,84 @@ export async function runPipeline(ctx) {
 
   /** @type {InspectorResult|undefined} */
   let importExportResult;
+  /** @type {ParserError|null} */
+  let loadError = null;
 
   if (needImportExport) {
-    const inspector = getInspector(ID_IMPORT_EXPORT);
-    if (!inspector) {
-      importExportResult = missingInspectorResult(
-        ID_IMPORT_EXPORT,
-        `Инспектор "${ID_IMPORT_EXPORT}" ещё не зарегистрирован`,
-      );
+    try {
+      await ensureTargetSourceFile(ctx);
+    } catch (err) {
+      if (err instanceof ParserError) {
+        loadError = err;
+      } else {
+        throw err;
+      }
+    }
+  }
+
+  if (needImportExport) {
+    if (loadError) {
+      importExportResult = parserErrorResult(ID_IMPORT_EXPORT, loadError);
       if (reportImportExport) {
         results[ID_IMPORT_EXPORT] = importExportResult;
       } else if (options.graph) {
         prerequisiteErrors.push(
-          `${ID_IMPORT_EXPORT}: ${importExportResult.error?.message ?? "missing"}`,
+          `${ID_IMPORT_EXPORT}: ${loadError.message}`,
         );
       }
     } else {
-      importExportResult = await inspector.analyze(ctx);
-      if (reportImportExport) {
-        const data = importExportResult.data
-          ? { ...importExportResult.data }
-          : undefined;
-        if (data && importExportResult.status === "ok") {
-          if (!options.imports) delete data.imports;
-          if (!options.exports) delete data.exports;
-        }
-        results[ID_IMPORT_EXPORT] = {
-          ...importExportResult,
-          data,
-        };
-      } else if (
-        options.graph &&
-        importExportResult.status === "error"
-      ) {
-        prerequisiteErrors.push(
-          `${ID_IMPORT_EXPORT}: ${importExportResult.error?.message ?? "error"}`,
+      const inspector = getInspector(ID_IMPORT_EXPORT);
+      if (!inspector) {
+        importExportResult = missingInspectorResult(
+          ID_IMPORT_EXPORT,
+          `Инспектор "${ID_IMPORT_EXPORT}" ещё не зарегистрирован`,
         );
+        if (reportImportExport) {
+          results[ID_IMPORT_EXPORT] = importExportResult;
+        } else if (options.graph) {
+          prerequisiteErrors.push(
+            `${ID_IMPORT_EXPORT}: ${importExportResult.error?.message ?? "missing"}`,
+          );
+        }
+      } else {
+        importExportResult = await inspector.analyze(ctx);
+        if (reportImportExport) {
+          const data = importExportResult.data
+            ? { ...importExportResult.data }
+            : undefined;
+          if (data && importExportResult.status === "ok") {
+            if (!options.imports) delete data.imports;
+            if (!options.exports) delete data.exports;
+          }
+          results[ID_IMPORT_EXPORT] = {
+            ...importExportResult,
+            data,
+          };
+        } else if (
+          options.graph &&
+          importExportResult.status === "error"
+        ) {
+          prerequisiteErrors.push(
+            `${ID_IMPORT_EXPORT}: ${importExportResult.error?.message ?? "error"}`,
+          );
+        }
       }
     }
   }
 
   if (options.graph) {
-    const inspector = getInspector(ID_DEPENDENCY);
-    if (!inspector) {
-      results[ID_DEPENDENCY] = missingInspectorResult(
-        ID_DEPENDENCY,
-        `Инспектор "${ID_DEPENDENCY}" ещё не зарегистрирован`,
-      );
+    if (loadError) {
+      results[ID_DEPENDENCY] = parserErrorResult(ID_DEPENDENCY, loadError);
     } else {
-      results[ID_DEPENDENCY] = await inspector.analyze(ctx);
+      const inspector = getInspector(ID_DEPENDENCY);
+      if (!inspector) {
+        results[ID_DEPENDENCY] = missingInspectorResult(
+          ID_DEPENDENCY,
+          `Инспектор "${ID_DEPENDENCY}" ещё не зарегистрирован`,
+        );
+      } else {
+        results[ID_DEPENDENCY] = await inspector.analyze(ctx);
+      }
     }
   }
 

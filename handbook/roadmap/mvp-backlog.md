@@ -14,9 +14,9 @@ source: .dep/.blueprint/80-roadmap
 | MVP-001 | Утвердить рабочую спеку `docs/` + `handbook/` | высокий | — | `завершено` |
 | MVP-002 | Каркас `src/`: cli, core, регистрация инспекторов | высокий | MVP-001 | `завершено` |
 | MVP-003 | ADR: выбор JS AST-парсера | высокий | MVP-001 | `завершено` |
-| MVP-004 | Модуль `parsers` + загрузка SourceFile | высокий | MVP-002, MVP-003 | `запланировано` |
-| MVP-005 | Инспектор basic-file-information | высокий | MVP-002 | `запланировано` |
-| MVP-006 | Инспектор import-export-analysis | высокий | MVP-004 | `запланировано` |
+| MVP-004 | Модуль `parsers` + загрузка SourceFile | высокий | MVP-002, MVP-003 | `завершено` |
+| MVP-005 | Инспектор basic-file-information | высокий | MVP-002 | `завершено` |
+| MVP-006 | Инспектор import-export-analysis | высокий | MVP-004 | `завершено` |
 | MVP-007 | Инспектор dependency-analysis | высокий | MVP-006 | `запланировано` |
 | MVP-008 | Reporters text + json (все MVP-секции) | высокий | MVP-005, MVP-006, MVP-007 | `запланировано` |
 | MVP-009 | CLI флаги MVP + pipeline + коды выхода | высокий | MVP-005, MVP-006, MVP-007, MVP-008 | `запланировано` |

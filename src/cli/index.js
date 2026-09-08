@@ -3,7 +3,10 @@
 import { existsSync, statSync } from "node:fs";
 import { isAbsolute, resolve } from "node:path";
 import { createAnalysisContext, runPipeline } from "../core/index.js";
+import { registerBuiltInInspectors } from "../inspectors/index.js";
 import { parseArgs } from "./parse-args.js";
+
+registerBuiltInInspectors();
 
 const PACKAGE_VERSION = "0.0.1";
 

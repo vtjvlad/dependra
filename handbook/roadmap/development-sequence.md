@@ -42,12 +42,13 @@ source: .dep/.blueprint/80-roadmap/development-sequence.md, 00-project/main-rule
 
 1. Инициализация `src/` по мере нужды (`cli`, `core`, …) — **MVP-002 сделано**
 2. ADR: выбор AST-парсера — **ADR-0001 Acorn (MVP-003)**
-3. Контракт инспектора в коде + smoke CLI — **есть**; далее MVP-004 `parsers`
+3. Контракт инспектора в коде + smoke CLI — **есть**; MVP-004 `parsers` + SourceFile — **сделано**
+
 
 ### S01-C — MVP-инспекторы
 
-1. `basic-file-information`
-2. `import-export-analysis`
+1. `basic-file-information` — **MVP-005 сделано**
+2. `import-export-analysis` — **MVP-006 сделано**
 3. `dependency-analysis`
 4. Text + JSON reporters
 5. CLI pipeline + тесты на фикстурах

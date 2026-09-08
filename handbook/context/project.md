@@ -23,9 +23,9 @@ source: .dep/.blueprint/90-context/project-context-spec.md
 | Ограничения проекта | Accepted | [docs/20-architecture/limitations.md](../../docs/20-architecture/limitations.md) |
 | MVP scope | Accepted | [docs/20-features/mvp-scope.md](../../docs/20-features/mvp-scope.md) |
 | Полный roadmap (S01–S10) | Задокументировано | [handbook/roadmap](../roadmap/README.md), [todo-checklist](../roadmap/todo-checklist.md) |
-| Текущие договорённости | Частично | docs accepted; активный подэтап = S01-B; следующая задача = MVP-004 |
+| Текущие договорённости | Частично | docs accepted; S01-C; следующая задача = MVP-007 |
 | Долгосрочные цели | В roadmap | [stages S02–S10](../roadmap/stages/README.md); детали фич — blueprint / deferred |
-| Особенности реализации | Каркас есть | `src/cli`, `src/core` (реестр + pipeline); инспекторы/parsers/reporters — следующие задачи |
+| Особенности реализации | basic + import-export | `src/inspectors/basic-file-information`, `import-export-analysis` (+ resolve); далее dependency-analysis / reporters |
 | Требования к качеству | Ожидает | — |
 | Взаимодействие модулей | Accepted | [inspector-contract](../../docs/20-architecture/inspector-contract.md), [modules](../../docs/20-architecture/modules.md) |
 | Требования к документации | Частично | docs = спека, handbook = процесс; blueprint = архив |

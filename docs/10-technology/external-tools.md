@@ -35,6 +35,6 @@ source: .dep/.blueprint/10-technology/20-external-tools
 
 ## Acceptance criteria
 
-- [ ] Парсер скрыт за модулем `parsers` / language backend
-- [ ] Выбор парсера оформлен ADR (когда принято)
+- [x] Парсер скрыт за модулем `parsers` / language backend
+- [x] Выбор парсера оформлен ADR (когда принято)
 - [ ] Инспекторы не импортируют API парсера напрямую

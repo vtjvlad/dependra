@@ -36,8 +36,8 @@ source: .dep/.blueprint/80-roadmap, docs/20-features/mvp-scope.md
 | ID | Название | Статус | Задачи |
 |----|----------|--------|--------|
 | S01-A | Спека | `завершено` | MVP-001 |
-| S01-B | Каркас + ADR парсера | `в работе` | MVP-002, MVP-003, MVP-004 |
-| S01-C | Инспекторы + reporters + CLI | `запланировано` | MVP-005…010 |
+| S01-B | Каркас + ADR парсера | `завершено` | MVP-002, MVP-003, MVP-004 |
+| S01-C | Инспекторы + reporters + CLI | `в работе` | MVP-005…010 |
 | S01-D | Стабилизация | `запланировано` | MVP-011 |
 
 ## Задачи
@@ -63,7 +63,7 @@ source: .dep/.blueprint/80-roadmap, docs/20-features/mvp-scope.md
 ## Чеклист этапа
 
 - [x] S01-A: ключевые docs в `review`/`accepted` (MVP-001)
-- [ ] S01-B: каркас `src/`, ADR парсера, parsers (MVP-002…004)
+- [x] S01-B: каркас `src/`, ADR парсера, parsers (MVP-002…004)
 - [ ] S01-C: три инспектора, reporters, CLI pipeline (MVP-005…009)
 - [ ] S01-C: фикстуры и тесты AC (MVP-010)
 - [ ] S01-D: context обновлён (MVP-011)

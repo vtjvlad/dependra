@@ -25,11 +25,11 @@ source: handbook/roadmap/stages
 ### S01-B — Каркас + ADR
 - [x] MVP-002: каркас `src/` (cli, core, регистрация инспекторов)
 - [x] MVP-003: ADR — выбор JS AST-парсера
-- [ ] MVP-004: модуль `parsers` + загрузка SourceFile
+- [x] MVP-004: модуль `parsers` + загрузка SourceFile
 
 ### S01-C — Инспекторы + reporters + CLI
-- [ ] MVP-005: инспектор basic-file-information
-- [ ] MVP-006: инспектор import-export-analysis
+- [x] MVP-005: инспектор basic-file-information
+- [x] MVP-006: инспектор import-export-analysis
 - [ ] MVP-007: инспектор dependency-analysis
 - [ ] MVP-008: reporters text + json
 - [ ] MVP-009: CLI флаги MVP + pipeline + коды выхода
