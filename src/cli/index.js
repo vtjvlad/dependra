@@ -5,31 +5,11 @@ import { isAbsolute, resolve } from "node:path";
 import { createAnalysisContext, runPipeline } from "../core/index.js";
 import { registerBuiltInInspectors } from "../inspectors/index.js";
 import { formatReport } from "../reporters/index.js";
-import { PACKAGE_VERSION, formatCliVersion } from "../version.js";
+import { formatCliVersion } from "../version.js";
+import { formatHelp } from "./help.js";
 import { parseArgs } from "./parse-args.js";
 
 registerBuiltInInspectors();
-
-const HELP = `dependra|fds|deps|dep <file> [options]
-
-Минимальный CLI анализа одного JS-файла (Dependra v${PACKAGE_VERSION}).
-
-Options:
-  -b, --basic              Базовая информация о файле
-  -i, --imports            Импорты
-  -e, --exports            Экспорты
-  -g, --graph              Зависимости (imported-by / imports)
-  -j, --json               Вывод JSON
-  -p, --path-mode <mode>   name|relative|absolute (default: relative)
-  -h, --help               Справка
-  -v, --version            Версия пакета
-
-Если ни один из -b|--basic|-i|--imports|-e|--exports|-g|--graph не указан,
-выполняются все четыре операции.
-
-Команды (npm bin): dependra, fds, deps, dep
-Entrypoint: node src/cli/index.js <file> [options]
-`;
 
 /**
  * @returns {Promise<number>}
@@ -43,7 +23,7 @@ async function main() {
   }
 
   if (parsed.help) {
-    process.stdout.write(HELP);
+    process.stdout.write(formatHelp());
     return 0;
   }
 
@@ -54,7 +34,7 @@ async function main() {
 
   if (!parsed.targetPath) {
     process.stderr.write("Укажите путь к файлу. См. --help\n");
-    process.stdout.write(HELP);
+    process.stdout.write(formatHelp());
     return 1;
   }
 

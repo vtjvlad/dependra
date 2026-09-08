@@ -1,6 +1,7 @@
 import { basename } from "node:path";
 import {
   createPalette,
+  formatBanner,
   formatBytes,
   frameSection,
   shortPath,
@@ -357,6 +358,8 @@ export function formatTextReport(report, styleOpts = {}) {
       "",
     );
   }
+
+  lines.push(...formatBanner(pal));
 
   return `${lines.join("\n").replace(/\n{3,}/g, "\n\n").trimEnd()}\n`;
 }

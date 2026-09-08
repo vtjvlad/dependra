@@ -115,3 +115,22 @@ export function frameSection(title, bodyLines, pal, minInner = 52) {
 export function visibleWidth(s) {
   return s.replace(/\u001b\[[0-9;]*m/g, "").length;
 }
+
+/**
+ * Фирменный баннер внизу schematic-вывода.
+ *
+ * @param {ReturnType<typeof createPalette>} pal
+ * @param {{ tagline?: string }} [opts]
+ * @returns {string[]}
+ */
+export function formatBanner(pal, opts = {}) {
+  const tagline = opts.tagline ?? "follow every edge";
+  return [
+    "",
+    pal.dim("        ┌───┐"),
+    `${pal.cyan("   ●────")}${pal.bold("│ D │")}${pal.cyan("────●")}`,
+    pal.dim("        └───┘"),
+    `   ${pal.bold("dependra")} ${pal.dim("·")} ${pal.dim(tagline)}`,
+    "",
+  ];
+}

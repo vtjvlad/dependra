@@ -132,7 +132,25 @@ cwd     /abs/proj
 - секция **graph** — только при `options.graph`
 - секция **file** (basic) — только при `options.basic`
 
-ANSI-цвет: только если stdout — TTY и не задан `NO_COLOR`.
+ANSI-цвет: только если stdout — TTY и не задан `NO_COLOR`. Баннер dependra — внизу text-отчёта и `--help`.
+
+## Секции S02
+
+Флаги и pipeline: [s02-flags.md](s02-flags.md). В text — отдельные рамки; в JSON — ключи инспекторов и поля `options.additional` / `options.entities`.
+
+```
+┌─ additional ───────────────────────────────────┐
+│  abs / rel / mode / privilege hints / copies   │
+└────────────────────────────────────────────────┘
+
+┌─ entities ─────────────────────────────────────┐
+│  path-mode … · export/import symbol rows       │
+└────────────────────────────────────────────────┘
+```
+
+- **additional** — только при `options.additional` (`-a` / `--additional`)
+- **entities** — только при `options.entities` (`-en` / `--entities`)
+- не входят в default-all S01
 
 ## Правила
 
@@ -148,3 +166,4 @@ ANSI-цвет: только если stdout — TTY и не задан `NO_COLOR
 - [ ] Text/JSON содержат секции только для включённых операций
 - [ ] При только `--imports` в `data` нет поля `exports`
 - [ ] При только `--graph` нет ключа `import-export-analysis` в `results`
+- [ ] Секции S02 `additional` / `entities` появляются только при `-a` / `-en`

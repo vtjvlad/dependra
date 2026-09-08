@@ -45,14 +45,17 @@ src/
 Entrypoint: `node src/cli/index.js <file> [options]`  
 npm `bin`: `dependra`, `fds`, `deps`, `dep` (один entrypoint).  
 Флаги MVP: `--basic|-b` `--imports|-i` `--exports|-e` `--graph|-g` `--json|-j` `--path-mode|-p` `--help|-h` `--version|-v`.  
-Default без op-флагов: все четыре операции. Версия пакета: `0.0.2`. `--version`/`-v` → `Dependra v0.0.2`.
+Default без op-флагов: все четыре операции S01 (операции S02+ только явно). Версия пакета: `0.0.2`. `--version`/`-v` → `Dependra v0.0.2`.  
+Text/help: schematic (рамки + баннер). Short при коллизии: вторая буква (`--entities` → `-en`); short S01 не переназначать.  
+S02 (спека): `--additional|-a`, `--entities|-en` — [s02-flags.md](../../docs/50-cli/s02-flags.md).
 
 ## Соглашения по именованию (S01)
 
 - Инспекторы: kebab-case id = имя файла (`basic-file-information`).
 - Поле внешнего модуля: всегда `isExternal` (не `external`).
-- Опции отчёта JSON: `basic`, `imports`, `exports`, `graph`, `pathMode`.
+- Опции отчёта JSON: `basic`, `imports`, `exports`, `graph`, `pathMode` (+ S02: `additional`, `entities`).
 - Коды ошибок: `SCREAMING_SNAKE` (`PARSE_FAILED`, `MODEL_INCOMPLETE`, …).
+- CLI short: 1 буква → при коллизии 2+ буквы одним токеном; без кластеров `-bg`.
 
 ## Краткие договорённости
 
