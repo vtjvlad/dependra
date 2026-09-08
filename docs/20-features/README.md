@@ -1,6 +1,6 @@
 ---
 title: Функционал
-status: draft
+status: accepted
 mvp: true
 source: .dep/.blueprint/20-features
 ---

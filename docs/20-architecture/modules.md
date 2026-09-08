@@ -1,6 +1,6 @@
 ---
 title: Модули и ответственность
-status: draft
+status: accepted
 mvp: true
 source: .dep/.blueprint/30-architecture/requirements/modules-and-responsibilities.md, project-structure.md
 ---

@@ -1,6 +1,6 @@
 ---
 title: Анализ импортов и экспортов
-status: draft
+status: accepted
 mvp: true
 source: .dep/.blueprint/20-features/import-export-analysis---M, exported-entities---M
 tags: [M]

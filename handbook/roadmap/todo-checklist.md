@@ -20,11 +20,11 @@ source: handbook/roadmap/stages
 Детали: [stages/01-mvp-core.md](stages/01-mvp-core.md), [mvp-backlog.md](mvp-backlog.md)
 
 ### S01-A — Спека
-- [ ] MVP-001: утвердить рабочую спеку `docs/` + `handbook/`
+- [x] MVP-001: утвердить рабочую спеку `docs/` + `handbook/`
 
 ### S01-B — Каркас + ADR
-- [ ] MVP-002: каркас `src/` (cli, core, регистрация инспекторов)
-- [ ] MVP-003: ADR — выбор JS AST-парсера
+- [x] MVP-002: каркас `src/` (cli, core, регистрация инспекторов)
+- [x] MVP-003: ADR — выбор JS AST-парсера
 - [ ] MVP-004: модуль `parsers` + загрузка SourceFile
 
 ### S01-C — Инспекторы + reporters + CLI

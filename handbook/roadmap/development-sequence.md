@@ -36,13 +36,13 @@ source: .dep/.blueprint/80-roadmap/development-sequence.md, 00-project/main-rule
 
 1. Рабочая спека в `docs/` (MVP до уровня реализации)
 2. Handbook: ADR-процесс, backlog, context
-3. Review владельцем → перевод ключевых docs в `accepted`
+3. Review владельцем → перевод ключевых docs в `accepted` — **сделано (MVP-001)**
 
 ### S01-B — Каркас кода (после accept спеки)
 
-1. Инициализация `src/` по мере нужды (`cli`, `core`, `inspectors`, `parsers`, `reporters`, …)
-2. ADR: выбор AST-парсера
-3. Контракт инспектора в коде + пустой/smoke CLI
+1. Инициализация `src/` по мере нужды (`cli`, `core`, …) — **MVP-002 сделано**
+2. ADR: выбор AST-парсера — **ADR-0001 Acorn (MVP-003)**
+3. Контракт инспектора в коде + smoke CLI — **есть**; далее MVP-004 `parsers`
 
 ### S01-C — MVP-инспекторы
 

@@ -1,6 +1,6 @@
 ---
 title: Базовая информация о файле
-status: draft
+status: accepted
 mvp: true
 source: .dep/.blueprint/20-features/basic-file-information---B
 tags: [B]

@@ -1,6 +1,6 @@
 ---
 title: Единая модель проекта (MVP)
-status: draft
+status: accepted
 mvp: true
 source: .dep/.blueprint/20-features/unified-project-model.md, 99-terminology
 ---

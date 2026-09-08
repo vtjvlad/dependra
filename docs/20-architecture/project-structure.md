@@ -1,6 +1,6 @@
 ---
 title: Структура проекта
-status: draft
+status: accepted
 mvp: true
 source: .dep/.blueprint/30-architecture/requirements/project-structure.md
 ---

@@ -1,6 +1,6 @@
 ---
 title: Проект
-status: draft
+status: accepted
 mvp: true
 source: .dep/.blueprint/00-project
 ---

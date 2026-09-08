@@ -1,6 +1,6 @@
 ---
 title: Технологический стек
-status: draft
+status: accepted
 mvp: true
 source: .dep/.blueprint/10-technology/00-used-stack, 10-primary-development-stack
 ---

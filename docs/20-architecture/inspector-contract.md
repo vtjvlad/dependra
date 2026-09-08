@@ -1,6 +1,6 @@
 ---
 title: Контракт инспектора
-status: draft
+status: accepted
 mvp: true
 source: .dep/.blueprint/30-architecture/requirements/module-contract.md, input-schema, output-schema, error-model, public-api
 ---

@@ -1,6 +1,6 @@
 ---
 title: Форматы вывода
-status: draft
+status: accepted
 mvp: true
 source: .dep/.blueprint/50-user/cli-flags.md, 35-configurations/output-settings.md
 ---

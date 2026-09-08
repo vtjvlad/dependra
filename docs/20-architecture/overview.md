@@ -1,6 +1,6 @@
 ---
 title: Архитектура — обзор
-status: draft
+status: accepted
 mvp: true
 source: .dep/.blueprint/30-architecture/general.md, principles
 ---

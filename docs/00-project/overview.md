@@ -1,6 +1,6 @@
 ---
 title: Обзор проекта
-status: draft
+status: accepted
 mvp: true
 source: .dep/.blueprint/00-project/10-general-concept, 00-project/20-main-goal
 ---

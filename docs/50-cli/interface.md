@@ -1,6 +1,6 @@
 ---
 title: CLI интерфейс
-status: draft
+status: accepted
 mvp: true
 source: .dep/.blueprint/50-user/cli-flags.md
 ---

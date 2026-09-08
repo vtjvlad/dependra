@@ -1,6 +1,6 @@
 ---
 title: Рабочая спецификация Dependra
-status: draft
+status: accepted
 mvp: true
 source: .dep/.blueprint/README.md
 ---

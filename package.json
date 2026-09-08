@@ -1,7 +1,7 @@
 {
   "name": "dependra",
   "version": "0.0.1",
-  "description": "Source code analysis platform for dependencies, architecture, and code quality. TBD...",
+  "description": "Source code analysis platform for dependencies, architecture, and code quality.",
   "keywords": [
     "dependency",
     "scope",
@@ -9,8 +9,13 @@
   ],
   "license": "ISC",
   "author": "vtjvlas",
-  "main": "app.js",
+  "type": "module",
+  "main": "src/cli/index.js",
   "scripts": {
+    "start": "node src/cli/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "acorn": "^8.18.0"
   }
 }

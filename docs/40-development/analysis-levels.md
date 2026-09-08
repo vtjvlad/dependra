@@ -1,6 +1,6 @@
 ---
 title: Уровни анализа
-status: draft
+status: accepted
 mvp: true
 source: .dep/.blueprint/40-development-guidelines/analysis-levels.md
 ---

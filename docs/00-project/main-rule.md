@@ -1,6 +1,6 @@
 ---
 title: Главное правило
-status: draft
+status: accepted
 mvp: true
 source: .dep/.blueprint/00-project/main-rule.md
 ---

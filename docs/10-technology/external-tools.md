@@ -1,6 +1,6 @@
 ---
 title: Внешние инструменты
-status: draft
+status: accepted
 mvp: true
 source: .dep/.blueprint/10-technology/20-external-tools
 ---
@@ -22,7 +22,7 @@ source: .dep/.blueprint/10-technology/20-external-tools
 
 | Область | Решение |
 |---------|---------|
-| Парсинг JS (ESM/CJS) | Выбрать один зрелый JS AST-парсер (конкретный пакет — через ADR при выборе) |
+| Парсинг JS (ESM/CJS) | **Acorn** ([ADR-0001](../../handbook/adr/ADR-0001-js-ast-parser.md)) |
 | FS / path / MIME | Стандартная библиотека Node.js (+ при необходимости узкая утилита) |
 | LSP / Tree-sitter | **Не обязательны** для MVP; `deferred` |
 

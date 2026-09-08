@@ -1,6 +1,6 @@
 ---
 title: Конфигурация (MVP)
-status: draft
+status: accepted
 mvp: true
 source: .dep/.blueprint/35-configurations
 ---

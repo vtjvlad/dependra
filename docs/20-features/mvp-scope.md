@@ -1,6 +1,6 @@
 ---
 title: Область MVP
-status: draft
+status: accepted
 mvp: true
 source: .dep/.blueprint/20-features/README.md, 00-project/main-rule.md
 ---

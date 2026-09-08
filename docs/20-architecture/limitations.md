@@ -1,6 +1,6 @@
 ---
 title: Ограничения архитектуры
-status: draft
+status: accepted
 mvp: true
 source: .dep/.blueprint/30-architecture/limitations.md, recommendations.md
 ---

@@ -1,6 +1,6 @@
 ---
 title: Отображение зависимостей
-status: draft
+status: accepted
 mvp: true
 source: .dep/.blueprint/20-features/dependency-analysis---M
 tags: [M]

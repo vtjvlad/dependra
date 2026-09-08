@@ -1,6 +1,6 @@
 ---
 title: Глоссарий MVP
-status: draft
+status: accepted
 mvp: true
 source: .dep/.blueprint/00-project/30-glossary, 99-terminology
 ---

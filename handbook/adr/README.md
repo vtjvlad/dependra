@@ -36,7 +36,9 @@ source: .dep/.blueprint/70-adr
 
 ## Журнал записей
 
-Пока записей нет. Первая ожидаемая: выбор JS AST-парсера (см. [external-tools.md](../../docs/10-technology/external-tools.md)).
+| ID | Заголовок | Статус | Дата |
+|----|-----------|--------|------|
+| [ADR-0001](ADR-0001-js-ast-parser.md) | Выбор JS AST-парсера для MVP (Acorn) | Принято | 2026-09-08 |
 
 ## Связь с blueprint
 

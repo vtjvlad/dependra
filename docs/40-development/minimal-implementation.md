@@ -1,6 +1,6 @@
 ---
 title: Минимально необходимая реализация
-status: draft
+status: accepted
 mvp: true
 source: .dep/.blueprint/40-development-guidelines/minimal-implementation.md
 ---

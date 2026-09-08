@@ -1,6 +1,6 @@
 ---
 title: Принципы операций
-status: draft
+status: accepted
 mvp: true
 source: .dep/.blueprint/20-features/operations-principles.md
 ---
