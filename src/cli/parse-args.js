@@ -1,5 +1,5 @@
 /**
- * Разбор argv CLI (docs/50-cli/interface.md, s02-flags.md).
+ * Разбор argv CLI (docs/50-cli/interface.md, s02–s04-flags.md).
  *
  * @typedef {import('../core/types.js').AnalysisOptions} AnalysisOptions
  *
@@ -30,6 +30,12 @@ export function parseArgs(argv) {
       graph: false,
       additional: false,
       entities: false,
+      validate: false,
+      environment: false,
+      commands: false,
+      envCheck: false,
+      runtime: false,
+      io: false,
       json: false,
       pathMode: "relative",
     },
@@ -38,6 +44,8 @@ export function parseArgs(argv) {
 
   let sawS01Op = false;
   let sawS02Op = false;
+  let sawS03Op = false;
+  let sawS04Op = false;
 
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
@@ -80,6 +88,36 @@ export function parseArgs(argv) {
       sawS02Op = true;
       continue;
     }
+    if (arg === "--validate" || arg === "-va") {
+      result.options.validate = true;
+      sawS03Op = true;
+      continue;
+    }
+    if (arg === "--environment" || arg === "-env") {
+      result.options.environment = true;
+      sawS04Op = true;
+      continue;
+    }
+    if (arg === "--commands" || arg === "-c") {
+      result.options.commands = true;
+      sawS04Op = true;
+      continue;
+    }
+    if (arg === "--env-check" || arg === "-ec") {
+      result.options.envCheck = true;
+      sawS04Op = true;
+      continue;
+    }
+    if (arg === "--runtime" || arg === "-r") {
+      result.options.runtime = true;
+      sawS04Op = true;
+      continue;
+    }
+    if (arg === "--io" || arg === "-io") {
+      result.options.io = true;
+      sawS04Op = true;
+      continue;
+    }
     if (arg === "--json" || arg === "-j") {
       result.options.json = true;
       continue;
@@ -112,8 +150,7 @@ export function parseArgs(argv) {
     result.targetPath = arg;
   }
 
-  // Default-all: только когда нет ни S01, ни S02 operation-флагов
-  if (!sawS01Op && !sawS02Op) {
+  if (!sawS01Op && !sawS02Op && !sawS03Op && !sawS04Op) {
     result.options.basic = true;
     result.options.imports = true;
     result.options.exports = true;

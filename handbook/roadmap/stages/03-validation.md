@@ -10,7 +10,7 @@ source: .dep/.blueprint/20-features/validation---D
 | Поле | Значение |
 |------|----------|
 | **ID** | S03 |
-| **Статус** | `запланировано` |
+| **Статус** | `в работе` |
 | **dependsOn** | S02 |
 
 ## Цель / границы
@@ -25,36 +25,47 @@ source: .dep/.blueprint/20-features/validation---D
 
 ## Источники
 
-- Blueprint: [`.dep/.blueprint/20-features/validation---D/`](../../../.dep/.blueprint/20-features/validation---D/README.md)
-- Promote → `docs/20-features/analysis/validation.md` (создать при старте этапа)
+- Рабочая спека (S03-A):
+  - [`docs/20-features/analysis/validation.md`](../../../docs/20-features/analysis/validation.md)
+  - [`docs/50-cli/s03-flags.md`](../../../docs/50-cli/s03-flags.md) — long/short, help, schematic
+  - Short-алгоритм (общий): [`docs/50-cli/interface.md`](../../../docs/50-cli/interface.md#короткие-флаги)
+- Blueprint (архив): [`.dep/.blueprint/20-features/validation---D/`](../../../.dep/.blueprint/20-features/validation---D/README.md)
+
+## CLI / short (сводка)
+
+| Long | Short | Заметка |
+|------|-------|---------|
+| `--validate` | `-va` | `-v` = version → вторая буква |
+
+Не в default-all. Text-секция: **diagnostics**. Help: `operations · s03`.
 
 ## Подэтапы
 
 | ID | Название | Статус |
 |----|----------|--------|
-| S03-A | Спека validation | `запланировано` |
-| S03-B | Инспектор validation | `запланировано` |
-| S03-C | Diagnostics в reporters | `запланировано` |
-| S03-D | Тесты + approve | `запланировано` |
+| S03-A | Спека validation | `завершено` |
+| S03-B | Инспектор validation | `завершено` |
+| S03-C | Diagnostics в reporters | `завершено` |
+| S03-D | Тесты + approve | `в работе` |
 
 ## Задачи
 
 | ID | Название | Приоритет | dependsOn | Статус |
 |----|----------|-----------|-----------|--------|
-| S03-001 | Спека validation в docs | высокий | S02 | `запланировано` |
-| S03-002 | Инспектор: cycles | высокий | S03-001 | `запланировано` |
-| S03-003 | Инспектор: unused imports/exports | высокий | S03-001 | `запланировано` |
-| S03-004 | Инспектор: broken imports / path errors | высокий | S03-001 | `запланировано` |
-| S03-005 | Секции diagnostics в text/JSON reporters | высокий | S03-002…004 | `запланировано` |
-| S03-006 | Фикстуры и тесты AC | высокий | S03-005 | `запланировано` |
+| S03-001 | Спека validation в docs | высокий | S02 | `завершено` |
+| S03-002 | Инспектор: cycles | высокий | S03-001 | `завершено` |
+| S03-003 | Инспектор: unused imports/exports | высокий | S03-001 | `завершено` |
+| S03-004 | Инспектор: broken imports / path errors | высокий | S03-001 | `завершено` |
+| S03-005 | Секции diagnostics в text/JSON reporters | высокий | S03-002…004 | `завершено` |
+| S03-006 | Фикстуры и тесты AC | высокий | S03-005 | `завершено` |
 | S03-007 | Approve владельца | средний | S03-006 | `запланировано` |
 
 ## Чеклист этапа
 
-- [ ] S03-A: спека validation в `docs/`
-- [ ] S03-B: cycles / unused / broken imports
-- [ ] S03-C: diagnostics в reporters
-- [ ] S03-D: тесты AC
+- [x] S03-A: спека validation + s03-flags в `docs/`
+- [x] S03-B: cycles / unused / broken imports
+- [x] S03-C: diagnostics в reporters
+- [x] S03-D: тесты AC
 - [ ] Exit criteria + approve
 
 ## Exit criteria

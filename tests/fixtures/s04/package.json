@@ -1,0 +1,12 @@
+{
+  "name": "dependra-s04-fixture",
+  "private": true,
+  "type": "module",
+  "main": "src/app.js",
+  "bin": {
+    "s04-app": "src/app.js"
+  },
+  "scripts": {
+    "start": "node src/app.js"
+  }
+}
