@@ -32,7 +32,7 @@ tags: [E]
 - Интерактивный canvas / TUI-граф (S08)
 - Автооткрытие Graphviz/Mermaid-рендерера во внешнем GUI
 - Полный monorepo / package-exports resolve beyond Node-like S01–S03
-- Quality / architectural smells поверх viz (S06)
+- Quality / architectural smells — спека S06: [code-quality-analysis.md](code-quality-analysis.md) (не поверх viz в S05)
 - Замена секции `graph` (S01): viz — **отдельная** операция
 
 ## CLI

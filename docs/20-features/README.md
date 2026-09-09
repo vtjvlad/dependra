@@ -23,4 +23,6 @@ source: .dep/.blueprint/20-features
 - [analysis/file-operations.md](analysis/file-operations.md) — S04 U
 - [analysis/visualization.md](analysis/visualization.md) — S05 E
 - [analysis/metadata.md](analysis/metadata.md) — S05 U
+- [analysis/code-quality-analysis.md](analysis/code-quality-analysis.md) — S06 F
+- [analysis/ai-explain.md](analysis/ai-explain.md) — S06 I
 - [deferred/README.md](deferred/README.md) — отложенное

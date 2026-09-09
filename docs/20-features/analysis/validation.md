@@ -26,7 +26,7 @@ tags: [D]
 ### Не входит
 
 - Автофикс / удаление импортов (S07)
-- Quality metrics / smells (S06)
+- Quality metrics / smells — спека S06: [code-quality-analysis.md](code-quality-analysis.md)
 - Visualization графа циклов (S05)
 - TypeScript / JSX как обязательный язык (S09)
 - Полный monorepo / package-exports resolve beyond Node-like S01

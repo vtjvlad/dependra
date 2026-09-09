@@ -139,8 +139,8 @@ source: handbook/roadmap/stages
 Детали: [stages/06-quality-ai.md](stages/06-quality-ai.md)
 
 ### S06-A — Спека
-- [ ] S06-001: спека code-quality
-- [ ] S06-002: спека AI explain (optional)
+- [x] S06-001: спека code-quality ([code-quality-analysis.md](../../docs/20-features/analysis/code-quality-analysis.md)) — `review`
+- [x] S06-002: спека AI explain ([ai-explain.md](../../docs/20-features/analysis/ai-explain.md), [s06-flags.md](../../docs/50-cli/s06-flags.md)) — `review`
 
 ### S06-B — Quality
 - [ ] S06-003: инспектор code-quality-analysis

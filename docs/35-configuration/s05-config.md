@@ -31,7 +31,8 @@ MVP-база: [overview.md](overview.md). Наглядный шаблон: [`dep
 - Произвольные шаблоны отчётов (custom template engine)
 - Хранение API-ключей в файле (только `apiKeyEnv`)
 - Отбор/переназначение **встроенных** short S01–S04 (`-b|-i|-e|-g|-j|-p|-h|-v|-a|-en|-va|-env|-c|-ec|-r|-io`) — только **добавление** aliases; rename long допустим, short S01–S04 — нет
-- Использование AI в pipeline до S06 (секция `[ai]` **резервируется и валидируется** в S05; вызовы provider — S06+)
+- Использование AI в pipeline: секция `[ai]` парсится в S05; **вызовы provider** — по [ai-explain.md](../20-features/analysis/ai-explain.md) (S06+)
+
 
 ## Иерархия (приоритет ↑)
 
@@ -105,16 +106,16 @@ MVP-база: [overview.md](overview.md). Наглядный шаблон: [`dep
 | `flags.disable` | string[] | запретить canonical long (CLI → ошибка) |
 | `profiles.<name>.operations.*` | bool | |
 | `profiles.<name>.pathMode` / `output` | optional | |
-| `ai.enabled` | bool | мастер-выключатель (S06+) |
+| `ai.enabled` | bool | мастер-выключатель (S06: вызовы explain) |
 | `ai.provider` | string | id адаптера |
 | `ai.baseUrl` | string \| null | |
 | `ai.apiKeyEnv` | string | имя env с ключом (**не** сам ключ) |
 | `ai.model` | string \| null | |
 | `ai.timeoutMs` | int | |
-| `ai.explain` | bool | AI explain (S06) |
+| `ai.explain` | bool | OR в `options.explain` ([ai-explain.md](../20-features/analysis/ai-explain.md)) |
 
 Ключи `operations` / profile operations — те же имена, что `options` в отчёте:  
-`basic`, `imports`, `exports`, `graph`, `additional`, `entities`, `validate`, `environment`, `commands`, `envCheck`, `runtime`, `io`, `mermaid`, `graphviz`, `vizJson`, `metadata`, … (S06+ добавят свои).
+`basic`, `imports`, `exports`, `graph`, `additional`, `entities`, `validate`, `environment`, `commands`, `envCheck`, `runtime`, `io`, `mermaid`, `graphviz`, `vizJson`, `metadata`, `quality`, … (`explain` приходит из CLI/`ai.explain`, не обязан дублироваться в `[operations]`).
 
 ## Пример синтаксиса
 
@@ -200,7 +201,7 @@ explain = false
 6. `--level` → OR с таблицей levels  
 7. Argv → OR/override  
 8. Если ops всё ещё пусты → применить `defaults.whenNoFlags`  
-9. Pipeline по итоговому `options`; `report.*` → reporters; `ai.*` → зарезервировано до S06
+9. Pipeline по итоговому `options`; `report.*` → reporters; `ai.*` → explain pass при S06 ([ai-explain.md](../20-features/analysis/ai-explain.md), [s06-flags.md](../50-cli/s06-flags.md))
 
 ## Ошибки
 
@@ -221,6 +222,7 @@ explain = false
 - [dependra.conf.example](dependra.conf.example)
 - [analysis-levels.md](../40-development/analysis-levels.md)
 - [s05-flags.md](../50-cli/s05-flags.md)
+- [s06-flags.md](../50-cli/s06-flags.md) — `quality` / `explain`
 - Blueprint: [`.dep/.blueprint/35-configurations/`](../../.dep/.blueprint/35-configurations/README.md)
 
 ## Acceptance criteria
@@ -231,7 +233,7 @@ explain = false
 - [ ] `--profile` / `--level` / `--config` работают по спеке
 - [ ] `[report]` влияет на text (style/color/banner/order) без смены семантики ops
 - [ ] `[flags.aliases]` принимает доп. токен; short S01 не отбираются
-- [ ] `[ai]` парсится; ключ только через `apiKeyEnv`; вызов AI не обязателен в S05
+- [ ] `[ai]` парсится; ключ только через `apiKeyEnv`; вызовы — S06 ([ai-explain.md](../20-features/analysis/ai-explain.md))
 - [ ] Пример [`dependra.conf.example`](dependra.conf.example) содержит все ключи закомментированными
 - [ ] Инспекторы не содержат `if (level === …)`
 - [ ] CLI перебивает конфиг

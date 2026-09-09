@@ -62,6 +62,8 @@
 # graphviz = false
 # vizJson = false
 # metadata = false
+# quality = false
+# # explain — через CLI -ex или [ai] explain (не обязательно дублировать здесь)
 
 # =============================================================================
 # [report] — оформление и поведение вывода
@@ -80,7 +82,7 @@
 # banner = true
 # # баннер dependra в text / help
 
-# sectionOrder = file, imports, exports, graph, additional, entities, diagnostics, environment, commands, env-check, runtime, io, mermaid, graphviz, viz-json, metadata
+# sectionOrder = file, imports, exports, graph, additional, entities, diagnostics, environment, commands, env-check, runtime, io, mermaid, graphviz, viz-json, metadata, quality, ai-explain
 # # порядок text-секций (неизвестные имена игнор / warning)
 
 # hideSections =
@@ -99,7 +101,8 @@
 # [flags.*] — алиасы / rename / disable
 # =============================================================================
 # Canonical long из спеки CLI всегда принимается.
-# Short S01–S04 (-b -i -e -g -j -p -h -v -a -en -va -env -c -ec -r -io) не отбирать.
+# Short S01–S05 (-b -i -e -g -j -p -h -v -a -en -va -env -c -ec -r -io -m -gr -vj -me -l -pr -cf) не отбирать.
+# S06: -q --quality, -ex --explain
 # api-ключи и секреты сюда не писать.
 
 # [flags.aliases]
@@ -143,15 +146,20 @@
 # mermaid = true
 # metadata = true
 
+# [profiles.quality.operations]
+# imports = true
+# validate = true
+# quality = true
+
 # =============================================================================
-# [ai] — провайдер (слот S05; вызовы — S06+)
+# [ai] — провайдер (спека S06: docs/20-features/analysis/ai-explain.md)
 # =============================================================================
 # Ключ API только через переменную окружения (apiKeyEnv), не в этом файле.
 
 # [ai]
 # enabled = false
 # provider = openai
-# # id адаптера: openai | anthropic | … (реестр S06)
+# # id адаптера: openai | … (реестр S06)
 
 # baseUrl =
 # # пусто = default провайдера
@@ -160,7 +168,7 @@
 # model =
 # timeoutMs = 30000
 # explain = false
-# # true → AI explain при наличии quality/ops (S06)
+# # true → options.explain (+ OR quality); нужен enabled + ключ в env
 
 # =============================================================================
 # Конец шаблона
