@@ -180,12 +180,38 @@ ANSI-цвет: только если stdout — TTY и не задан `NO_COLOR
 - только при явном флаге; не в default-all
 - операции **только анализ** (нет install / записи FS)
 
+## Секции S05
+
+Флаги и pipeline: [s05-flags.md](s05-flags.md). Config: [s05-config.md](../35-configuration/s05-config.md).
+
+| options.* | results key | text title |
+|-----------|-------------|------------|
+| `mermaid` | `visualization` | `mermaid` |
+| `graphviz` | `visualization` | `graphviz` |
+| `vizJson` | `visualization` | `viz-json` |
+| `metadata` | `metadata` | `metadata` |
+
+- viz-флаги разделяют один ключ `visualization`; в `data.formats` только запрошенные носители
+- `--json` / `-j` — формат **отчёта**; `--viz-json` / `-vj` — вид графа
+- `--level` / `--profile` / `--config` секций в `results` не создают
+- не в default-all
+
+```
+┌─ mermaid ──────────────────────────────────────┐
+│  dependency-graph / import-tree / …            │
+└────────────────────────────────────────────────┘
+
+┌─ metadata ─────────────────────────────────────┐
+│  providers · skippedProviders                  │
+└────────────────────────────────────────────────┘
+```
+
 ## Правила
 
 1. JSON — в stdout; диагностики CLI при `--json` — в stderr.
 2. При ошибке инспектора в JSON возвращается объект с `status: "error"`.
 3. Имена полей зависимостей в graph: `isExternal` (не `external`) — единообразно с моделью.
-4. Форматы Mermaid/Graphviz — deferred.
+4. Форматы Mermaid/Graphviz/viz-json — спека S05: [visualization.md](../20-features/analysis/visualization.md).
 
 ## Acceptance criteria
 
@@ -197,3 +223,4 @@ ANSI-цвет: только если stdout — TTY и не задан `NO_COLOR
 - [ ] Секции S02 `additional` / `entities` появляются только при `-a` / `-en`
 - [ ] Секция S03 `diagnostics` / ключ `validation` только при `-va` / `--validate`
 - [ ] Секции S04 появляются только при `-env`/`-c`/`-ec`/`-r`/`-io`
+- [ ] Секции S05 mermaid/graphviz/viz-json/metadata только при соответствующих флагах (или level/profile)

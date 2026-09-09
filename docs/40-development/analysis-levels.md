@@ -1,6 +1,6 @@
 ---
 title: Уровни анализа
-status: accepted
+status: draft
 mvp: true
 source: .dep/.blueprint/40-development-guidelines/analysis-levels.md
 ---
@@ -9,39 +9,56 @@ source: .dep/.blueprint/40-development-guidelines/analysis-levels.md
 
 ## Цель
 
-Концептуальная карта глубины анализа. Уровни — **конфигурация будущего**, не жёсткий код ядра.
+Концептуальная карта глубины анализа. Уровни — **конфигурация / сахар CLI**, не жёсткий код инспекторов.
 
-## MVP (0.0.1)
+## MVP (S01, исторически)
 
-**Флаг `--level` в CLI не реализуется.** Пользователь включает операции явными флагами (`--basic`, `--imports`, …).
-
-Соответствие «уровней» наборам флагов (справочно):
+**Флаг `--level` в CLI S01 не реализовывался.** Пользователь включал операции явными флагами.
 
 | Level | Эквивалент флагов MVP | Заметка |
 |-------|----------------------|---------|
 | **1** | `--basic` | |
-| **2** | нет отдельного набора | Окружение/FS extras — deferred; **не** эмулировать noop-level |
+| **2** | нет в MVP | Не эмулировать noop-level |
 | **3** | `--basic --imports --exports --graph` (или default-all) | |
 
-Level 2 **не** входит в MVP даже как алиас.
+## S05 — `--level` / `-l`
 
-## Deferred
+Сахар над композицией операций. Раскрытие — в CLI/config layer ([s05-config.md](../35-configuration/s05-config.md)), **не** внутри inspectors.
 
-| Level | Идея |
-|-------|------|
-| **2** | basic + окружение / permissions (P) |
-| **4** | AST-глубина, quality, структура файла |
-| **5** | Проект целиком, визуализация, архитектурные нарушения |
+| Level | Включаемые operations (OR-набор) |
+|-------|----------------------------------|
+| **1** | `basic` |
+| **2** | `basic`, `additional`, `environment` |
+| **3** | level **2** + `imports`, `exports`, `graph` |
+| **4** | level **3** + `entities`, `validate` |
+| **5** | level **4** + `mermaid`, `metadata` |
 
-Когда появится `--level`, он станет сахарным синтаксисом над композицией инспекторов (ADR + обновление CLI).
+Пояснения:
 
-## Правила
+- Level **2** использует уже существующие S02/S04 ops (`additional`, `environment`), без noop.
+- Level **4** не тянет quality (S06) — когда появится S06, таблицу расширят отдельным approve.
+- Level **5** включает **один** viz-формат по умолчанию (`mermaid`); `graphviz` / `viz-json` — только явными флагами.
+- S04 ops (`commands`, `envCheck`, `runtime`, `io`) в levels **не** входят (шумны) — только явными флагами / профилем.
 
-- Включать/отключать анализаторы конфигурацией и флагами.
-- Не зашивать номера уровней в инспекторы.
+### Правила
+
+1. `--level <n>` / `-l <n>`, `n` ∈ 1..5.
+2. Явные op-флаги **добавляются** к набору level (OR).
+3. Level + profile → OR операций; явный CLI выше по pathMode/output.
+4. Не зашивать номера уровней в инспекторы.
+5. Можно менять состав levels в конфиге **будущим** полем `levels` (не в S05 schema min) — сейчас таблица фиксирована спекой.
+
+## Зависимости
+
+- [s05-config.md](../35-configuration/s05-config.md)
+- [s05-flags.md](../50-cli/s05-flags.md)
+- [interface.md](../50-cli/interface.md)
 
 ## Acceptance criteria
 
-- [ ] В MVP CLI нет `--level`
-- [ ] Level 3 покрывается комбинацией MVP-флагов
-- [ ] Level 2/4/5 не реализованы
+- [ ] S01/MVP: без `--level` в старых AC — поведение сохранено, пока флаг не передан
+- [ ] `--level 1` → только basic (если нет других ops)
+- [ ] `--level 3` → basic+additional+environment+imports+exports+graph
+- [ ] `--level 5` включает mermaid+metadata
+- [ ] Инспекторы не ветвятся по номеру level
+- [ ] Неверный level → exit 1

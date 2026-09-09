@@ -18,7 +18,7 @@ source: .dep/.blueprint/35-configurations
 1. Встроенные defaults
 2. Параметры CLI (наивысший приоритет)
 
-Файлы `dependra.config.*`, глобальные/пользовательские конфиги, профили — **deferred** (см. blueprint `35-configurations`).
+Файлы `dependra.config.*`, глобальные/пользовательские конфиги, профили — **S05**: [s05-config.md](s05-config.md).
 
 ## Defaults
 
@@ -31,13 +31,12 @@ source: .dep/.blueprint/35-configurations
 | `pathMode` | `"relative"` |
 | `output` | `"text"` (`--json` → `"json"`) |
 
-Параметр / флаг `level` в MVP **отсутствует** (см. [analysis-levels.md](../40-development/analysis-levels.md)).
+Параметр / флаг `level` в **MVP/S01 отсутствует**. В S05 — сахар: [analysis-levels.md](../40-development/analysis-levels.md).
 
-## Долгосрочная модель (справочно, deferred)
+## Долгосрочная модель
 
-Иерархия blueprint: defaults → global → project → user → profile → CLI. Типы параметров и валидация по схеме — когда появятся config-файлы.
-
-Архив: [`.dep/.blueprint/35-configurations/`](../../.dep/.blueprint/35-configurations/README.md).
+Иерархия и профили — рабочая спека **[s05-config.md](s05-config.md)**.  
+Архив blueprint: [`.dep/.blueprint/35-configurations/`](../../.dep/.blueprint/35-configurations/README.md).
 
 ## Acceptance criteria
 

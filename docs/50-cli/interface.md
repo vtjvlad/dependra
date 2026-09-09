@@ -61,9 +61,9 @@ dependra|fds|deps|dep <file> [options]
 
 У MVP-флагов S01 буквы не пересекаются → все однобуквенные lowercase.
 
-**Не в MVP / не в S01:** `--level` (см. [analysis-levels.md](../40-development/analysis-levels.md)).
+**Не в MVP / не в S01:** `--level` (см. [analysis-levels.md](../40-development/analysis-levels.md); реализация сахара — S05 / [s05-flags.md](s05-flags.md)).
 
-Расширения следующего этапа: [s02-flags.md](s02-flags.md).
+Расширения следующих этапов: [s02-flags.md](s02-flags.md), [s03-flags.md](s03-flags.md), [s04-flags.md](s04-flags.md), [s05-flags.md](s05-flags.md).
 
 Если не указан ни один из `--basic|-b|--imports|-i|--exports|-e|--graph|-g`, по умолчанию: **все четыре операции S01**.  
 Операции S02+ в default-all **не** входят (только явный флаг).
@@ -146,6 +146,6 @@ dependra|fds|deps|dep <file> [options]
 - [ ] Короткие флаги `-b|-i|-e|-g|-j|-p` эквивалентны long-формам
 - [ ] Алгоритм short: при коллизии — вторая буква; S01 short стабильны (см. S02 `-en`)
 - [ ] Коды выхода соответствуют таблице
-- [ ] Нет флага `--level` в MVP
+- [ ] Нет флага `--level` в MVP (S05: [s05-flags.md](s05-flags.md))
 - [ ] npm `bin` содержит `dependra`, `fds`, `deps`, `dep`
-- [ ] Расширения S02 описаны в [s02-flags.md](s02-flags.md)
+- [ ] Расширения S02+ описаны в s02–s05-flags.md

@@ -86,11 +86,12 @@ source: .dep/.blueprint/80-roadmap/development-sequence.md, 00-project/main-rule
 4. CLI / тесты — **сделано**
 5. Approve владельца — **сделано**
 
-## S05 — Visualization + config (E)
+## S05 — Visualization + config (E) (в работе · спека готова)
 
-1. Спека viz + profiles/`--level` + config files + metadata extractors
+1. Спека viz + config + metadata — **сделано**
 2. Реализация визуализации и конфигурации
-3. Тесты / approve
+3. Metadata extractors
+4. Тесты / approve
 
 ## S06 — Quality + AI explain (F+I)
 

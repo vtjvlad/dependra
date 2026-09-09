@@ -21,4 +21,6 @@ source: .dep/.blueprint/20-features
 - [analysis/environment-validation.md](analysis/environment-validation.md) — S04 P
 - [analysis/runtime-dependency-analysis.md](analysis/runtime-dependency-analysis.md) — S04 U
 - [analysis/file-operations.md](analysis/file-operations.md) — S04 U
+- [analysis/visualization.md](analysis/visualization.md) — S05 E
+- [analysis/metadata.md](analysis/metadata.md) — S05 U
 - [deferred/README.md](deferred/README.md) — отложенное

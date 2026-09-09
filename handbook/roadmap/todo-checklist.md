@@ -11,7 +11,7 @@ source: handbook/roadmap/stages
 Детали, `dependsOn` и exit criteria — в [stages/](stages/) и [mvp-backlog.md](mvp-backlog.md).  
 При закрытии пункта синхронизируй статус в файле этапа / backlog.
 
-**Активный этап:** S05 / S06 (параллельно после закрытия S03). S01–S04 — `завершено`.
+**Активный этап:** S05 (`в работе`, спека готова) / S06 (параллельно). S01–S04 — `завершено`.
 
 ---
 
@@ -116,9 +116,9 @@ source: handbook/roadmap/stages
 Детали: [stages/05-visualization-config.md](stages/05-visualization-config.md)
 
 ### S05-A — Спека
-- [ ] S05-001: спека visualization
-- [ ] S05-002: спека config / profiles / `--level`
-- [ ] S05-003: спека metadata extractors
+- [x] S05-001: спека visualization ([visualization.md](../../docs/20-features/analysis/visualization.md), [s05-flags.md](../../docs/50-cli/s05-flags.md))
+- [x] S05-002: спека config / profiles / `--level` ([s05-config.md](../../docs/35-configuration/s05-config.md), [analysis-levels.md](../../docs/40-development/analysis-levels.md))
+- [x] S05-003: спека metadata extractors ([metadata.md](../../docs/20-features/analysis/metadata.md))
 
 ### S05-B — Visualization
 - [ ] S05-004: Mermaid / Graphviz / JSON viz
