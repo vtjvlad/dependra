@@ -11,7 +11,7 @@ source: handbook/roadmap/stages/04-environment-runtime.md, docs/50-cli/interface
 
 Зафиксировать operation-флаги этапа **S04** (P+U: environment / runtime) в правилах S01–S03: long/short, pipeline/`results`, schematic help/text.
 
-Версия пакета остаётся `0.0.33` (не повышать без approve).
+Версия пакета остаётся `0.0.39` (не повышать без approve).
 
 ## Правила short
 

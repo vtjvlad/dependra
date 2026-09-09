@@ -14,8 +14,17 @@
  * @property {boolean} envCheck
  * @property {boolean} runtime
  * @property {boolean} io
+ * @property {boolean} mermaid
+ * @property {boolean} graphviz
+ * @property {boolean} vizJson
+ * @property {boolean} metadata
  * @property {boolean} json
  * @property {"name"|"relative"|"absolute"} pathMode
+ * @property {number|null} [level]
+ * @property {string|null} [profile]
+ * @property {string|null} [configPath]
+ * @property {object|null} [report]
+ * @property {object|null} [ai]
  *
  * @typedef {object} ProjectModel
  * @property {string} cwd

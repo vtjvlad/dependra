@@ -18,7 +18,7 @@ source: .dep/.blueprint/35-configurations
 1. Встроенные defaults
 2. Параметры CLI (наивысший приоритет)
 
-Файлы `dependra.config.*`, глобальные/пользовательские конфиги, профили — **S05**: [s05-config.md](s05-config.md).
+Файлы `dependra.conf`, user-конфиг, профили, report/flags/ai — **S05**: [s05-config.md](s05-config.md), шаблон [dependra.conf.example](dependra.conf.example).
 
 ## Defaults
 
@@ -35,7 +35,7 @@ source: .dep/.blueprint/35-configurations
 
 ## Долгосрочная модель
 
-Иерархия и профили — рабочая спека **[s05-config.md](s05-config.md)**.  
+Иерархия, `.conf`, профили, report/flags/ai — **[s05-config.md](s05-config.md)**.  
 Архив blueprint: [`.dep/.blueprint/35-configurations/`](../../.dep/.blueprint/35-configurations/README.md).
 
 ## Acceptance criteria

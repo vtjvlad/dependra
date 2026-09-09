@@ -1,6 +1,6 @@
 ---
 title: Визуализация
-status: draft
+status: accepted
 mvp: false
 source: .dep/.blueprint/20-features/visualization---E
 tags: [E]

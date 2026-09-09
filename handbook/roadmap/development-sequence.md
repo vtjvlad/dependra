@@ -58,7 +58,7 @@ source: .dep/.blueprint/80-roadmap/development-sequence.md, 00-project/main-rule
 
 1. Доработка по AC из docs
 2. Обновление `handbook/context` — **MVP-011 сделано**
-3. Переход к S02 (версия пакета `0.0.33`; дальше **не повышать** без решения владельца)
+3. Переход к S02 (версия пакета `0.0.39`; дальше **не повышать** без решения владельца)
 
 Задачи: [mvp-backlog.md](mvp-backlog.md) (`MVP-001`…`011` — все `завершено`).
 
@@ -86,12 +86,12 @@ source: .dep/.blueprint/80-roadmap/development-sequence.md, 00-project/main-rule
 4. CLI / тесты — **сделано**
 5. Approve владельца — **сделано**
 
-## S05 — Visualization + config (E) (в работе · спека готова)
+## S05 — Visualization + config (E) (`завершено`)
 
-1. Спека viz + config + metadata — **сделано**
-2. Реализация визуализации и конфигурации
-3. Metadata extractors
-4. Тесты / approve
+1. Спека viz + config + metadata — **сделано** (accepted)
+2. Реализация визуализации и конфигурации — **сделано**
+3. Metadata extractors — **сделано**
+4. Тесты / approve — **сделано**
 
 ## S06 — Quality + AI explain (F+I)
 

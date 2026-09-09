@@ -621,111 +621,338 @@ function formatIoSection(result, pal) {
 }
 
 /**
+ * @param {InspectorResult} result
+ * @param {AnalysisReport} report
+ * @param {Palette} pal
+ * @returns {string[]}
+ */
+function formatMermaidSection(result, report, pal) {
+  if (result.status === "error") {
+    return frameSection(
+      "mermaid",
+      [pal.red(`✖ ${result.error?.code}: ${result.error?.message}`)],
+      pal,
+    );
+  }
+  const m = result.data?.formats?.mermaid ?? {};
+  /** @type {string[]} */
+  const body = [];
+  for (const [name, text] of Object.entries(m)) {
+    body.push(pal.dim(`· ${name}`));
+    for (const line of String(text).trimEnd().split("\n")) {
+      body.push(line);
+    }
+    body.push("");
+  }
+  if (body.length === 0) body.push(pal.dim("(empty)"));
+  return frameSection("mermaid", body, pal);
+}
+
+/**
+ * @param {InspectorResult} result
+ * @param {Palette} pal
+ * @returns {string[]}
+ */
+function formatGraphvizSection(result, pal) {
+  if (result.status === "error") {
+    return frameSection(
+      "graphviz",
+      [pal.red(`✖ ${result.error?.code}: ${result.error?.message}`)],
+      pal,
+    );
+  }
+  const g = result.data?.formats?.graphviz ?? {};
+  /** @type {string[]} */
+  const body = [];
+  for (const [name, text] of Object.entries(g)) {
+    body.push(pal.dim(`· ${name}`));
+    for (const line of String(text).trimEnd().split("\n")) {
+      body.push(line);
+    }
+    body.push("");
+  }
+  if (body.length === 0) body.push(pal.dim("(empty)"));
+  return frameSection("graphviz", body, pal);
+}
+
+/**
+ * @param {InspectorResult} result
+ * @param {Palette} pal
+ * @returns {string[]}
+ */
+function formatVizJsonSection(result, pal) {
+  if (result.status === "error") {
+    return frameSection(
+      "viz-json",
+      [pal.red(`✖ ${result.error?.code}: ${result.error?.message}`)],
+      pal,
+    );
+  }
+  const j = result.data?.formats?.json ?? {};
+  /** @type {string[]} */
+  const body = [];
+  for (const [name, view] of Object.entries(j)) {
+    const nodes = view?.nodes?.length ?? 0;
+    const edges = view?.edges?.length ?? 0;
+    body.push(`${pal.cyan(name)}  nodes ${nodes} · edges ${edges}`);
+  }
+  if (body.length === 0) body.push(pal.dim("(empty)"));
+  return frameSection("viz-json", body, pal);
+}
+
+/**
+ * @param {InspectorResult} result
+ * @param {Palette} pal
+ * @returns {string[]}
+ */
+function formatMetadataSection(result, pal) {
+  if (result.status === "error") {
+    return frameSection(
+      "metadata",
+      [pal.red(`✖ ${result.error?.code}: ${result.error?.message}`)],
+      pal,
+    );
+  }
+  const providers = result.data?.providers ?? [];
+  const skipped = result.data?.skippedProviders ?? [];
+  /** @type {string[]} */
+  const body = [];
+  for (const p of providers) {
+    if (p.id === "fs-extended") {
+      const d = p.data ?? {};
+      body.push(
+        `${pal.cyan("fs-extended")}  ino ${d.ino ?? "—"} · mtime ${d.mtimeMs ?? "—"}`,
+      );
+    } else if (p.id === "embedded-text") {
+      const markers = p.data?.markers ?? [];
+      const summary = markers
+        .map((m) => `${m.kind} ${m.value}`)
+        .join(" · ");
+      body.push(
+        `${pal.cyan("embedded-text")}  ${summary || pal.dim("(no markers)")}`,
+      );
+    } else {
+      body.push(`${pal.cyan(p.id)}  ok`);
+    }
+  }
+  for (const s of skipped) {
+    body.push(pal.dim(`skipped  ${s.id} (${s.reason})`));
+  }
+  if (body.length === 0) body.push(pal.dim("(none)"));
+  return frameSection("metadata", body, pal);
+}
+
+/**
+ * Resolve color from report config.
+ * @param {{ color?: boolean }} styleOpts
+ * @param {object|null|undefined} reportCfg
+ * @returns {boolean}
+ */
+function resolveColor(styleOpts, reportCfg) {
+  if (styleOpts.color !== undefined) return Boolean(styleOpts.color);
+  const mode = reportCfg?.color ?? "auto";
+  if (mode === "always") return true;
+  if (mode === "never") return false;
+  return useColor();
+}
+
+/**
  * Текстовый отчёт — schematic layout.
  *
  * @param {AnalysisReport} report
- * @param {{ color?: boolean }} [styleOpts]
+ * @param {{ color?: boolean, report?: object|null }} [styleOpts]
  * @returns {string}
  */
 export function formatTextReport(report, styleOpts = {}) {
-  const color =
-    styleOpts.color === undefined ? useColor() : Boolean(styleOpts.color);
+  const reportCfg = styleOpts.report ?? null;
+  const color = resolveColor(styleOpts, reportCfg);
   const pal = createPalette(color);
   const opts = report.options ?? {};
+  const hide = new Set(reportCfg?.hideSections ?? []);
+  const style = reportCfg?.style ?? "schematic";
+  const showBanner = reportCfg?.banner !== false;
+  const unicode = reportCfg?.unicode !== false;
 
+  const styleLabel = style === "plain" ? "plain" : "schematic";
   const relTarget = shortPath(report.target, report.cwd);
   /** @type {string[]} */
   const lines = [
-    `${pal.bold("dependra")} ${pal.dim(report.version)} ${pal.dim("·")} ${pal.cyan("schematic")}`,
+    `${pal.bold("dependra")} ${pal.dim(report.version)} ${pal.dim("·")} ${pal.cyan(styleLabel)}`,
     `${pal.dim("target")}  ${relTarget}`,
     `${pal.dim("cwd")}     ${report.cwd}`,
     "",
   ];
 
+  /** @type {{ id: string, lines: string[] }[]} */
+  const sections = [];
+
+  const push = (id, sectionLines) => {
+    if (hide.has(id)) return;
+    if (!sectionLines?.length) return;
+    sections.push({ id, lines: sectionLines });
+  };
+
+  const frame =
+    style === "plain" || !unicode
+      ? (title, body) => {
+          const out = [`[${title}]`, ...body.map((l) => `  ${l}`), ""];
+          return out;
+        }
+      : (title, body) => frameSection(title, body, pal);
+
+  // Re-wrap existing formatters: they return framed lines. For plain we rebuild briefly via hide/order only.
   const basic = report.results["basic-file-information"];
   if (opts.basic && basic) {
-    lines.push(...formatBasicSection(basic, report, pal), "");
+    push("file", formatBasicSection(basic, report, pal));
   }
 
   const ie = report.results["import-export-analysis"];
   if (ie && (opts.imports || opts.exports)) {
-    lines.push(
-      ...formatImportExportSections(
-        ie,
-        Boolean(opts.imports),
-        Boolean(opts.exports),
-        pal,
-      ),
+    const blocks = formatImportExportSections(
+      ie,
+      Boolean(opts.imports),
+      Boolean(opts.exports),
+      pal,
     );
+    // formatImportExportSections returns combined framed blocks; keep as imports/exports logical
+    if (opts.imports) push("imports", blocks);
+    else push("exports", blocks);
   }
 
   const graph = report.results["dependency-analysis"];
   if (opts.graph && graph) {
-    lines.push(...formatGraphSection(graph, report, pal), "");
+    push("graph", formatGraphSection(graph, report, pal));
   }
 
   const additional = report.results["additional-file-information"];
   if (opts.additional && additional) {
-    lines.push(...formatAdditionalSection(additional, pal), "");
+    push("additional", formatAdditionalSection(additional, pal));
   }
 
   const entities = report.results["exported-entities"];
   if (opts.entities && entities) {
-    lines.push(...formatEntitiesSection(entities, pal), "");
+    push("entities", formatEntitiesSection(entities, pal));
   }
 
   const validation = report.results.validation;
   if (opts.validate && validation) {
-    lines.push(...formatDiagnosticsSection(validation, pal), "");
+    push("diagnostics", formatDiagnosticsSection(validation, pal));
   }
 
   const environment = report.results["file-environment-analysis"];
   if (opts.environment && environment) {
-    lines.push(...formatEnvironmentSection(environment, pal), "");
+    push("environment", formatEnvironmentSection(environment, pal));
   }
 
   const commands = report.results.commands;
   if (opts.commands && commands) {
-    lines.push(...formatCommandsSection(commands, pal), "");
+    push("commands", formatCommandsSection(commands, pal));
   }
 
   const envCheck = report.results["environment-validation"];
   if (opts.envCheck && envCheck) {
-    lines.push(...formatEnvCheckSection(envCheck, pal), "");
+    push("env-check", formatEnvCheckSection(envCheck, pal));
   }
 
   const runtime = report.results["runtime-dependency-analysis"];
   if (opts.runtime && runtime) {
-    lines.push(...formatRuntimeSection(runtime, pal), "");
+    push("runtime", formatRuntimeSection(runtime, pal));
   }
 
   const io = report.results["file-operations"];
   if (opts.io && io) {
-    lines.push(...formatIoSection(io, pal), "");
+    push("io", formatIoSection(io, pal));
+  }
+
+  const visualization = report.results.visualization;
+  if (visualization) {
+    if (opts.mermaid) {
+      push("mermaid", formatMermaidSection(visualization, report, pal));
+    }
+    if (opts.graphviz) {
+      push("graphviz", formatGraphvizSection(visualization, pal));
+    }
+    if (opts.vizJson) {
+      push("viz-json", formatVizJsonSection(visualization, pal));
+    }
+  }
+
+  const metadata = report.results.metadata;
+  if (opts.metadata && metadata) {
+    push("metadata", formatMetadataSection(metadata, pal));
   }
 
   if (report.prerequisiteErrors?.length) {
-    lines.push(
-      ...frameSection(
+    push(
+      "prerequisite",
+      frameSection(
         "prerequisite",
         report.prerequisiteErrors.map((msg) => pal.red(`✖ ${msg}`)),
         pal,
       ),
-      "",
     );
   }
 
-  lines.push(...formatBanner(pal));
+  const order = Array.isArray(reportCfg?.sectionOrder)
+    ? reportCfg.sectionOrder
+    : null;
+  /** @type {{ id: string, lines: string[] }[]} */
+  let ordered = sections;
+  if (order) {
+    const map = new Map(sections.map((s) => [s.id, s]));
+    ordered = [];
+    for (const id of order) {
+      const s = map.get(id);
+      if (s) {
+        ordered.push(s);
+        map.delete(id);
+      }
+    }
+    for (const s of map.values()) ordered.push(s);
+  }
+
+  for (const s of ordered) {
+    if (style === "plain" || !unicode) {
+      // strip box and emit plain — keep content lines heuristically
+      const content = s.lines
+        .filter((l) => !/^[┌└│]/.test(l.replace(/\u001b\[[0-9;]*m/g, "").trimStart() === "" ? "x" : l.replace(/\u001b\[[0-9;]*m/g, "")))
+        .filter((l) => {
+          const t = l.replace(/\u001b\[[0-9;]*m/g, "");
+          return !t.startsWith("┌") && !t.startsWith("└") && !t.startsWith("│");
+        });
+      // Simpler: just use framed output even for plain if strip is fragile — use id header
+      lines.push(`[${s.id}]`);
+      for (const l of s.lines) {
+        const t = l.replace(/\u001b\[[0-9;]*m/g, "");
+        if (t.startsWith("┌") || t.startsWith("└")) continue;
+        if (t.startsWith("│")) {
+          lines.push(t.slice(1).replace(/\s+│\s*$/, "").trimEnd());
+        } else {
+          lines.push(l);
+        }
+      }
+      lines.push("");
+    } else {
+      lines.push(...s.lines, "");
+    }
+  }
+
+  if (showBanner) {
+    lines.push(...formatBanner(pal));
+  }
 
   return `${lines.join("\n").replace(/\n{3,}/g, "\n\n").trimEnd()}\n`;
 }
 
 /**
  * @param {AnalysisReport} report
- * @param {{ json?: boolean, color?: boolean }} [opts]
+ * @param {{ json?: boolean, color?: boolean, report?: object|null }} [opts]
  * @returns {string}
  */
 export function formatReport(report, opts = {}) {
   if (opts.json) return formatJsonReport(report);
-  return formatTextReport(report, { color: opts.color });
+  return formatTextReport(report, {
+    color: opts.color,
+    report: opts.report,
+  });
 }

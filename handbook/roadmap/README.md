@@ -8,7 +8,7 @@ source: .dep/.blueprint/80-roadmap
 # Roadmap
 
 Полный процесс разработки Dependra: большие этапы `S01`–`S11`, подэтапы и задачи.  
-Активный этап сейчас: **S05 (Visualization + config)** / параллельно **S06 (Quality + AI explain)**. S01–S04 — `завершено`. Версию пакета **не повышать** (`0.0.33`), пока владелец не решит иначе.
+Активный этап сейчас: **S06 (Quality + AI explain)** (параллельно был доступен с S05). S01–S05 — `завершено`. Версию пакета **не повышать** (`0.0.39`), пока владелец не решит иначе.
 
 ## Документы
 
@@ -28,7 +28,7 @@ source: .dep/.blueprint/80-roadmap
 | S02 | Углубление анализа B/M | `завершено` | S01 | [stages/02-deepen-analysis.md](stages/02-deepen-analysis.md) |
 | S03 | Validation (D) | `завершено` | S02 | [stages/03-validation.md](stages/03-validation.md) |
 | S04 | Environment / runtime (P+U) | `завершено` | S02 | [stages/04-environment-runtime.md](stages/04-environment-runtime.md) |
-| S05 | Visualization + config (E) | `в работе` | S03 | [stages/05-visualization-config.md](stages/05-visualization-config.md) |
+| S05 | Visualization + config (E) | `завершено` | S03 | [stages/05-visualization-config.md](stages/05-visualization-config.md) |
 | S06 | Quality + AI explain (F+I) | `запланировано` | S03 | [stages/06-quality-ai.md](stages/06-quality-ai.md) |
 | S07 | Modifications / enhancement | `запланировано` | S05, S06 | [stages/07-modifications.md](stages/07-modifications.md) |
 | S08 | TUI и поверхности | `запланировано` | S07 | [stages/08-tui-surfaces.md](stages/08-tui-surfaces.md) |

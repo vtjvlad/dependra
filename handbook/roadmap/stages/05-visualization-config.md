@@ -10,7 +10,7 @@ source: .dep/.blueprint/20-features/visualization---E, 35-configurations, metada
 | Поле | Значение |
 |------|----------|
 | **ID** | S05 |
-| **Статус** | `в работе` |
+| **Статус** | `завершено` |
 | **dependsOn** | S03 |
 
 ## Цель / границы
@@ -32,7 +32,8 @@ source: .dep/.blueprint/20-features/visualization---E, 35-configurations, metada
 - Рабочие спеки (S05-A):
   - [`docs/20-features/analysis/visualization.md`](../../../docs/20-features/analysis/visualization.md)
   - [`docs/20-features/analysis/metadata.md`](../../../docs/20-features/analysis/metadata.md)
-  - [`docs/35-configuration/s05-config.md`](../../../docs/35-configuration/s05-config.md)
+  - [`docs/35-configuration/s05-config.md`](../../../docs/35-configuration/s05-config.md) — `dependra.conf` (INI-like)
+  - [`docs/35-configuration/dependra.conf.example`](../../../docs/35-configuration/dependra.conf.example) — шаблон со всеми ключами в комментариях
   - [`docs/40-development/analysis-levels.md`](../../../docs/40-development/analysis-levels.md)
   - CLI: [`docs/50-cli/s05-flags.md`](../../../docs/50-cli/s05-flags.md)
 - Blueprint (архив):
@@ -50,7 +51,7 @@ source: .dep/.blueprint/20-features/visualization---E, 35-configurations, metada
 | `--metadata` | `-me` | `-m` = mermaid |
 | `--level` | `-l` | сахар 1..5 |
 | `--profile` | `-pr` | |
-| `--config` | `-cf` | |
+| `--config` | `-cf` | путь к `.conf` |
 
 Не в default-all (кроме раскрытия level/profile). Help: `operations · s05` + `config · s05`.
 
@@ -58,10 +59,10 @@ source: .dep/.blueprint/20-features/visualization---E, 35-configurations, metada
 
 | ID | Название | Статус |
 |----|----------|--------|
-| S05-A | Спека viz + config + metadata | `завершено` |
-| S05-B | Visualization reporters | `запланировано` |
-| S05-C | Profiles / `--level` / config files | `запланировано` |
-| S05-D | Metadata extractors + тесты | `запланировано` |
+| S05-A | Спека viz + config + metadata | `завершено` (accepted) |
+| S05-B | Visualization reporters | `завершено` |
+| S05-C | Profiles / `--level` / config files | `завершено` |
+| S05-D | Metadata extractors + тесты | `завершено` |
 
 ## Задачи
 
@@ -70,19 +71,19 @@ source: .dep/.blueprint/20-features/visualization---E, 35-configurations, metada
 | S05-001 | Спека visualization в docs | высокий | S03 | `завершено` |
 | S05-002 | Спека config/profiles/`--level` | высокий | S03 | `завершено` |
 | S05-003 | Спека metadata extractors | средний | S03 | `завершено` |
-| S05-004 | Mermaid / Graphviz / JSON viz output | высокий | S05-001 | `запланировано` |
-| S05-005 | Profiles + `--level` как сахар над флагами | высокий | S05-002 | `запланировано` |
-| S05-006 | Загрузка project/user config files | высокий | S05-002 | `запланировано` |
-| S05-007 | Metadata provider plugins | средний | S05-003 | `запланировано` |
-| S05-008 | Тесты AC + approve | высокий | S05-004…007 | `запланировано` |
+| S05-004 | Mermaid / Graphviz / JSON viz output | высокий | S05-001 | `завершено` |
+| S05-005 | Profiles + `--level` как сахар над флагами | высокий | S05-002 | `завершено` |
+| S05-006 | Загрузка project/user config files | высокий | S05-002 | `завершено` |
+| S05-007 | Metadata provider plugins | средний | S05-003 | `завершено` |
+| S05-008 | Тесты AC + approve | высокий | S05-004…007 | `завершено` |
 
 ## Чеклист этапа
 
 - [x] S05-A: спеки viz, config, metadata в `docs/`
-- [ ] S05-B: Mermaid/Graphviz/JSON работают
-- [ ] S05-C: profiles и `--level` = композиция инспекторов
-- [ ] S05-D: metadata extractors + тесты
-- [ ] Exit criteria + approve
+- [x] S05-B: Mermaid/Graphviz/JSON работают
+- [x] S05-C: profiles и `--level` = композиция инспекторов
+- [x] S05-D: metadata extractors + тесты
+- [x] Exit criteria + approve
 
 ## Exit criteria
 

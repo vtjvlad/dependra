@@ -36,10 +36,10 @@ function runCli(args, opts = {}) {
 }
 
 describe("MVP CLI AC", () => {
-  it("--version prints Dependra v0.0.33", async () => {
+  it("--version prints Dependra v0.0.39", async () => {
     const { code, stdout } = await runCli(["--version"]);
     assert.equal(code, 0);
-    assert.equal(stdout.trim(), "Dependra v0.0.33");
+    assert.equal(stdout.trim(), "Dependra v0.0.39");
   });
 
   it("missing file exits 1", async () => {
@@ -48,7 +48,7 @@ describe("MVP CLI AC", () => {
   });
 
   it("unknown flag exits 1", async () => {
-    const { code, stderr } = await runCli([APP, "--level"]);
+    const { code, stderr } = await runCli([APP, "--not-a-real-flag"]);
     assert.equal(code, 1);
     assert.match(stderr, /Неизвестный флаг/);
   });
@@ -57,7 +57,7 @@ describe("MVP CLI AC", () => {
     const { code, stdout } = await runCli([APP, "--basic", "--json"]);
     assert.equal(code, 0);
     const report = JSON.parse(stdout);
-    assert.equal(report.version, "0.0.33");
+    assert.equal(report.version, "0.0.39");
     const data = report.results["basic-file-information"].data;
     for (const key of [
       "name",
@@ -189,7 +189,7 @@ describe("MVP CLI AC", () => {
     assert.equal(code, 0);
     assert.equal(stderr, "");
     const report = JSON.parse(stdout);
-    assert.equal(report.version, "0.0.33");
+    assert.equal(report.version, "0.0.39");
   });
 
   it("-g -j smoke matches --graph --json", async () => {

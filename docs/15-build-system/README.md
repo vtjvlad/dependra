@@ -15,7 +15,7 @@ source: .dep/.blueprint/15-build-system
 
 ## Сейчас
 
-- Обычный npm-пакет, версия `0.0.33`
+- Обычный npm-пакет, версия `0.0.39`
 - Нет отдельной build-системы / monorepo-оркестрации
 - Layout monorepo — этап **[S10](../../handbook/roadmap/stages/10-platform-monorepo.md)**; полный pipeline — **S11**
 - Детали остаются в архиве: [`.dep/.blueprint/15-build-system/`](../../.dep/.blueprint/15-build-system/README.md)

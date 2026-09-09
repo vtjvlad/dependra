@@ -130,4 +130,28 @@ describe("parseArgs short flags", () => {
     assert.equal(longs.options.runtime, true);
     assert.equal(longs.options.io, true);
   });
+
+  it("S05 shorts and default-all exclusion", () => {
+    const parsed = parseArgs(["file.js"]);
+    assert.equal(parsed.options.mermaid, false);
+    assert.equal(parsed.options.graphviz, false);
+    assert.equal(parsed.options.vizJson, false);
+    assert.equal(parsed.options.metadata, false);
+
+    const m = parseArgs(["file.js", "-m"]);
+    assert.equal(m.options.mermaid, true);
+    assert.equal(m.options.basic, false);
+
+    const me = parseArgs(["file.js", "-me"]);
+    assert.equal(me.options.metadata, true);
+    assert.equal(me.options.mermaid, false);
+
+    const viz = parseArgs(["file.js", "-gr", "-vj"]);
+    assert.equal(viz.options.graphviz, true);
+    assert.equal(viz.options.vizJson, true);
+
+    const level = parseArgs(["file.js", "-l", "3"]);
+    assert.equal(level.levelArg, 3);
+    assert.equal(level.options.level, 3);
+  });
 });

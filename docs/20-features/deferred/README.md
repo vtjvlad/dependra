@@ -40,7 +40,7 @@ CLI MVP — в [docs/50-cli](../../50-cli/interface.md) (S01).
 
 | Тема | Целевой этап |
 |------|--------------|
-| Config profiles / `--level` ([s05-config](../../35-configuration/s05-config.md), [levels](../../40-development/analysis-levels.md)) | [S05](../../../handbook/roadmap/stages/05-visualization-config.md) |
+| Config profiles / `--level` / report / flags / ai ([`.conf`](../../35-configuration/s05-config.md), [example](../../35-configuration/dependra.conf.example)) | [S05](../../../handbook/roadmap/stages/05-visualization-config.md) |
 | AI explain (без мутаций) | [S06](../../../handbook/roadmap/stages/06-quality-ai.md) |
 | Multi-language / LSP / Tree-sitter | [S09](../../../handbook/roadmap/stages/09-multilang.md) |
 | Platform / monorepo | [S10](../../../handbook/roadmap/stages/10-platform-monorepo.md) |

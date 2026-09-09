@@ -1,6 +1,6 @@
 ---
 title: CLI флаги S05
-status: draft
+status: accepted
 mvp: false
 source: handbook/roadmap/stages/05-visualization-config.md, docs/50-cli/interface.md
 ---
@@ -11,7 +11,7 @@ source: handbook/roadmap/stages/05-visualization-config.md, docs/50-cli/interfac
 
 Зафиксировать флаги этапа **S05** (visualization E + config sugar + metadata U) в правилах S01–S04: long/short, pipeline/`results`, schematic help/text.
 
-Версия пакета остаётся `0.0.33` (не повышать без approve).
+Версия пакета остаётся `0.0.39` (не повышать без approve).
 
 ## Правила short
 
@@ -35,10 +35,11 @@ Short S01–S04 не переназначать
 | Long | Short | Аргумент | Смысл |
 |------|-------|----------|--------|
 | `--level` | `-l` | `1..5` | Сахар → набор operations ([analysis-levels.md](../40-development/analysis-levels.md)) |
-| `--profile` | `-pr` | имя | Профиль из конфига |
-| `--config` | `-cf` | path | Явный project-config JSON |
+| `--profile` | `-pr` | имя | Профиль из `dependra.conf` |
+| `--config` | `-cf` | path | Явный путь к `.conf` (вместо project `dependra.conf`) |
 
-Детали merge: [s05-config.md](../35-configuration/s05-config.md).
+Детали merge / диалект: [s05-config.md](../35-configuration/s05-config.md).  
+Шаблон: [dependra.conf.example](../35-configuration/dependra.conf.example).
 
 ### Запрещено в S05
 
@@ -57,7 +58,7 @@ Short S01–S04 не переназначать
   - `dependra f.js -me -a`
   - `dependra f.js -l 3`
   - `dependra f.js -pr deps -va`
-  - `dependra f.js -cf ./my.config.json -l 1 -m`
+  - `dependra f.js -cf ./dependra.conf -l 1 -m`
 
 ## Соответствие флагов и `results`
 
@@ -76,7 +77,7 @@ Short S01–S04 не переназначать
   "metadata": true,
   "level": 5,
   "profile": "deps",
-  "configPath": "/abs/proj/dependra.config.json"
+  "configPath": "/abs/proj/dependra.conf"
 }
 ```
 
@@ -110,7 +111,7 @@ Short S01–S04 не переназначать
 ┌─ config · s05 ─────────────────────────────────┐
 │ -l, --level <1..5>      сахар над операциями   │
 │ -pr, --profile <name>   профиль из конфига     │
-│ -cf, --config <path>    явный dependra.config  │
+│ -cf, --config <path>    явный dependra.conf    │
 └────────────────────────────────────────────────┘
 ```
 
