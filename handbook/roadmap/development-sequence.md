@@ -71,20 +71,20 @@ source: .dep/.blueprint/80-roadmap/development-sequence.md, 00-project/main-rule
 3. CLI / reporters / тесты
 4. Approve → S03 / S04 — **сделано**
 
-## S03 — Validation (D) (в работе · ждёт approve)
+## S03 — Validation (D) (`завершено`)
 
 1. Спека validation — **сделано**
 2. Инспектор + diagnostics в reporters — **сделано**
 3. Тесты (cycles, unused, broken imports) — **сделано**
-4. Approve владельца ← **сейчас** (нужен до S05/S06 и безопасных modifications)
+4. Approve владельца → S05/S06 — **сделано**
 
-## S04 — Environment / runtime (P+U) (в работе · ждёт approve)
+## S04 — Environment / runtime (P+U) (`завершено`)
 
 1. Спека кластеров P и U — **сделано**
 2. Инспекторы P — **сделано**
 3. Инспекторы U — **сделано**
 4. CLI / тесты — **сделано**
-5. Approve владельца ← **сейчас**
+5. Approve владельца — **сделано**
 
 ## S05 — Visualization + config (E)
 

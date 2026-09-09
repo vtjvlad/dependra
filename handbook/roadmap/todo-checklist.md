@@ -11,7 +11,7 @@ source: handbook/roadmap/stages
 Детали, `dependsOn` и exit criteria — в [stages/](stages/) и [mvp-backlog.md](mvp-backlog.md).  
 При закрытии пункта синхронизируй статус в файле этапа / backlog.
 
-**Активный этап:** S03 / S04 — реализация готова, ждут approve.
+**Активный этап:** S05 / S06 (параллельно после закрытия S03). S01–S04 — `завершено`.
 
 ---
 
@@ -81,8 +81,8 @@ source: handbook/roadmap/stages
 
 ### S03-D — Тесты
 - [x] S03-006: фикстуры и тесты AC
-- [ ] S03-007: approve → S05/S06
-- [ ] Exit criteria S03 (ждёт approve)
+- [x] S03-007: approve → S05/S06
+- [x] Exit criteria S03
 
 ---
 
@@ -106,8 +106,8 @@ source: handbook/roadmap/stages
 ### S04-D — CLI / тесты
 - [x] S04-008: CLI флаги + reporters
 - [x] S04-009: фикстуры и тесты AC
-- [ ] S04-010: approve владельца
-- [ ] Exit criteria S04 (ждёт approve)
+- [x] S04-010: approve владельца
+- [x] Exit criteria S04
 
 ---
 

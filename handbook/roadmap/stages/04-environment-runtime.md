@@ -10,7 +10,7 @@ source: .dep/.blueprint/20-features (P/U clusters)
 | Поле | Значение |
 |------|----------|
 | **ID** | S04 |
-| **Статус** | `в работе` |
+| **Статус** | `завершено` |
 | **dependsOn** | S02 |
 
 ## Цель / границы
@@ -51,7 +51,7 @@ source: .dep/.blueprint/20-features (P/U clusters)
 | S04-A | Спека кластеров P и U | `завершено` |
 | S04-B | Инспекторы P | `завершено` |
 | S04-C | Инспекторы U | `завершено` |
-| S04-D | CLI / тесты / approve | `в работе` |
+| S04-D | CLI / тесты / approve | `завершено` |
 
 ## Задачи
 
@@ -66,7 +66,7 @@ source: .dep/.blueprint/20-features (P/U clusters)
 | S04-007 | Инспектор file-operations (I/O) | средний | S04-002 | `завершено` |
 | S04-008 | CLI флаги + reporters | высокий | S04-003…007 | `завершено` |
 | S04-009 | Фикстуры и тесты AC | высокий | S04-008 | `завершено` |
-| S04-010 | Approve владельца | средний | S04-009 | `запланировано` |
+| S04-010 | Approve владельца | средний | S04-009 | `завершено` |
 
 ## Чеклист этапа
 
@@ -74,10 +74,10 @@ source: .dep/.blueprint/20-features (P/U clusters)
 - [x] S04-B: environment / commands / env-validation
 - [x] S04-C: runtime deps / file I/O ops
 - [x] S04-D: CLI, тесты AC
-- [ ] Exit criteria + approve
+- [x] Exit criteria + approve
 
 ## Exit criteria
 
 1. P- и U-операции доступны флагами CLI и в JSON.
 2. Нет скрытых мутаций окружения (только анализ).
-3. Approve владельца.
+3. Approve владельца. — **сделано**
