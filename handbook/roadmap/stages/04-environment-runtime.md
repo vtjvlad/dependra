@@ -18,7 +18,7 @@ source: .dep/.blueprint/20-features (P/U clusters)
 **Входит (P):** file-environment-analysis, commands, environment-validation.  
 **Входит (U):** runtime-dependency-analysis, file-operations (I/O analysis).
 
-**Не входит:** установка пакетов/модификация FS (S07), monorepo build (S10).
+**Не входит:** установка пакетов/модификация FS (S07), monorepo (S10), Build System (S11).
 
 ## Зависимости
 

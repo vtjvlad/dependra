@@ -7,7 +7,7 @@ source: handbook/roadmap/stages
 
 # Сводный TODO-чеклист
 
-Единая картина прогресса по этапам `S01`–`S10`.  
+Единая картина прогресса по этапам `S01`–`S11`.  
 Детали, `dependsOn` и exit criteria — в [stages/](stages/) и [mvp-backlog.md](mvp-backlog.md).  
 При закрытии пункта синхронизируй статус в файле этапа / backlog.
 
@@ -225,23 +225,41 @@ source: handbook/roadmap/stages
 
 ---
 
-## S10 — Platform / monorepo / releases
+## S10 — Platform / monorepo
 
 Детали: [stages/10-platform-monorepo.md](stages/10-platform-monorepo.md)
 
 ### S10-A — Спека / решение
 - [ ] S10-001: approve — monorepo действительно нужен
 - [ ] S10-002: спека apps/packages/inspectors layout
-- [ ] S10-003: спека build stages
 
 ### S10-B — Разбиение
-- [ ] S10-004: выделить packages
-- [ ] S10-005: apps/cli (+ daemon при нужде)
+- [ ] S10-003: выделить packages
+- [ ] S10-004: apps/cli (+ daemon при нужде)
 
-### S10-C — CI / release
-- [ ] S10-006: CI lint/test/package/artifacts
-- [ ] S10-007: release bundle + versioning policy
-
-### S10-D — Verification
-- [ ] S10-008: verification checklist + approve
+### S10-C — Verification
+- [ ] S10-005: verification checklist + approve → S11
 - [ ] Exit criteria S10
+
+---
+
+## S11 — Build System
+
+Детали: [stages/11-build-system.md](stages/11-build-system.md)
+
+### S11-A — Спека
+- [ ] S11-001: спека build stages (Clean → Release Bundle)
+- [ ] S11-002: спека build-graph / task-system / profiles
+
+### S11-B — Incremental / module build
+- [ ] S11-003: incremental + module-build
+
+### S11-C — CI / artifacts / release
+- [ ] S11-004: CI lint/test/package/artifacts
+- [ ] S11-005: artifact generation + package verification
+- [ ] S11-006: release bundle + versioning / publish policy
+
+### S11-D — Workflow + verification
+- [ ] S11-007: development workflow в docs
+- [ ] S11-008: verification checklist + approve
+- [ ] Exit criteria S11

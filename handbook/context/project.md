@@ -22,9 +22,9 @@ source: .dep/.blueprint/90-context/project-context-spec.md
 | Выбор AST-парсера | ADR-0001 (Acorn) | [ADR-0001](../adr/ADR-0001-js-ast-parser.md) |
 | Ограничения проекта | Accepted | [limitations.md](../../docs/20-architecture/limitations.md) |
 | MVP scope | Accepted, S01 реализован | [mvp-scope.md](../../docs/20-features/mvp-scope.md) |
-| Полный roadmap (S01–S10) | S01 `завершено` | [roadmap](../roadmap/README.md), [todo-checklist](../roadmap/todo-checklist.md) |
+| Полный roadmap (S01–S11) | S01 `завершено` | [roadmap](../roadmap/README.md), [todo-checklist](../roadmap/todo-checklist.md) |
 | Текущие договорённости | Актуальны | S03 и **S04** реализация готова, ждут **approve**; пакет = `0.0.33` |
-| Долгосрочные цели | В roadmap | [stages S02–S10](../roadmap/stages/README.md) |
+| Долгосрочные цели | В roadmap | [stages S02–S11](../roadmap/stages/README.md) |
 | Особенности реализации | Задокументировано | раздел ниже |
 | Требования к качеству | `npm test` (13 AC) | `tests/mvp-*.test.js`, `tests/fixtures/mvp/` |
 | Взаимодействие модулей | Accepted | [inspector-contract](../../docs/20-architecture/inspector-contract.md), [modules](../../docs/20-architecture/modules.md) |
@@ -65,7 +65,7 @@ S02 (спека): `--additional|-a`, `--entities|-en` — [s02-flags.md](../../d
 4. Версия пакета — `0.0.33`; **не повышать** без approve владельца. `--version` → `Dependra v…`.
 5. MVP: один JS-файл; basic + imports/exports + graph; один инспектор import-export; pipeline prerequisites для graph; без `--level`.
 6. `ImportRecord.source` может быть `null` (dynamic import).
-7. Roadmap: `S01`–`S10`; сводный чеклист — `todo-checklist.md`.
+7. Roadmap: `S01`–`S11`; сводный чеклист — `todo-checklist.md`.
 8. Парсер: **Acorn** только через `parsers` (ADR-0001).
 9. Тесты: `npm test` (= `node --test tests/**/*.test.js`).
 

@@ -43,7 +43,8 @@ CLI MVP — в [docs/50-cli](../../50-cli/interface.md) (S01).
 | Config profiles / `--level` | [S05](../../../handbook/roadmap/stages/05-visualization-config.md) |
 | AI explain (без мутаций) | [S06](../../../handbook/roadmap/stages/06-quality-ai.md) |
 | Multi-language / LSP / Tree-sitter | [S09](../../../handbook/roadmap/stages/09-multilang.md) |
-| Build-system / monorepo / releases | [S10](../../../handbook/roadmap/stages/10-platform-monorepo.md) |
+| Platform / monorepo | [S10](../../../handbook/roadmap/stages/10-platform-monorepo.md) |
+| Build System / releases | [S11](../../../handbook/roadmap/stages/11-build-system.md) |
 
 ## Правило возврата
 
