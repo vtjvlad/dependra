@@ -20,7 +20,7 @@ source: .dep/.blueprint/10-technology, 30-architecture, 99-terminology/language-
 - language-backend adapters; инспекторы beyond JS (минимум один дополнительный язык)
 - опциональные Tree-sitter / LSP providers за адаптерами
 
-**Не входит:** обязательный LSP для всех языков; полный monorepo (S10).
+**Не входит:** обязательный LSP для всех языков; полный monorepo (S10); Build System (S11).
 
 ## Зависимости
 
@@ -66,4 +66,4 @@ source: .dep/.blueprint/10-technology, 30-architecture, 99-terminology/language-
 
 1. Новый язык подключается адаптером без изменения публичного контракта core.
 2. JS-путь S01+ не деградировал.
-3. Approve → решение о S10.
+3. Approve → решение о S10 (затем S11 Build System).

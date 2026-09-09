@@ -7,7 +7,7 @@ source: .dep/.blueprint/80-roadmap/development-sequence.md, 00-project/main-rule
 
 # Последовательность разработки
 
-Полная цепочка больших этапов `S01`–`S10`. Детали — в [stages/](stages/), задачи S01 — в [mvp-backlog.md](mvp-backlog.md).
+Полная цепочка больших этапов `S01`–`S11`. Детали — в [stages/](stages/), задачи S01 — в [mvp-backlog.md](mvp-backlog.md).
 
 ## Обзор
 
@@ -22,9 +22,10 @@ source: .dep/.blueprint/80-roadmap/development-sequence.md, 00-project/main-rule
 | [S07](stages/07-modifications.md) | Modifications / enhancement | S05, S06 |
 | [S08](stages/08-tui-surfaces.md) | TUI и поверхности | S07 |
 | [S09](stages/09-multilang.md) | Multi-language + LSP/Tree-sitter | S08 |
-| [S10](stages/10-platform-monorepo.md) | Platform / monorepo / releases | S09 |
+| [S10](stages/10-platform-monorepo.md) | Platform / monorepo | S09 |
+| [S11](stages/11-build-system.md) | Build System | S10 |
 
-Параллели: S04 ∥ S03 (после S02); S05 ∥ S06 (после S03).
+Параллели: S04 ∥ S03 (после S02); S05 ∥ S06 (после S03). S11 — строго после остальных.
 
 ---
 
@@ -57,7 +58,7 @@ source: .dep/.blueprint/80-roadmap/development-sequence.md, 00-project/main-rule
 
 1. Доработка по AC из docs
 2. Обновление `handbook/context` — **MVP-011 сделано**
-3. Переход к S02 (версия пакета `0.0.33`; дальше **не повышать** без решения владельца)
+3. Переход к S02 (версия пакета `0.0.39`; дальше **не повышать** без решения владельца)
 
 Задачи: [mvp-backlog.md](mvp-backlog.md) (`MVP-001`…`011` — все `завершено`).
 
@@ -70,26 +71,27 @@ source: .dep/.blueprint/80-roadmap/development-sequence.md, 00-project/main-rule
 3. CLI / reporters / тесты
 4. Approve → S03 / S04 — **сделано**
 
-## S03 — Validation (D) (в работе · ждёт approve)
+## S03 — Validation (D) (`завершено`)
 
 1. Спека validation — **сделано**
 2. Инспектор + diagnostics в reporters — **сделано**
 3. Тесты (cycles, unused, broken imports) — **сделано**
-4. Approve владельца ← **сейчас** (нужен до S05/S06 и безопасных modifications)
+4. Approve владельца → S05/S06 — **сделано**
 
-## S04 — Environment / runtime (P+U) (в работе · ждёт approve)
+## S04 — Environment / runtime (P+U) (`завершено`)
 
 1. Спека кластеров P и U — **сделано**
 2. Инспекторы P — **сделано**
 3. Инспекторы U — **сделано**
 4. CLI / тесты — **сделано**
-5. Approve владельца ← **сейчас**
+5. Approve владельца — **сделано**
 
-## S05 — Visualization + config (E)
+## S05 — Visualization + config (E) (`завершено`)
 
-1. Спека viz + profiles/`--level` + config files + metadata extractors
-2. Реализация визуализации и конфигурации
-3. Тесты / approve
+1. Спека viz + config + metadata — **сделано** (accepted)
+2. Реализация визуализации и конфигурации — **сделано**
+3. Metadata extractors — **сделано**
+4. Тесты / approve — **сделано**
 
 ## S06 — Quality + AI explain (F+I)
 
@@ -120,12 +122,20 @@ source: .dep/.blueprint/80-roadmap/development-sequence.md, 00-project/main-rule
 
 ## S10 — Platform / monorepo
 
-1. Спека monorepo layout + build/release pipeline
-2. Разбиение на `apps/` / `packages/` по реальной нужде
-3. CI / artifacts / approve
+1. Approve: monorepo действительно нужен
+2. Спека layout `apps/` / `packages/`
+3. Разбиение по реальной нужде
+4. Approve → S11
+
+## S11 — Build System
+
+1. Спека build stages (Clean → Release Bundle) + task system / profiles
+2. Incremental / module-build
+3. CI / artifacts / release policy
+4. Development workflow + approve
 
 ---
 
 ## Вне последовательности до своего этапа
 
-Build-system monorepo, полный TUI, modifications, multi-language — только через соответствующий `S0N`, не «заодно» с S01.
+Monorepo (S10), Build System (S11), полный TUI, modifications, multi-language — только через соответствующий `S0N`/`S11`, не «заодно» с S01.

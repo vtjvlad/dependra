@@ -19,6 +19,8 @@ const ID_COMMANDS = "commands";
 const ID_ENV_CHECK = "environment-validation";
 const ID_RUNTIME = "runtime-dependency-analysis";
 const ID_IO = "file-operations";
+const ID_VISUALIZATION = "visualization";
+const ID_METADATA = "metadata";
 
 /**
  * @param {string} id
@@ -87,9 +89,17 @@ export async function runPipeline(ctx) {
   const prerequisiteErrors = [];
 
   const needImportExport =
-    options.imports || options.exports || options.graph || options.validate;
+    options.imports ||
+    options.exports ||
+    options.graph ||
+    options.validate ||
+    options.mermaid ||
+    options.graphviz ||
+    options.vizJson;
   const reportImportExport = options.imports || options.exports;
   const needAst = needImportExport || options.entities || options.io;
+  const needViz =
+    options.mermaid || options.graphviz || options.vizJson;
 
   if (options.basic) {
     results[ID_BASIC] = await runInspector(ID_BASIC, ctx);
@@ -117,7 +127,7 @@ export async function runPipeline(ctx) {
       importExportResult = parserErrorResult(ID_IMPORT_EXPORT, loadError);
       if (reportImportExport) {
         results[ID_IMPORT_EXPORT] = importExportResult;
-      } else if (options.graph || options.validate) {
+      } else if (options.graph || options.validate || needViz) {
         prerequisiteErrors.push(
           `${ID_IMPORT_EXPORT}: ${loadError.message}`,
         );
@@ -137,7 +147,7 @@ export async function runPipeline(ctx) {
           data,
         };
       } else if (
-        (options.graph || options.validate) &&
+        (options.graph || options.validate || needViz) &&
         importExportResult.status === "error"
       ) {
         prerequisiteErrors.push(
@@ -202,6 +212,22 @@ export async function runPipeline(ctx) {
     }
   }
 
+  if (needViz) {
+    if (loadError) {
+      results[ID_VISUALIZATION] = parserErrorResult(
+        ID_VISUALIZATION,
+        loadError,
+      );
+      prerequisiteErrors.push(`${ID_VISUALIZATION}: ${loadError.message}`);
+    } else {
+      results[ID_VISUALIZATION] = await runInspector(ID_VISUALIZATION, ctx);
+    }
+  }
+
+  if (options.metadata) {
+    results[ID_METADATA] = await runInspector(ID_METADATA, ctx);
+  }
+
   /** @type {AnalysisReport} */
   const report = {
     version: PACKAGE_VERSION,
@@ -220,7 +246,14 @@ export async function runPipeline(ctx) {
       envCheck: Boolean(options.envCheck),
       runtime: Boolean(options.runtime),
       io: Boolean(options.io),
+      mermaid: Boolean(options.mermaid),
+      graphviz: Boolean(options.graphviz),
+      vizJson: Boolean(options.vizJson),
+      metadata: Boolean(options.metadata),
       pathMode: options.pathMode,
+      level: options.level ?? null,
+      profile: options.profile ?? null,
+      configPath: options.configPath ?? null,
     },
     results,
   };

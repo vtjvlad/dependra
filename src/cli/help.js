@@ -114,6 +114,35 @@ export function formatHelp(opts = {}) {
 
   lines.push(
     ...frameSection(
+      "operations · s05",
+      [
+        flagRow("-m, --mermaid", "Mermaid views", col, pal),
+        flagRow("-gr, --graphviz", "Graphviz DOT", col, pal),
+        flagRow("-vj, --viz-json", "JSON graph views", col, pal),
+        flagRow("-me, --metadata", "metadata extractors", col, pal),
+        "",
+        pal.dim("только явное / level / profile (не default-all)"),
+      ],
+      pal,
+    ),
+    "",
+  );
+
+  lines.push(
+    ...frameSection(
+      "config · s05",
+      [
+        flagRow("-l, --level <1..5>", "сахар над операциями", col, pal),
+        flagRow("-pr, --profile <name>", "профиль из dependra.conf", col, pal),
+        flagRow("-cf, --config <path>", "явный dependra.conf", col, pal),
+      ],
+      pal,
+    ),
+    "",
+  );
+
+  lines.push(
+    ...frameSection(
       "output",
       [
         flagRow("-j, --json", "JSON вместо schematic text", col, pal),

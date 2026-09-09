@@ -20,7 +20,7 @@ source: .dep/.blueprint/50-user/tui
 - TUI над стабильным public core API (навигация, результаты, операции, configurator, save/presentation)
 - Контракты future surfaces: Web UI, REST API, Node library, IDE plugins — **каркас/контракт**, не полная реализация всех UI
 
-**Не входит:** полноценный Web/Desktop IDE client; monorepo packaging (S10).
+**Не входит:** полноценный Web/Desktop IDE client; monorepo packaging (S10); Build System (S11).
 
 ## Зависимости
 

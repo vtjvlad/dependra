@@ -7,14 +7,14 @@ source: .dep/.blueprint/80-roadmap
 
 # Roadmap
 
-Полный процесс разработки Dependra: большие этапы `S01`–`S10`, подэтапы и задачи.  
-Активный этап сейчас: **S03 (Validation)** / параллельно возможен **S04 (Environment / runtime)**. S01 и S02 — `завершено`. Версию пакета **не повышать** (`0.0.33`), пока владелец не решит иначе.
+Полный процесс разработки Dependra: большие этапы `S01`–`S11`, подэтапы и задачи.  
+Активный этап сейчас: **S06 (Quality + AI explain)** (параллельно был доступен с S05). S01–S05 — `завершено`. Версию пакета **не повышать** (`0.0.39`), пока владелец не решит иначе.
 
 ## Документы
 
 | Документ | Назначение |
 |----------|------------|
-| [development-sequence.md](development-sequence.md) | Порядок этапов S01–S10 |
+| [development-sequence.md](development-sequence.md) | Порядок этапов S01–S11 |
 | [stages/](stages/) | Детали каждого большого этапа |
 | [mvp-backlog.md](mvp-backlog.md) | Задачи этапа S01 (`MVP-001`…`011`) |
 | [todo-checklist.md](todo-checklist.md) | Сводный TODO-чеклист всех этапов |
@@ -26,16 +26,17 @@ source: .dep/.blueprint/80-roadmap
 |----|----------|--------|-----------|------|
 | S01 | MVP core | `завершено` | — | [stages/01-mvp-core.md](stages/01-mvp-core.md) |
 | S02 | Углубление анализа B/M | `завершено` | S01 | [stages/02-deepen-analysis.md](stages/02-deepen-analysis.md) |
-| S03 | Validation (D) | `в работе` | S02 | [stages/03-validation.md](stages/03-validation.md) |
-| S04 | Environment / runtime (P+U) | `в работе` | S02 | [stages/04-environment-runtime.md](stages/04-environment-runtime.md) |
-| S05 | Visualization + config (E) | `запланировано` | S03 | [stages/05-visualization-config.md](stages/05-visualization-config.md) |
+| S03 | Validation (D) | `завершено` | S02 | [stages/03-validation.md](stages/03-validation.md) |
+| S04 | Environment / runtime (P+U) | `завершено` | S02 | [stages/04-environment-runtime.md](stages/04-environment-runtime.md) |
+| S05 | Visualization + config (E) | `завершено` | S03 | [stages/05-visualization-config.md](stages/05-visualization-config.md) |
 | S06 | Quality + AI explain (F+I) | `запланировано` | S03 | [stages/06-quality-ai.md](stages/06-quality-ai.md) |
 | S07 | Modifications / enhancement | `запланировано` | S05, S06 | [stages/07-modifications.md](stages/07-modifications.md) |
 | S08 | TUI и поверхности | `запланировано` | S07 | [stages/08-tui-surfaces.md](stages/08-tui-surfaces.md) |
 | S09 | Multi-language + LSP/Tree-sitter | `запланировано` | S08 | [stages/09-multilang.md](stages/09-multilang.md) |
-| S10 | Platform / monorepo / releases | `запланировано` | S09 | [stages/10-platform-monorepo.md](stages/10-platform-monorepo.md) |
+| S10 | Platform / monorepo | `запланировано` | S09 | [stages/10-platform-monorepo.md](stages/10-platform-monorepo.md) |
+| S11 | Build System | `запланировано` | S10 | [stages/11-build-system.md](stages/11-build-system.md) |
 
-S04 может идти параллельно с S03 после закрытия S02. S05 и S06 — параллельно после S03. S07 ждёт оба.
+S04 может идти параллельно с S03 после закрытия S02. S05 и S06 — параллельно после S03. S07 ждёт оба. S11 — только после остальных этапов (после S10).
 
 ## Статусы задач
 

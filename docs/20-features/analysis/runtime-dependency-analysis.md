@@ -27,7 +27,7 @@ tags: [U]
 ### Не входит
 
 - Фактический запуск файла / тест harness
-- Полный detect build-system monorepo (S10)
+- Полный detect build-system / monorepo (S10–S11)
 - Обязательный gcc/cargo/go/dotnet для JS-проекта — только если цель явно C/Rust/Go/… по расширению/shebang
 - Установка runtime (S07)
 

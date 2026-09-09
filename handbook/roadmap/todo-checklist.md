@@ -7,11 +7,11 @@ source: handbook/roadmap/stages
 
 # Сводный TODO-чеклист
 
-Единая картина прогресса по этапам `S01`–`S10`.  
+Единая картина прогресса по этапам `S01`–`S11`.  
 Детали, `dependsOn` и exit criteria — в [stages/](stages/) и [mvp-backlog.md](mvp-backlog.md).  
 При закрытии пункта синхронизируй статус в файле этапа / backlog.
 
-**Активный этап:** S03 / S04 — реализация готова, ждут approve.
+**Активный этап:** S06. S01–S05 — `завершено`.
 
 ---
 
@@ -81,8 +81,8 @@ source: handbook/roadmap/stages
 
 ### S03-D — Тесты
 - [x] S03-006: фикстуры и тесты AC
-- [ ] S03-007: approve → S05/S06
-- [ ] Exit criteria S03 (ждёт approve)
+- [x] S03-007: approve → S05/S06
+- [x] Exit criteria S03
 
 ---
 
@@ -106,8 +106,8 @@ source: handbook/roadmap/stages
 ### S04-D — CLI / тесты
 - [x] S04-008: CLI флаги + reporters
 - [x] S04-009: фикстуры и тесты AC
-- [ ] S04-010: approve владельца
-- [ ] Exit criteria S04 (ждёт approve)
+- [x] S04-010: approve владельца
+- [x] Exit criteria S04
 
 ---
 
@@ -116,21 +116,21 @@ source: handbook/roadmap/stages
 Детали: [stages/05-visualization-config.md](stages/05-visualization-config.md)
 
 ### S05-A — Спека
-- [ ] S05-001: спека visualization
-- [ ] S05-002: спека config / profiles / `--level`
-- [ ] S05-003: спека metadata extractors
+- [x] S05-001: спека visualization ([visualization.md](../../docs/20-features/analysis/visualization.md), [s05-flags.md](../../docs/50-cli/s05-flags.md))
+- [x] S05-002: спека config / profiles / `--level` / report / flags / ai ([s05-config.md](../../docs/35-configuration/s05-config.md), [dependra.conf.example](../../docs/35-configuration/dependra.conf.example), [analysis-levels.md](../../docs/40-development/analysis-levels.md))
+- [x] S05-003: спека metadata extractors ([metadata.md](../../docs/20-features/analysis/metadata.md))
 
 ### S05-B — Visualization
-- [ ] S05-004: Mermaid / Graphviz / JSON viz
+- [x] S05-004: Mermaid / Graphviz / JSON viz
 
 ### S05-C — Config
-- [ ] S05-005: profiles + `--level`
-- [ ] S05-006: project/user config files
+- [x] S05-005: profiles + `--level`
+- [x] S05-006: project/user config files
 
 ### S05-D — Metadata + тесты
-- [ ] S05-007: metadata provider plugins
-- [ ] S05-008: тесты AC + approve
-- [ ] Exit criteria S05
+- [x] S05-007: metadata provider plugins
+- [x] S05-008: тесты AC + approve
+- [x] Exit criteria S05
 
 ---
 
@@ -225,23 +225,41 @@ source: handbook/roadmap/stages
 
 ---
 
-## S10 — Platform / monorepo / releases
+## S10 — Platform / monorepo
 
 Детали: [stages/10-platform-monorepo.md](stages/10-platform-monorepo.md)
 
 ### S10-A — Спека / решение
 - [ ] S10-001: approve — monorepo действительно нужен
 - [ ] S10-002: спека apps/packages/inspectors layout
-- [ ] S10-003: спека build stages
 
 ### S10-B — Разбиение
-- [ ] S10-004: выделить packages
-- [ ] S10-005: apps/cli (+ daemon при нужде)
+- [ ] S10-003: выделить packages
+- [ ] S10-004: apps/cli (+ daemon при нужде)
 
-### S10-C — CI / release
-- [ ] S10-006: CI lint/test/package/artifacts
-- [ ] S10-007: release bundle + versioning policy
-
-### S10-D — Verification
-- [ ] S10-008: verification checklist + approve
+### S10-C — Verification
+- [ ] S10-005: verification checklist + approve → S11
 - [ ] Exit criteria S10
+
+---
+
+## S11 — Build System
+
+Детали: [stages/11-build-system.md](stages/11-build-system.md)
+
+### S11-A — Спека
+- [ ] S11-001: спека build stages (Clean → Release Bundle)
+- [ ] S11-002: спека build-graph / task-system / profiles
+
+### S11-B — Incremental / module build
+- [ ] S11-003: incremental + module-build
+
+### S11-C — CI / artifacts / release
+- [ ] S11-004: CI lint/test/package/artifacts
+- [ ] S11-005: artifact generation + package verification
+- [ ] S11-006: release bundle + versioning / publish policy
+
+### S11-D — Workflow + verification
+- [ ] S11-007: development workflow в docs
+- [ ] S11-008: verification checklist + approve
+- [ ] Exit criteria S11

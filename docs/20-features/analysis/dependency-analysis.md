@@ -28,7 +28,7 @@ tags: [M]
 - Полноценный индексер с кэшем
 - npm-граф пакетов
 - Runtime-зависимости (`deferred` U)
-- Mermaid/Graphviz (`deferred` E)
+- Mermaid/Graphviz/viz-json ([visualization.md](visualization.md), S05)
 
 ## Вход
 

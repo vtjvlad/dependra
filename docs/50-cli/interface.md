@@ -9,7 +9,7 @@ source: .dep/.blueprint/50-user/cli-flags.md
 
 ## Цель
 
-Минимальный командный интерфейс для запуска MVP-операций. Версия пакета: `0.0.33`.
+Минимальный командный интерфейс для запуска MVP-операций. Версия пакета: `0.0.39`.
 
 ## Entrypoint
 
@@ -45,7 +45,7 @@ dependra|fds|deps|dep <file> [options]
 | `--json` | `-j` | Вывод JSON вместо текста |
 | `--path-mode <name\|relative\|absolute>` | `-p <…>` | Режим путей для graph (default: `relative`) |
 | `--help` | `-h` | Справка |
-| `--version` | `-v` | Версия пакета: `Dependra v0.0.33` |
+| `--version` | `-v` | Версия пакета: `Dependra v0.0.39` |
 
 ### Короткие флаги
 
@@ -61,9 +61,9 @@ dependra|fds|deps|dep <file> [options]
 
 У MVP-флагов S01 буквы не пересекаются → все однобуквенные lowercase.
 
-**Не в MVP / не в S01:** `--level` (см. [analysis-levels.md](../40-development/analysis-levels.md)).
+**Не в MVP / не в S01:** `--level` (см. [analysis-levels.md](../40-development/analysis-levels.md); реализация сахара — S05 / [s05-flags.md](s05-flags.md)).
 
-Расширения следующего этапа: [s02-flags.md](s02-flags.md).
+Расширения следующих этапов: [s02-flags.md](s02-flags.md), [s03-flags.md](s03-flags.md), [s04-flags.md](s04-flags.md), [s05-flags.md](s05-flags.md).
 
 Если не указан ни один из `--basic|-b|--imports|-i|--exports|-e|--graph|-g`, по умолчанию: **все четыре операции S01**.  
 Операции S02+ в default-all **не** входят (только явный флаг).
@@ -141,11 +141,11 @@ dependra|fds|deps|dep <file> [options]
 - [ ] Каждый флаг операции включает только свою **секцию отчёта** (кроме default-all)
 - [ ] `--imports` и `--exports` дают один ключ `import-export-analysis` с отфильтрованным `data`
 - [ ] `--graph` без `--imports` не добавляет import-export в `results`, но reverse/forward graph работает
-- [ ] `--version` / `-v` печатает `Dependra v0.0.33`
+- [ ] `--version` / `-v` печатает `Dependra v0.0.39`
 - [ ] `--json` / `-j` даёт валидный JSON по схеме отчёта
 - [ ] Короткие флаги `-b|-i|-e|-g|-j|-p` эквивалентны long-формам
 - [ ] Алгоритм short: при коллизии — вторая буква; S01 short стабильны (см. S02 `-en`)
 - [ ] Коды выхода соответствуют таблице
-- [ ] Нет флага `--level` в MVP
+- [ ] Нет флага `--level` в MVP (S05: [s05-flags.md](s05-flags.md))
 - [ ] npm `bin` содержит `dependra`, `fds`, `deps`, `dep`
-- [ ] Расширения S02 описаны в [s02-flags.md](s02-flags.md)
+- [ ] Расширения S02+ описаны в s02–s05-flags.md

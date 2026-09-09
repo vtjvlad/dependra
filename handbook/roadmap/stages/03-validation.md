@@ -10,7 +10,7 @@ source: .dep/.blueprint/20-features/validation---D
 | Поле | Значение |
 |------|----------|
 | **ID** | S03 |
-| **Статус** | `в работе` |
+| **Статус** | `завершено` |
 | **dependsOn** | S02 |
 
 ## Цель / границы
@@ -46,7 +46,7 @@ source: .dep/.blueprint/20-features/validation---D
 | S03-A | Спека validation | `завершено` |
 | S03-B | Инспектор validation | `завершено` |
 | S03-C | Diagnostics в reporters | `завершено` |
-| S03-D | Тесты + approve | `в работе` |
+| S03-D | Тесты + approve | `завершено` |
 
 ## Задачи
 
@@ -58,7 +58,7 @@ source: .dep/.blueprint/20-features/validation---D
 | S03-004 | Инспектор: broken imports / path errors | высокий | S03-001 | `завершено` |
 | S03-005 | Секции diagnostics в text/JSON reporters | высокий | S03-002…004 | `завершено` |
 | S03-006 | Фикстуры и тесты AC | высокий | S03-005 | `завершено` |
-| S03-007 | Approve владельца | средний | S03-006 | `запланировано` |
+| S03-007 | Approve владельца | средний | S03-006 | `завершено` |
 
 ## Чеклист этапа
 
@@ -66,10 +66,10 @@ source: .dep/.blueprint/20-features/validation---D
 - [x] S03-B: cycles / unused / broken imports
 - [x] S03-C: diagnostics в reporters
 - [x] S03-D: тесты AC
-- [ ] Exit criteria + approve
+- [x] Exit criteria + approve
 
 ## Exit criteria
 
 1. CLI/JSON отдают validation diagnostics по AC спеки.
 2. Ложные срабатывания на фикстурах в допустимых пределах спеки.
-3. Approve → можно стартовать S05/S06.
+3. Approve → можно стартовать S05/S06. — **сделано**

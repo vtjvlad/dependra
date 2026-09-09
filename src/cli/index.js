@@ -7,7 +7,7 @@ import { registerBuiltInInspectors } from "../inspectors/index.js";
 import { formatReport } from "../reporters/index.js";
 import { formatCliVersion } from "../version.js";
 import { formatHelp } from "./help.js";
-import { parseArgs } from "./parse-args.js";
+import { resolveCli } from "./resolve-cli.js";
 
 registerBuiltInInspectors();
 
@@ -15,7 +15,13 @@ registerBuiltInInspectors();
  * @returns {Promise<number>}
  */
 async function main() {
-  const parsed = parseArgs(process.argv.slice(2));
+  const parsed = resolveCli(process.argv.slice(2));
+
+  if (parsed.warnings?.length) {
+    for (const w of parsed.warnings) {
+      process.stderr.write(`warning: ${w}\n`);
+    }
+  }
 
   if (parsed.error) {
     process.stderr.write(`${parsed.error}\n`);
@@ -70,7 +76,10 @@ async function main() {
     }
 
     process.stdout.write(
-      formatReport(report, { json: parsed.options.json }),
+      formatReport(report, {
+        json: parsed.options.json,
+        report: parsed.options.report,
+      }),
     );
     return exitCode;
   } catch (err) {

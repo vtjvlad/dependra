@@ -1,6 +1,6 @@
 {
   "name": "dependra",
-  "version": "0.0.33",
+  "version": "0.0.39",
   "description": "Source code analysis platform for dependencies, architecture, and code quality.",
   "keywords": [
     "dependency",

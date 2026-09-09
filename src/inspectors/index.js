@@ -8,8 +8,10 @@ import { exportedEntitiesInspector } from "./exported-entities.js";
 import { fileEnvironmentAnalysisInspector } from "./file-environment-analysis.js";
 import { fileOperationsInspector } from "./file-operations.js";
 import { importExportAnalysisInspector } from "./import-export-analysis.js";
+import { metadataInspector } from "./metadata.js";
 import { runtimeDependencyAnalysisInspector } from "./runtime-dependency-analysis.js";
 import { validationInspector } from "./validation.js";
+import { visualizationInspector } from "./visualization.js";
 
 /**
  * Регистрация инспекторов, доступных в текущей версии.
@@ -27,4 +29,6 @@ export function registerBuiltInInspectors() {
   registerInspector(environmentValidationInspector);
   registerInspector(runtimeDependencyAnalysisInspector);
   registerInspector(fileOperationsInspector);
+  registerInspector(visualizationInspector);
+  registerInspector(metadataInspector);
 }

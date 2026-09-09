@@ -1,11 +1,11 @@
 ---
-title: S10 — Platform / monorepo / releases
+title: S10 — Platform / monorepo
 status: draft
 mvp: false
-source: .dep/.blueprint/15-build-system
+source: .dep/.blueprint/15-build-system/monorepo-structure.md, monorepo.md
 ---
 
-# S10 — Platform / monorepo / releases
+# S10 — Platform / monorepo
 
 | Поле | Значение |
 |------|----------|
@@ -15,27 +15,26 @@ source: .dep/.blueprint/15-build-system
 
 ## Цель / границы
 
-**Входит:** разбиение на `apps/` + `packages/` + inspectors по реальной нужде; build/test/release pipeline; reproducible artifacts.
+**Входит:** решение о monorepo по реальной нужде; layout `apps/` + `packages/` (+ inspectors); выделение пакетов без пустых «на будущее».
 
-**Не входит:** преждевременный monorepo «на будущее» до появления multi-package необходимости (см. minimal-implementation).
+**Не входит:** полная build-система / CI / release pipeline — это **[S11](11-build-system.md)** после закрытия S10.
 
 ## Зависимости
 
-После S09, когда есть cli / core / несколько language inspectors. Старт только при approve «нужен monorepo».
+После S09, когда есть cli / core / несколько language inspectors. Старт только при approve «нужен monorepo» (или явное «single-package → сразу минимальный S11»).
 
 ## Источники
 
-- [`.dep/.blueprint/15-build-system/`](../../../.dep/.blueprint/15-build-system/README.md)
-- Stub: [`docs/15-build-system/README.md`](../../../docs/15-build-system/README.md)
+- Blueprint: [`.dep/.blueprint/15-build-system/monorepo-structure.md`](../../../.dep/.blueprint/15-build-system/monorepo-structure.md), [`monorepo.md`](../../../.dep/.blueprint/15-build-system/monorepo.md)
+- Stub build-system (S11): [`docs/15-build-system/README.md`](../../../docs/15-build-system/README.md)
 
 ## Подэтапы
 
 | ID | Название | Статус |
 |----|----------|--------|
-| S10-A | Спека layout + pipeline | `запланировано` |
+| S10-A | Спека / решение layout | `запланировано` |
 | S10-B | Разбиение пакетов | `запланировано` |
-| S10-C | CI / artifacts / release | `запланировано` |
-| S10-D | Verification + approve | `запланировано` |
+| S10-C | Verification + approve → S11 | `запланировано` |
 
 ## Задачи
 
@@ -43,23 +42,19 @@ source: .dep/.blueprint/15-build-system
 |----|----------|-----------|-----------|--------|
 | S10-001 | Approve: monorepo действительно нужен | высокий | S09 | `запланировано` |
 | S10-002 | Спека apps/packages/inspectors layout в docs | высокий | S10-001 | `запланировано` |
-| S10-003 | Спека build stages (clean→release) | высокий | S10-001 | `запланировано` |
-| S10-004 | Выделить packages (core, config, reporter, …) | высокий | S10-002 | `запланировано` |
-| S10-005 | apps/cli (+ при необходимости daemon) | высокий | S10-004 | `запланировано` |
-| S10-006 | CI: lint/test/package/artifacts | высокий | S10-003, S10-005 | `запланировано` |
-| S10-007 | Release bundle + versioning policy | средний | S10-006 | `запланировано` |
-| S10-008 | Verification checklist + approve | высокий | S10-007 | `запланировано` |
+| S10-003 | Выделить packages (core, config, reporter, …) | высокий | S10-002 | `запланировано` |
+| S10-004 | apps/cli (+ при необходимости daemon) | высокий | S10-003 | `запланировано` |
+| S10-005 | Verification checklist + approve → S11 | высокий | S10-004 | `запланировано` |
 
 ## Чеклист этапа
 
-- [ ] S10-A: спека layout и pipeline; явный approve нужды
+- [ ] S10-A: спека layout; явный approve нужды
 - [ ] S10-B: packages/apps выделены без мёртвых пустых пакетов
-- [ ] S10-C: CI и artifacts
-- [ ] S10-D: verification + approve
+- [ ] S10-C: verification + approve → S11
 - [ ] Exit criteria выполнены
 
 ## Exit criteria
 
-1. Clone → bootstrap → build → test воспроизводим по docs.
-2. Нет пустых пакетов «на будущее».
-3. Владелец утвердил release policy и закрытие этапа (или следующий цикл roadmap).
+1. Layout задокументирован; нет пустых пакетов «на будущее».
+2. Пакеты собираются хотя бы минимальным способом, достаточным для старта S11.
+3. Владелец утвердил закрытие S10 → переход к Build System (S11).
