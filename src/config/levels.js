@@ -24,6 +24,7 @@ export const LEVEL_OPERATIONS = {
     "graph",
     "entities",
     "validate",
+    "quality",
   ],
   5: [
     "basic",
@@ -34,6 +35,7 @@ export const LEVEL_OPERATIONS = {
     "graph",
     "entities",
     "validate",
+    "quality",
     "mermaid",
     "metadata",
   ],

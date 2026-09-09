@@ -10,7 +10,7 @@ source: .dep/.blueprint/20-features/code-quality-analysis---F, 10-technology/60-
 | Поле | Значение |
 |------|----------|
 | **ID** | S06 |
-| **Статус** | `запланировано` (S06-A спека — `review`) |
+| **Статус** | `завершено` |
 | **dependsOn** | S03 |
 
 ## Цель / границы
@@ -28,7 +28,7 @@ source: .dep/.blueprint/20-features/code-quality-analysis---F, 10-technology/60-
 
 ## Источники
 
-- Рабочие спеки (S06-A):
+- Рабочие спеки (S06-A, accepted):
   - [`docs/20-features/analysis/code-quality-analysis.md`](../../../docs/20-features/analysis/code-quality-analysis.md)
   - [`docs/20-features/analysis/ai-explain.md`](../../../docs/20-features/analysis/ai-explain.md)
   - CLI: [`docs/50-cli/s06-flags.md`](../../../docs/50-cli/s06-flags.md)
@@ -51,33 +51,33 @@ source: .dep/.blueprint/20-features/code-quality-analysis---F, 10-technology/60-
 
 | ID | Название | Статус |
 |----|----------|--------|
-| S06-A | Спека quality (+ AI explain) | `ожидает подтверждения` (docs `review`) |
-| S06-B | Инспектор code-quality | `запланировано` |
-| S06-C | AI provider adapter (optional) | `запланировано` |
-| S06-D | CLI / тесты / approve | `запланировано` |
+| S06-A | Спека quality (+ AI explain) | `завершено` (accepted) |
+| S06-B | Инспектор code-quality | `завершено` |
+| S06-C | AI provider adapter (optional) | `завершено` |
+| S06-D | CLI / тесты / approve | `завершено` |
 
 ## Задачи
 
 | ID | Название | Приоритет | dependsOn | Статус |
 |----|----------|-----------|-----------|--------|
-| S06-001 | Спека code-quality в docs | высокий | S03 | `ожидает подтверждения` |
-| S06-002 | Спека AI explain (optional, non-blocking) | средний | S03 | `ожидает подтверждения` |
-| S06-003 | Инспектор code-quality-analysis | высокий | S06-001 | `запланировано` |
-| S06-004 | Reporter-секции quality | высокий | S06-003 | `запланировано` |
-| S06-005 | AI provider adapter + флаг включения | средний | S06-002, S06-003 | `запланировано` |
-| S06-006 | Тесты: quality без AI; AI mock/off | высокий | S06-004, S06-005 | `запланировано` |
-| S06-007 | Approve владельца | средний | S06-006 | `запланировано` |
+| S06-001 | Спека code-quality в docs | высокий | S03 | `завершено` |
+| S06-002 | Спека AI explain (optional, non-blocking) | средний | S03 | `завершено` |
+| S06-003 | Инспектор code-quality-analysis | высокий | S06-001 | `завершено` |
+| S06-004 | Reporter-секции quality | высокий | S06-003 | `завершено` |
+| S06-005 | AI provider adapter + флаг включения | средний | S06-002, S06-003 | `завершено` |
+| S06-006 | Тесты: quality без AI; AI mock/off | высокий | S06-004, S06-005 | `завершено` |
+| S06-007 | Approve владельца | средний | S06-006 | `завершено` |
 
 ## Чеклист этапа
 
-- [x] S06-A: спеки quality и AI explain в `docs/` (статус `review` → approve владельца)
-- [ ] S06-B: инспектор quality + reporter
-- [ ] S06-C: AI adapter optional; ядро работает offline
-- [ ] S06-D: тесты AC + approve
-- [ ] Exit criteria выполнены
+- [x] S06-A: спеки quality и AI explain в `docs/`
+- [x] S06-B: инспектор quality + reporter
+- [x] S06-C: AI adapter optional; ядро работает offline
+- [x] S06-D: тесты AC + approve
+- [x] Exit criteria выполнены
 
 ## Exit criteria
 
-1. Quality-анализ работает без сети и без AI.
-2. AI explain отключается и не ломает pipeline.
-3. Approve (вместе с S05 → S07).
+1. Quality-анализ работает без сети и без AI. — **сделано**
+2. AI explain отключается и не ломает pipeline. — **сделано**
+3. Approve (вместе с S05 → S07). — **сделано**

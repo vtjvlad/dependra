@@ -1,6 +1,6 @@
 ---
 title: AI explain
-status: review
+status: accepted
 mvp: false
 source: .dep/.blueprint/10-technology/60-artificial-intelligence
 tags: [I]

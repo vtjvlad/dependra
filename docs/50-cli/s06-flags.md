@@ -1,6 +1,6 @@
 ---
 title: CLI флаги S06
-status: review
+status: accepted
 mvp: false
 source: handbook/roadmap/stages/06-quality-ai.md, docs/50-cli/interface.md
 ---

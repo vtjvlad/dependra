@@ -130,6 +130,21 @@ export function formatHelp(opts = {}) {
 
   lines.push(
     ...frameSection(
+      "operations · s06",
+      [
+        flagRow("-q, --quality", "code quality metrics", col, pal),
+        flagRow("-ex, --explain", "AI explanations (opt)", col, pal),
+        "",
+        pal.dim("quality offline; explain нужен ai.enabled+key"),
+        pal.dim("не default-all"),
+      ],
+      pal,
+    ),
+    "",
+  );
+
+  lines.push(
+    ...frameSection(
       "config · s05",
       [
         flagRow("-l, --level <1..5>", "сахар над операциями", col, pal),

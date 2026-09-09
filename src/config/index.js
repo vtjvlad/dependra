@@ -27,6 +27,7 @@ export const OPERATION_KEYS = [
   "graphviz",
   "vizJson",
   "metadata",
+  "quality",
 ];
 
 /**

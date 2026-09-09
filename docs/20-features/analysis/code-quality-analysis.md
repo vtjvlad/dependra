@@ -1,6 +1,6 @@
 ---
 title: Анализ качества кода
-status: review
+status: accepted
 mvp: false
 source: .dep/.blueprint/20-features/code-quality-analysis---F
 tags: [F]

@@ -18,6 +18,8 @@
  * @property {boolean} graphviz
  * @property {boolean} vizJson
  * @property {boolean} metadata
+ * @property {boolean} quality
+ * @property {boolean} explain
  * @property {boolean} json
  * @property {"name"|"relative"|"absolute"} pathMode
  * @property {number|null} [level]

@@ -154,6 +154,14 @@ export function resolveCli(argv, env = {}) {
     }
   }
 
+  // S06: ai.explain → options.explain; explain OR-включает quality
+  if (model.ai?.explain) {
+    parsed.options.explain = true;
+  }
+  if (parsed.options.explain) {
+    parsed.options.quality = true;
+  }
+
   return { ...parsed, warnings };
 }
 
