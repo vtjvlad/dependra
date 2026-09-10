@@ -1,6 +1,6 @@
 ---
 title: TUI — попапы и потоки
-status: review
+status: accepted
 mvp: false
 source: docs/50-tui/overview.md
 ---
@@ -21,14 +21,14 @@ source: docs/50-tui/overview.md
 После `analyze()`:
 
 1. `formatText(report, { report: model.report })`
-2. Попап со scroll (`j`/`k`, PgUp/PgDn)
+2. Попап со scroll (`j`/`k`, wheel, PgUp/PgDn)
 3. `Esc` / `q` — закрыть и вернуться к browser
 
 ## Settings
 
 Две вкладки:
 
-1. **TUI** — `theme`, `showHidden`, `showKeyHints` → `tui.json`
-2. **Configurator** — модель `dependra.conf` (pathMode, output, defaults, operations, report, profiles, ai без секретов) → `serializeConf` + `saveConf`
+1. **TUI** — блоки «Внешний вид» / «Дерево файлов»: `theme` (10 схем), `showHidden`, `showKeyHints` → `tui.json`
+2. **Configurator** — `dependra.conf` по логическим блокам с описаниями → `serializeConf` + `saveConf`
 
-Сохранение: `Enter` на «Save» или `:w` в command line попапа.
+Сохранение: `w`. Описание текущего параметра — в нижней строке помощи.

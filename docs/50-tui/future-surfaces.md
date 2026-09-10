@@ -1,6 +1,6 @@
 ---
 title: Future surfaces (S08)
-status: review
+status: accepted
 mvp: false
 source: .dep/.blueprint/50-user/tui/future-interfaces.md
 ---

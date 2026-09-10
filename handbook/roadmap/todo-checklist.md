@@ -11,7 +11,7 @@ source: handbook/roadmap/stages
 Детали, `dependsOn` и exit criteria — в [stages/](stages/) и [mvp-backlog.md](mvp-backlog.md).  
 При закрытии пункта синхронизируй статус в файле этапа / backlog.
 
-**Активный этап:** S08 (реализация готова, ожидает approve). S01–S07 — `завершено`.
+**Активный этап:** S09. S01–S08 — `завершено`.
 
 ---
 
@@ -199,7 +199,7 @@ source: handbook/roadmap/stages
 
 ### S08-D — Тесты
 - [x] S08-007: smoke-тесты TUI + approve
-- [ ] Exit criteria S08 (approve владельца → S09)
+- [x] Exit criteria S08
 
 ---
 

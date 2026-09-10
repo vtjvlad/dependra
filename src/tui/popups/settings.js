@@ -1,16 +1,28 @@
 /**
- * Settings popup: TUI prefs + dependra.conf configurator.
+ * Settings popup: TUI prefs + dependra.conf configurator (grouped + help).
  */
 
-import { listThemeNames } from "../theme.js";
+import { listThemeNames, themeLabel, themeHelp } from "../theme.js";
 import { saveTuiPrefs } from "../state/session.js";
 import { join } from "node:path";
 import { wireListMouse } from "../mouse.js";
 import {
-  OPERATION_KEYS,
   resolveUserConfPath,
   saveConf,
 } from "../bridge.js";
+import { configSections, tuiSections } from "./config-schema.js";
+
+  /**
+   * @typedef {object} Row
+   * @property {"section"|"field"} type
+   * @property {string} id
+   * @property {string} label
+   * @property {string} help
+   * @property {() => string} [get]
+   * @property {() => void} [cycle]
+   * @property {() => void} [toggle]
+   * @property {() => string} [helpFn]
+   */
 
 /**
  * @param {import('neo-blessed').Widgets.Screen} screen
@@ -46,8 +58,8 @@ export function openSettings(screen, theme, session, handlers) {
     parent: screen,
     top: "center",
     left: "center",
-    width: "80%",
-    height: "85%",
+    width: "88%",
+    height: "90%",
     border: { type: "line" },
     label: " Settings ",
     tags: true,
@@ -74,7 +86,7 @@ export function openSettings(screen, theme, session, handlers) {
     top: 2,
     left: 1,
     right: 1,
-    bottom: 2,
+    bottom: 3,
     keys: true,
     vi: true,
     mouse: true,
@@ -92,6 +104,16 @@ export function openSettings(screen, theme, session, handlers) {
 
   wireListMouse(body, screen);
 
+  const helpBox = blessed.box({
+    parent: box,
+    bottom: 1,
+    left: 1,
+    right: 1,
+    height: 1,
+    tags: true,
+    style: { fg: theme.dim, bg: theme.popupBg },
+  });
+
   const footer = blessed.box({
     parent: box,
     bottom: 0,
@@ -99,62 +121,58 @@ export function openSettings(screen, theme, session, handlers) {
     right: 1,
     height: 1,
     tags: true,
-    content: `{${theme.dim}-fg}Tab switch · Space/click edit · wheel scroll · w save · Esc close{/}`,
+    content: `{${theme.dim}-fg}Tab · j/k · Space/Enter edit · w save · Esc{/}`,
   });
 
-  /** @type {{ id: string, label: string, get: () => string, cycle?: () => void, toggle?: () => void }[]} */
+  /** @type {Row[]} */
   let rows = [];
 
   function refreshTabBar() {
     const t0 = tab === 0 ? `{bold}{${theme.accent}-fg}[TUI]{/}` : " TUI ";
     const t1 = tab === 1 ? `{bold}{${theme.accent}-fg}[Config]{/}` : " Config ";
-    tabBar.setContent(`${t0}  ${t1}`);
+    tabBar.setContent(`${t0}  ${t1}  {${theme.dim}-fg}блоки · описания внизу{/}`);
   }
 
-  function buildTuiRows() {
-    const themes = listThemeNames();
-    rows = [
-      {
-        id: "theme",
-        label: "theme",
-        get: () => prefs.theme,
+  /**
+   * @param {string} id
+   * @returns {{ get: () => string, cycle?: () => void, toggle?: () => void }}
+   */
+  function fieldBinding(id) {
+    /** @type {Record<string, { get: () => string, cycle?: () => void, toggle?: () => void, help?: () => string }>} */
+    const map = {
+      theme: {
+        get: () => {
+          const tid = prefs.theme;
+          return `${themeLabel(tid)} (${tid})`;
+        },
         cycle() {
+          const themes = listThemeNames();
           const i = themes.indexOf(prefs.theme);
           prefs.theme = themes[(i + 1) % themes.length];
         },
+        help() {
+          return themeHelp(prefs.theme);
+        },
       },
-      {
-        id: "showHidden",
-        label: "showHidden",
+      showHidden: {
         get: () => String(prefs.showHidden),
         toggle() {
           prefs.showHidden = !prefs.showHidden;
         },
       },
-      {
-        id: "showKeyHints",
-        label: "showKeyHints",
+      showKeyHints: {
         get: () => String(prefs.showKeyHints),
         toggle() {
           prefs.showKeyHints = !prefs.showKeyHints;
         },
       },
-    ];
-  }
-
-  function buildConfigRows() {
-    rows = [
-      {
-        id: "confTarget",
-        label: "save target",
+      confTarget: {
         get: () => confTargets[confTargetIdx].label,
         cycle() {
           confTargetIdx = (confTargetIdx + 1) % confTargets.length;
         },
       },
-      {
-        id: "pathMode",
-        label: "pathMode",
+      pathMode: {
         get: () => String(model.pathMode ?? "relative"),
         cycle() {
           const modes = ["name", "relative", "absolute"];
@@ -162,45 +180,36 @@ export function openSettings(screen, theme, session, handlers) {
           model.pathMode = modes[(i + 1) % modes.length];
         },
       },
-      {
-        id: "output",
-        label: "output",
+      output: {
         get: () => String(model.output ?? "text"),
         cycle() {
           model.output = model.output === "json" ? "text" : "json";
           model.report.format = model.output;
         },
       },
-      {
-        id: "strict",
-        label: "strict",
+      strict: {
         get: () => String(Boolean(model.strict)),
         toggle() {
           model.strict = !model.strict;
         },
       },
-      {
-        id: "whenNoFlags",
-        label: "defaults.whenNoFlags",
+      whenNoFlags: {
         get: () => String(model.defaults?.whenNoFlags ?? "s01-all"),
         cycle() {
           const vals = ["s01-all", "none"];
           const cur = model.defaults.whenNoFlags ?? "s01-all";
-          model.defaults.whenNoFlags = vals[(vals.indexOf(cur) + 1) % vals.length];
+          model.defaults.whenNoFlags =
+            vals[(vals.indexOf(cur) + 1) % vals.length];
         },
       },
-      {
-        id: "report.style",
-        label: "report.style",
+      "report.style": {
         get: () => String(model.report?.style ?? "schematic"),
         cycle() {
           model.report.style =
             model.report.style === "plain" ? "schematic" : "plain";
         },
       },
-      {
-        id: "report.color",
-        label: "report.color",
+      "report.color": {
         get: () => String(model.report?.color ?? "auto"),
         cycle() {
           const vals = ["auto", "always", "never"];
@@ -208,25 +217,19 @@ export function openSettings(screen, theme, session, handlers) {
           model.report.color = vals[(vals.indexOf(cur) + 1) % vals.length];
         },
       },
-      {
-        id: "report.banner",
-        label: "report.banner",
+      "report.banner": {
         get: () => String(model.report?.banner !== false),
         toggle() {
           model.report.banner = model.report.banner === false;
         },
       },
-      {
-        id: "report.unicode",
-        label: "report.unicode",
+      "report.unicode": {
         get: () => String(model.report?.unicode !== false),
         toggle() {
           model.report.unicode = model.report.unicode === false;
         },
       },
-      {
-        id: "report.verbosity",
-        label: "report.verbosity",
+      "report.verbosity": {
         get: () => String(model.report?.verbosity ?? "normal"),
         cycle() {
           const vals = ["quiet", "normal", "verbose"];
@@ -234,25 +237,19 @@ export function openSettings(screen, theme, session, handlers) {
           model.report.verbosity = vals[(vals.indexOf(cur) + 1) % vals.length];
         },
       },
-      {
-        id: "ai.enabled",
-        label: "ai.enabled",
+      "ai.enabled": {
         get: () => String(Boolean(model.ai?.enabled)),
         toggle() {
           model.ai.enabled = !model.ai.enabled;
         },
       },
-      {
-        id: "ai.explain",
-        label: "ai.explain",
+      "ai.explain": {
         get: () => String(Boolean(model.ai?.explain)),
         toggle() {
           model.ai.explain = !model.ai.explain;
         },
       },
-      {
-        id: "ai.provider",
-        label: "ai.provider",
+      "ai.provider": {
         get: () => String(model.ai?.provider ?? "openai"),
         cycle() {
           const vals = ["openai", "mock"];
@@ -260,34 +257,112 @@ export function openSettings(screen, theme, session, handlers) {
           model.ai.provider = vals[(vals.indexOf(cur) + 1) % vals.length];
         },
       },
-    ];
+    };
 
-    for (const key of OPERATION_KEYS) {
-      rows.push({
-        id: `op.${key}`,
-        label: `operations.${key}`,
+    if (id.startsWith("op.")) {
+      const key = id.slice(3);
+      return {
         get: () => String(Boolean(model.operations?.[key])),
         toggle() {
           model.operations[key] = !model.operations[key];
         },
-      });
+      };
     }
+
+    return map[id] ?? { get: () => "" };
+  }
+
+  /**
+   * @param {ReturnType<typeof tuiSections>} sections
+   * @returns {Row[]}
+   */
+  function rowsFromSections(sections) {
+    /** @type {Row[]} */
+    const out = [];
+    for (const section of sections) {
+      out.push({
+        type: "section",
+        id: `sec:${section.id}`,
+        label: section.title,
+        help: section.help,
+      });
+      for (const field of section.fields) {
+        const bind = fieldBinding(field.id);
+        out.push({
+          type: "field",
+          id: field.id,
+          label: field.label,
+          help: field.help,
+          get: bind.get,
+          cycle: bind.cycle,
+          toggle: bind.toggle,
+          helpFn: bind.help,
+        });
+      }
+    }
+    return out;
+  }
+
+  function formatRow(row) {
+    if (row.type === "section") {
+      return `{${theme.header}-fg}{bold}── ${row.label} ──{/}  {${theme.dim}-fg}${row.help}{/}`;
+    }
+    const value = row.get ? row.get() : "";
+    const help = row.helpFn ? row.helpFn() : row.help;
+    const name = `  ${row.label}`;
+    return `${name.padEnd(22)} {${theme.accent}-fg}${value}{/}  {${theme.dim}-fg}${help}{/}`;
+  }
+
+  function updateHelp() {
+    const row = rows[body.selected];
+    if (!row) {
+      helpBox.setContent("");
+      return;
+    }
+    if (row.type === "section") {
+      helpBox.setContent(
+        `{${theme.header}-fg}блок:{/} ${row.label}  ·  ${row.help}`,
+      );
+      return;
+    }
+    const help = row.helpFn ? row.helpFn() : row.help;
+    helpBox.setContent(`{${theme.accent}-fg}${row.label}{/}  ·  ${help}`);
   }
 
   function refreshBody() {
-    if (tab === 0) buildTuiRows();
-    else buildConfigRows();
-    body.setItems(rows.map((r) => `${r.label.padEnd(28)} ${r.get()}`));
+    const prevId = rows[body.selected]?.id;
+    rows =
+      tab === 0
+        ? rowsFromSections(tuiSections())
+        : rowsFromSections(configSections());
+    body.setItems(rows.map(formatRow));
+    let idx = 0;
+    if (prevId) {
+      const found = rows.findIndex((r) => r.id === prevId);
+      if (found >= 0) idx = found;
+    }
+    // Prefer first field, not section header
+    if (rows[idx]?.type === "section") {
+      const next = rows.findIndex((r, i) => i >= idx && r.type === "field");
+      if (next >= 0) idx = next;
+    }
+    body.select(idx);
     refreshTabBar();
+    updateHelp();
     screen.render();
   }
 
   function editCurrent() {
     const row = rows[body.selected];
-    if (!row) return;
+    if (!row || row.type === "section") return;
     if (row.toggle) row.toggle();
     else if (row.cycle) row.cycle();
-    refreshBody();
+    else return;
+    const keep = body.selected;
+    body.setItems(rows.map(formatRow));
+    body.select(keep);
+    updateHelp();
+    screen.render();
   }
 
   function save() {
@@ -321,6 +396,7 @@ export function openSettings(screen, theme, session, handlers) {
   function cleanup() {
     body.detach();
     tabBar.detach();
+    helpBox.detach();
     footer.detach();
     box.detach();
     screen.render();
@@ -338,10 +414,49 @@ export function openSettings(screen, theme, session, handlers) {
   body.key(["space", "enter"], editCurrent);
   body.key(["w"], save);
   body.key(["escape"], close);
+
+  body.key(["down", "j"], () => {
+    setImmediate(() => {
+      if (rows[body.selected]?.type === "section") {
+        for (let i = body.selected + 1; i < rows.length; i += 1) {
+          if (rows[i].type === "field") {
+            body.select(i);
+            break;
+          }
+        }
+      }
+      updateHelp();
+      screen.render();
+    });
+  });
+
+  body.key(["up", "k"], () => {
+    setImmediate(() => {
+      if (rows[body.selected]?.type === "section") {
+        for (let i = body.selected - 1; i >= 0; i -= 1) {
+          if (rows[i].type === "field") {
+            body.select(i);
+            break;
+          }
+        }
+      }
+      updateHelp();
+      screen.render();
+    });
+  });
+
   box.key(["escape"], close);
   box.key(["tab"], () => {
     tab = tab === 0 ? 1 : 0;
     refreshBody();
+  });
+
+  // Mouse hover / click selection → refresh help line
+  body.on("mousemove", () => {
+    setImmediate(() => {
+      updateHelp();
+      screen.render();
+    });
   });
 
   refreshBody();

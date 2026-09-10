@@ -1,6 +1,6 @@
 ---
 title: S08 — TUI и поверхности
-status: review
+status: accepted
 mvp: false
 source: .dep/.blueprint/50-user/tui
 ---
@@ -10,7 +10,7 @@ source: .dep/.blueprint/50-user/tui
 | Поле | Значение |
 |------|----------|
 | **ID** | S08 |
-| **Статус** | `в работе` / реализация готова к approve |
+| **Статус** | `завершено` |
 | **dependsOn** | S07 |
 
 ## Цель / границы
@@ -40,7 +40,7 @@ source: .dep/.blueprint/50-user/tui
 | S08-A | Спека TUI + public API surface | `завершено` |
 | S08-B | TUI MVP | `завершено` |
 | S08-C | Контракты future surfaces | `завершено` |
-| S08-D | Тесты / smoke / approve | `завершено` (ожидает approve владельца → S09) |
+| S08-D | Тесты / smoke / approve | `завершено` |
 
 ## Задачи
 
@@ -52,7 +52,7 @@ source: .dep/.blueprint/50-user/tui
 | S08-004 | TUI: запуск ops + configurator | высокий | S08-003 | `завершено` |
 | S08-005 | TUI: save / presentation результатов | средний | S08-003 | `завершено` |
 | S08-006 | Контракты REST / library / IDE hook (docs + stubs) | средний | S08-002 | `завершено` |
-| S08-007 | Smoke-тесты TUI + approve | высокий | S08-004…006 | `завершено` (код/тесты; approve — владельцем) |
+| S08-007 | Smoke-тесты TUI + approve | высокий | S08-004…006 | `завершено` |
 
 ## Чеклист этапа
 
@@ -60,10 +60,30 @@ source: .dep/.blueprint/50-user/tui
 - [x] S08-B: TUI MVP (results + ops + configurator)
 - [x] S08-C: контракты future surfaces задокументированы
 - [x] S08-D: smoke + approve
-- [ ] Exit criteria: approve владельца → S09
+- [x] Exit criteria выполнены
+
+## Реализация (факт)
+
+```
+src/api/          public facade (analyze, formatText, config R/W, listOperations)
+src/tui/          neo-blessed TUI
+  bridge.js       только src/api
+  screens/        file tree (Devicons)
+  popups/         inspector-picker, text-result, settings (+ config-schema)
+  theme.js        цветовые схемы
+  mouse.js        wheel / hover
+docs/50-tui/      UX + future surfaces
+docs/20-architecture/public-api.md
+docs/50-cli/s08-flags.md
+tests/s08-*.test.js
+```
+
+Entrypoint: `dependra --tui` | `-t` | `tui`. Версия пакета: `0.0.47` (без bump).
+
+Доработки после MVP-каркаса (в рамках S08): мышь/свайп, дерево+Devicons, configurator по блокам с описаниями, набор цветовых схем.
 
 ## Exit criteria
 
 1. TUI использует только public API (не внутренности инспекторов). — **сделано** (`src/tui/bridge.js` → `src/api`)
 2. Future surfaces описаны контрактами без обязательной полной реализации. — **сделано**
-3. Approve → S09. — **ожидает владельца**
+3. Approve → S09. — **сделано** (закрыто владельцем)

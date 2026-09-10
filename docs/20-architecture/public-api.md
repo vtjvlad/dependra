@@ -1,6 +1,6 @@
 ---
 title: Public API
-status: review
+status: accepted
 mvp: false
 source: handbook/roadmap/stages/08-tui-surfaces.md
 ---
@@ -40,6 +40,6 @@ TUI и внешние клиенты **не** импортируют `src/inspec
 
 ## Acceptance criteria
 
-- [ ] TUI зависит только от `src/api`
-- [ ] `serializeConf` + `parseConf` round-trip сохраняет известные ключи
-- [ ] `package.json` экспортирует API
+- [x] TUI зависит только от `src/api`
+- [x] `serializeConf` + `parseConf` round-trip сохраняет известные ключи
+- [x] `package.json` экспортирует API

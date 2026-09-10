@@ -5,10 +5,11 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { dirname, join } from "node:path";
+import { isThemeName } from "../theme.js";
 
 /**
  * @typedef {object} TuiPrefs
- * @property {"default"|"dim"} theme
+ * @property {string} theme
  * @property {boolean} showHidden
  * @property {boolean} showKeyHints
  */
@@ -43,8 +44,12 @@ export function loadTuiPrefs() {
   if (!existsSync(path)) return base;
   try {
     const raw = JSON.parse(readFileSync(path, "utf8"));
+    const theme =
+      typeof raw.theme === "string" && isThemeName(raw.theme)
+        ? raw.theme
+        : "default";
     return {
-      theme: raw.theme === "dim" ? "dim" : "default",
+      theme,
       showHidden: Boolean(raw.showHidden),
       showKeyHints: raw.showKeyHints !== false,
     };

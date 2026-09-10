@@ -1,6 +1,6 @@
 ---
 title: CLI flags (S08 TUI)
-status: review
+status: accepted
 mvp: false
 source: docs/50-tui/overview.md
 ---

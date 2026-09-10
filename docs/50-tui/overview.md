@@ -1,6 +1,6 @@
 ---
 title: TUI (S08)
-status: review
+status: accepted
 mvp: false
 source: .dep/.blueprint/50-user/tui, handbook/roadmap/stages/08-tui-surfaces.md
 ---
@@ -15,12 +15,13 @@ source: .dep/.blueprint/50-user/tui, handbook/roadmap/stages/08-tui-surfaces.md
 
 ### Входит
 
-- File browser (список/дерево проекта)
-- Vim-like клавиши
+- File browser: раскрываемое **дерево** проекта с иконками **Devicons** (`devicons` + Nerd Fonts `nf-dev-*`)
+- Vim-like клавиши + мышь (wheel / hover)
 - Попап выбора операций (инспекторов) при выборе файла
 - Попап текстового отчёта
-- Попап настроек: TUI prefs + полный configurator `dependra.conf`
+- Попап настроек: TUI prefs (темы) + configurator `dependra.conf` (блоки + описания)
 - Запуск только через `src/api` (не internals инспекторов)
+- Контракты future surfaces (docs)
 
 ### Не входит
 
@@ -42,8 +43,9 @@ dependra tui
 
 | Элемент | Поведение |
 |---------|-----------|
-| Главный экран | Список файлов от project root (ncdu/mc-стиль) |
+| Главный экран | **Дерево проекта** (раскрываемые каталоги, иконки типов файлов) |
 | Выбор файла | `Enter` → попап multi-select операций → Run |
+| Каталог | `Enter` / `Space` / `l` — раскрыть; `h` — свернуть / к родителю |
 | Результаты | Scrollable text-попап (`formatText(report)`) |
 | Настройки | `s` или `:settings` → вкладки TUI / Configurator |
 | Выход | `q` |
@@ -53,8 +55,10 @@ dependra tui
 | Клавиша | Действие |
 |---------|----------|
 | `hjkl` / стрелки / **мышь** | Навигация; колесо и touchpad-свайп — прокрутка; hover подсвечивает строку |
-| `Enter` | Выбрать файл → inspector picker |
-| `/` | Фильтр/поиск по списку |
+| `Enter` / `Space` | Файл → inspector picker; каталог → раскрыть/свернуть |
+| `l` / `→` | Раскрыть каталог / войти в первую дочернюю строку |
+| `h` / `←` | Свернуть каталог / перейти к родителю |
+| `/` | Фильтр/поиск по дереву |
 | `:` | Command line (`settings`, `q`, `quit`) |
 | `s` | Settings popup |
 | `Esc` | Закрыть попап / отменить command |
@@ -66,6 +70,7 @@ dependra tui
 ## Стек
 
 - `neo-blessed` — виджеты и модалки
+- `devicons` + `@m234/nerd-fonts` — иконки дерева
 - Код: `src/tui/`, bridge только к `src/api`
 
 ## TUI prefs
@@ -74,13 +79,17 @@ dependra tui
 
 | Ключ | Тип | Default | Описание |
 |------|-----|---------|----------|
-| `theme` | `"default"` \| `"dim"` | `"default"` | Палитра рамок/focus |
+| `theme` | string | `"default"` | Цветовая схема: `default`, `dim`, `ocean`, `forest`, `amber`, `slate`, `crimson`, `nord`, `mono`, `paper` |
 | `showHidden` | bool | `false` | Показывать скрытые файлы/каталоги |
 | `showKeyHints` | bool | `true` | Строка подсказок внизу |
 
+## Configurator
+
+Вкладка Config: параметры сгруппированы по блокам (Сохранение, Общие, Defaults, Отчёт, AI, Операции·анализ, Операции·модификации) с краткими описаниями блока и каждого ключа. Запись через `serializeConf` / `saveConf`.
+
 ## Acceptance criteria
 
-- [ ] TUI не импортирует `src/inspectors/*` / `src/parsers/*` напрямую
-- [ ] Выбор файла открывает picker операций
-- [ ] Отчёт показывается текстом в попапе
-- [ ] Settings сохраняет TUI prefs и `dependra.conf`
+- [x] TUI не импортирует `src/inspectors/*` / `src/parsers/*` напрямую
+- [x] Выбор файла открывает picker операций
+- [x] Отчёт показывается текстом в попапе
+- [x] Settings сохраняет TUI prefs и `dependra.conf`

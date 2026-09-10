@@ -28,7 +28,9 @@
     "test": "node --test tests/**/*.test.js"
   },
   "dependencies": {
+    "@m234/nerd-fonts": "^0.5.2",
     "acorn": "^8.18.0",
+    "devicons": "^2.0.1",
     "neo-blessed": "^0.2.0"
   }
 }

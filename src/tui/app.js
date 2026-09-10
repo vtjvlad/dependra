@@ -76,7 +76,7 @@ export async function startApp(opts = {}) {
     tags: true,
     style: { fg: theme.dim, bg: theme.bg },
     content: session.prefs.showKeyHints
-      ? `{${theme.dim}-fg}hjkl/mouse navigate · Enter open · / filter · s settings · : cmd · q quit{/}`
+      ? `{${theme.dim}-fg}hjkl/mouse · Enter/Space expand · / filter · s settings · q quit{/}`
       : "",
   });
 
@@ -166,14 +166,23 @@ export async function startApp(opts = {}) {
     activePopup = openSettings(screen, theme, session, {
       onSaved() {
         theme = getTheme(session.prefs.theme);
+        status.style.fg = theme.dim;
+        status.style.bg = theme.bg;
+        hints.style.fg = theme.dim;
+        hints.style.bg = theme.bg;
         hints.setContent(
           session.prefs.showKeyHints
-            ? `{${theme.dim}-fg}hjkl/mouse navigate · Enter open · / filter · s settings · : cmd · q quit{/}`
+            ? `{${theme.dim}-fg}hjkl/mouse · Enter/Space expand · / filter · s settings · q quit{/}`
             : "",
         );
         hints.height = session.prefs.showKeyHints ? 1 : 0;
         status.bottom = session.prefs.showKeyHints ? 1 : 0;
-        browser.refresh();
+        if (typeof browser.applyTheme === "function") {
+          browser.applyTheme(theme);
+        } else {
+          browser.refresh();
+        }
+        screen.render();
       },
       onClose() {
         closePopup();
