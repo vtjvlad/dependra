@@ -34,7 +34,7 @@ source: .dep/.blueprint/20-features
 
 ## Пользовательский UI
 
-TUI и blueprint `50-user/tui` → этап **[S08](../../../handbook/roadmap/stages/08-tui-surfaces.md)**.  
+TUI → **[S08](../../../handbook/roadmap/stages/08-tui-surfaces.md)** / спека [`docs/50-tui/`](../../50-tui/overview.md).  
 CLI MVP — в [docs/50-cli](../../50-cli/interface.md) (S01).
 
 ## Прочее (вне feature-таблицы)

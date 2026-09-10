@@ -15,7 +15,9 @@ source: .dep/.blueprint/30-architecture/requirements/project-structure.md
 
 ```
 src/
+├── api/           # public surface (S08)
 ├── cli/
+├── tui/           # neo-blessed TUI (S08)
 ├── core/
 ├── scanner/
 ├── inspectors/
@@ -28,6 +30,8 @@ src/
 ├── runtime/
 ├── plugins/
 ├── reporters/
+├── modifications/
+├── config/
 ├── cache/
 ├── utils/
 └── types/

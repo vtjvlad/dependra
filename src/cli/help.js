@@ -44,6 +44,7 @@ export function formatHelp(opts = {}) {
       "usage",
       [
         `${pal.cyan("→")}  ${pal.bold("dependra")} ${pal.dim("<file>")} ${pal.dim("[options]")}`,
+        `${pal.cyan("→")}  ${pal.bold("dependra")} ${pal.cyan("--tui")}${pal.dim("|")}${pal.cyan("-t")}${pal.dim("|tui")}`,
         `${pal.cyan("→")}  ${pal.bold("fds")}${pal.dim("|")}${pal.bold("deps")}${pal.dim("|")}${pal.bold("dep")} ${pal.dim("<file> [options]")}`,
         `${pal.cyan("→")}  node src/cli/index.js ${pal.dim("<file> [options]")}`,
       ],
@@ -201,6 +202,7 @@ export function formatHelp(opts = {}) {
     ...frameSection(
       "meta",
       [
+        flagRow("-t, --tui", "интерактивный TUI", col, pal),
         flagRow("-h, --help", "эта справка", col, pal),
         flagRow("-v, --version", `Dependra v${PACKAGE_VERSION}`, col, pal),
       ],
@@ -216,6 +218,7 @@ export function formatHelp(opts = {}) {
         `${pal.dim("$")} dependra src/app.js`,
         `${pal.dim("$")} dependra src/app.js ${pal.cyan("-g")} ${pal.cyan("-p")} name`,
         `${pal.dim("$")} dependra src/app.js ${pal.cyan("-i")} ${pal.cyan("-e")} ${pal.cyan("-j")}`,
+        `${pal.dim("$")} dependra ${pal.cyan("--tui")}`,
       ],
       pal,
     ),

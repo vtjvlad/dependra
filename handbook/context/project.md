@@ -23,7 +23,7 @@ source: .dep/.blueprint/90-context/project-context-spec.md
 | Ограничения проекта | Accepted | [limitations.md](../../docs/20-architecture/limitations.md) |
 | MVP scope | Accepted, S01 реализован | [mvp-scope.md](../../docs/20-features/mvp-scope.md) |
 | Полный roadmap (S01–S11) | S01–S07 `завершено` | [roadmap](../roadmap/README.md), [todo-checklist](../roadmap/todo-checklist.md) |
-| Текущие договорённости | Актуальны | S01–S07 `завершено`; активен **S08**; пакет = `0.0.47` |
+| Текущие договорённости | Актуальны | S01–S07 `завершено`; S08 реализация готова (approve → S09); пакет = `0.0.47` |
 | Долгосрочные цели | В roadmap | [stages S02–S11](../roadmap/stages/README.md) |
 | Особенности реализации | Задокументировано | раздел ниже |
 | Требования к качеству | `npm test` (13 AC) | `tests/mvp-*.test.js`, `tests/fixtures/mvp/` |

@@ -109,10 +109,10 @@ source: .dep/.blueprint/80-roadmap/development-sequence.md, 00-project/main-rule
 
 ## S08 — TUI и поверхности
 
-1. Спека TUI над core API
-2. TUI MVP
-3. Контракты future surfaces (Web/REST/IDE) без полной реализации всех UI
-4. Approve
+1. Спека TUI над core API — **сделано**
+2. TUI MVP — **сделано** (`neo-blessed`, `--tui` / `-t` / `tui`)
+3. Контракты future surfaces (Web/REST/IDE) без полной реализации всех UI — **сделано**
+4. Approve — ожидает владельца
 
 ## S09 — Multi-language
 
