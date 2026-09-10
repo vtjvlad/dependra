@@ -28,6 +28,12 @@ function peekTargetPath(argv) {
     "-pr",
     "--config",
     "-cf",
+    "--undo-session",
+    "--change",
+    "--changes",
+    "--pm",
+    "--install-package",
+    "--aim-instruction",
   ]);
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
@@ -161,6 +167,9 @@ export function resolveCli(argv, env = {}) {
   if (parsed.options.explain) {
     parsed.options.quality = true;
   }
+
+  // Mutate-only / undo: never leave empty analysis with accidental s01 from conf none —
+  // already handled via sawAnyOp. Apply/dry-run stay CLI-only (not from conf).
 
   return { ...parsed, warnings };
 }

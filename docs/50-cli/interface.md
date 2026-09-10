@@ -9,7 +9,7 @@ source: .dep/.blueprint/50-user/cli-flags.md
 
 ## Цель
 
-Минимальный командный интерфейс для запуска MVP-операций. Версия пакета: `0.0.39`.
+Минимальный командный интерфейс для запуска MVP-операций. Версия пакета: `0.0.47`.
 
 ## Entrypoint
 
@@ -45,7 +45,7 @@ dependra|fds|deps|dep <file> [options]
 | `--json` | `-j` | Вывод JSON вместо текста |
 | `--path-mode <name\|relative\|absolute>` | `-p <…>` | Режим путей для graph (default: `relative`) |
 | `--help` | `-h` | Справка |
-| `--version` | `-v` | Версия пакета: `Dependra v0.0.39` |
+| `--version` | `-v` | Версия пакета: `Dependra v0.0.47` |
 
 ### Короткие флаги
 
@@ -63,7 +63,7 @@ dependra|fds|deps|dep <file> [options]
 
 **Не в MVP / не в S01:** `--level` (см. [analysis-levels.md](../40-development/analysis-levels.md); реализация сахара — S05 / [s05-flags.md](s05-flags.md)).
 
-Расширения следующих этапов: [s02-flags.md](s02-flags.md), [s03-flags.md](s03-flags.md), [s04-flags.md](s04-flags.md), [s05-flags.md](s05-flags.md), [s06-flags.md](s06-flags.md).
+Расширения следующих этапов: [s02-flags.md](s02-flags.md), [s03-flags.md](s03-flags.md), [s04-flags.md](s04-flags.md), [s05-flags.md](s05-flags.md), [s06-flags.md](s06-flags.md), [s07-flags.md](s07-flags.md).
 
 Если не указан ни один из `--basic|-b|--imports|-i|--exports|-e|--graph|-g`, по умолчанию: **все четыре операции S01**.  
 Операции S02+ в default-all **не** входят (только явный флаг).
@@ -141,7 +141,7 @@ dependra|fds|deps|dep <file> [options]
 - [ ] Каждый флаг операции включает только свою **секцию отчёта** (кроме default-all)
 - [ ] `--imports` и `--exports` дают один ключ `import-export-analysis` с отфильтрованным `data`
 - [ ] `--graph` без `--imports` не добавляет import-export в `results`, но reverse/forward graph работает
-- [ ] `--version` / `-v` печатает `Dependra v0.0.39`
+- [ ] `--version` / `-v` печатает `Dependra v0.0.47`
 - [ ] `--json` / `-j` даёт валидный JSON по схеме отчёта
 - [ ] Короткие флаги `-b|-i|-e|-g|-j|-p` эквивалентны long-формам
 - [ ] Алгоритм short: при коллизии — вторая буква; S01 short стабильны (см. S02 `-en`)

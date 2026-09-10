@@ -28,6 +28,15 @@ export const OPERATION_KEYS = [
   "vizJson",
   "metadata",
   "quality",
+  // S07 mutate ops (OR from conf; never in --level)
+  "format",
+  "sortImports",
+  "fixImports",
+  "fixExports",
+  "stripComments",
+  "commentBanner",
+  "installDeps",
+  "aiModify",
 ];
 
 /**

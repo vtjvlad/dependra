@@ -1,5 +1,5 @@
 /**
- * Разбор argv CLI (docs/50-cli/interface.md, s02–s06-flags.md).
+ * Разбор argv CLI (docs/50-cli/interface.md, s02–s07-flags.md).
  *
  * @typedef {import('../core/types.js').AnalysisOptions} AnalysisOptions
  *
@@ -13,9 +13,61 @@
  * @property {string|null} [profileArg]
  * @property {number|null} [levelArg]
  * @property {boolean} [sawAnyOp]
+ * @property {boolean} [sawMutateOp]
  */
 
 const PATH_MODES = new Set(["name", "relative", "absolute"]);
+
+/**
+ * @returns {AnalysisOptions}
+ */
+function emptyOptions() {
+  return {
+    basic: false,
+    imports: false,
+    exports: false,
+    graph: false,
+    additional: false,
+    entities: false,
+    validate: false,
+    environment: false,
+    commands: false,
+    envCheck: false,
+    runtime: false,
+    io: false,
+    mermaid: false,
+    graphviz: false,
+    vizJson: false,
+    metadata: false,
+    quality: false,
+    explain: false,
+    format: false,
+    sortImports: false,
+    fixImports: false,
+    fixExports: false,
+    stripComments: false,
+    commentBanner: false,
+    installDeps: false,
+    aiModify: false,
+    apply: false,
+    dryRun: false,
+    backup: false,
+    noBackup: false,
+    undo: false,
+    undoSession: null,
+    changeIds: [],
+    pm: null,
+    installPackage: null,
+    aimInstruction: null,
+    json: false,
+    pathMode: "relative",
+    level: null,
+    profile: null,
+    configPath: null,
+    report: null,
+    ai: null,
+  };
+}
 
 /**
  * @param {string[]} argv process.argv.slice(2)
@@ -30,38 +82,13 @@ export function parseArgs(argv, opts = {}) {
     help: false,
     version: false,
     targetPath: null,
-    options: {
-      basic: false,
-      imports: false,
-      exports: false,
-      graph: false,
-      additional: false,
-      entities: false,
-      validate: false,
-      environment: false,
-      commands: false,
-      envCheck: false,
-      runtime: false,
-      io: false,
-      mermaid: false,
-      graphviz: false,
-      vizJson: false,
-      metadata: false,
-      quality: false,
-      explain: false,
-      json: false,
-      pathMode: "relative",
-      level: null,
-      profile: null,
-      configPath: null,
-      report: null,
-      ai: null,
-    },
+    options: emptyOptions(),
     error: null,
     configPathArg: null,
     profileArg: null,
     levelArg: null,
     sawAnyOp: false,
+    sawMutateOp: false,
   };
 
   let sawS01Op = false;
@@ -70,6 +97,7 @@ export function parseArgs(argv, opts = {}) {
   let sawS04Op = false;
   let sawS05Op = false;
   let sawS06Op = false;
+  let sawMutateOp = false;
 
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
@@ -172,6 +200,138 @@ export function parseArgs(argv, opts = {}) {
       sawS06Op = true;
       continue;
     }
+    // --- S07 mutate ---
+    if (arg === "--format" || arg === "-f") {
+      result.options.format = true;
+      sawMutateOp = true;
+      continue;
+    }
+    if (arg === "--sort-imports" || arg === "-si") {
+      result.options.sortImports = true;
+      sawMutateOp = true;
+      continue;
+    }
+    if (arg === "--fix-imports" || arg === "-fi") {
+      result.options.fixImports = true;
+      sawMutateOp = true;
+      continue;
+    }
+    if (arg === "--fix-exports" || arg === "-fe") {
+      result.options.fixExports = true;
+      sawMutateOp = true;
+      continue;
+    }
+    if (arg === "--strip-comments" || arg === "-sc") {
+      result.options.stripComments = true;
+      sawMutateOp = true;
+      continue;
+    }
+    if (arg === "--comment-banner" || arg === "-cb") {
+      result.options.commentBanner = true;
+      sawMutateOp = true;
+      continue;
+    }
+    if (arg === "--install-deps" || arg === "-id") {
+      result.options.installDeps = true;
+      sawMutateOp = true;
+      continue;
+    }
+    if (arg === "--ai-modify" || arg === "-am") {
+      result.options.aiModify = true;
+      sawMutateOp = true;
+      continue;
+    }
+    if (arg === "--apply" || arg === "-ap") {
+      result.options.apply = true;
+      continue;
+    }
+    if (arg === "--dry-run" || arg === "-dr") {
+      result.options.dryRun = true;
+      continue;
+    }
+    if (arg === "--backup" || arg === "-bk") {
+      result.options.backup = true;
+      continue;
+    }
+    if (arg === "--no-backup") {
+      result.options.noBackup = true;
+      continue;
+    }
+    if (arg === "--undo" || arg === "-u") {
+      result.options.undo = true;
+      continue;
+    }
+    if (arg === "--undo-session") {
+      const value = argv[i + 1];
+      if (!value || value.startsWith("-")) {
+        result.error = "Флаг --undo-session требует <id>";
+        return result;
+      }
+      result.options.undo = true;
+      result.options.undoSession = value;
+      i += 1;
+      continue;
+    }
+    if (arg === "--change") {
+      const value = argv[i + 1];
+      if (!value || value.startsWith("-")) {
+        result.error = "Флаг --change требует <id>";
+        return result;
+      }
+      result.options.changeIds = result.options.changeIds ?? [];
+      result.options.changeIds.push(value);
+      i += 1;
+      continue;
+    }
+    if (arg === "--changes") {
+      const value = argv[i + 1];
+      if (!value || value.startsWith("-")) {
+        result.error = "Флаг --changes требует <id,id,…>";
+        return result;
+      }
+      result.options.changeIds = result.options.changeIds ?? [];
+      for (const id of value.split(",").map((s) => s.trim()).filter(Boolean)) {
+        result.options.changeIds.push(id);
+      }
+      i += 1;
+      continue;
+    }
+    if (arg === "--pm") {
+      const value = argv[i + 1];
+      if (!value || value.startsWith("-")) {
+        result.error = "Флаг --pm требует npm|pnpm|yarn|bun";
+        return result;
+      }
+      if (!["npm", "pnpm", "yarn", "bun"].includes(value)) {
+        result.error = `Неизвестный --pm: ${value}`;
+        return result;
+      }
+      result.options.pm = value;
+      i += 1;
+      continue;
+    }
+    if (arg === "--install-package") {
+      const value = argv[i + 1];
+      if (!value || value.startsWith("-")) {
+        result.error = "Флаг --install-package требует <name>";
+        return result;
+      }
+      result.options.installPackage = value;
+      result.options.installDeps = true;
+      sawMutateOp = true;
+      i += 1;
+      continue;
+    }
+    if (arg === "--aim-instruction") {
+      const value = argv[i + 1];
+      if (!value || value.startsWith("-")) {
+        result.error = "Флаг --aim-instruction требует <text>";
+        return result;
+      }
+      result.options.aimInstruction = value;
+      i += 1;
+      continue;
+    }
     if (arg === "--json" || arg === "-j") {
       result.options.json = true;
       continue;
@@ -242,11 +402,19 @@ export function parseArgs(argv, opts = {}) {
     result.targetPath = arg;
   }
 
-  const sawAnyOp =
+  const sawAnalysisOp =
     sawS01Op || sawS02Op || sawS03Op || sawS04Op || sawS05Op || sawS06Op;
-  result.sawAnyOp = sawAnyOp;
+  result.sawMutateOp = sawMutateOp;
+  // sawAnyOp includes analysis ops only for default-all purposes;
+  // mutate-only / undo / safety flags must NOT expand S01 default-all
+  const sawSafety =
+    result.options.apply ||
+    result.options.dryRun ||
+    result.options.backup ||
+    result.options.undo;
+  result.sawAnyOp = sawAnalysisOp || sawMutateOp || sawSafety;
 
-  if (!skipDefaultAll && !sawAnyOp) {
+  if (!skipDefaultAll && !sawAnalysisOp && !sawMutateOp && !sawSafety) {
     result.options.basic = true;
     result.options.imports = true;
     result.options.exports = true;

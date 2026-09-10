@@ -828,6 +828,61 @@ function formatAiExplainSection(result, pal) {
 }
 
 /**
+ * @param {InspectorResult} result
+ * @param {Palette} pal
+ * @returns {string[]}
+ */
+function formatModificationSection(result, pal) {
+  if (result.status === "error") {
+    return frameSection(
+      "modification",
+      [pal.red(`✖ ${result.error?.code}: ${result.error?.message}`)],
+      pal,
+    );
+  }
+  const d = result.data ?? {};
+  /** @type {string[]} */
+  const body = [
+    `${pal.dim("mode")}     ${d.mode ?? "—"}`,
+    `${pal.dim("summary")}  proposed ${d.summary?.proposed ?? 0} · applied ${d.summary?.applied ?? 0} · failed ${d.summary?.failed ?? 0}`,
+  ];
+  if (d.backup?.sessionId) {
+    body.push(
+      `${pal.dim("backup")}   ${d.backup.sessionId}  ${pal.dim(d.backup.dir ?? "")}`,
+    );
+  }
+  const changes = Array.isArray(d.changes) ? d.changes : [];
+  if (changes.length === 0) {
+    body.push(pal.dim("∅  no changes"));
+  } else {
+    body.push("");
+    for (const c of changes.slice(0, 40)) {
+      const mark = c.skippedReason
+        ? pal.yellow("·")
+        : c.selected === false
+          ? pal.dim("·")
+          : pal.cyan("→");
+      const risk =
+        c.risk === "dangerous"
+          ? pal.red("dangerous")
+          : c.risk === "caution"
+            ? pal.yellow("caution")
+            : pal.dim("safe");
+      body.push(
+        `${mark}  ${pal.bold(c.id)}  ${c.op}  ${risk}  ${c.summary ?? ""}`,
+      );
+      if (c.skippedReason) {
+        body.push(pal.dim(`     skip: ${c.skippedReason}`));
+      }
+    }
+    if (changes.length > 40) {
+      body.push(pal.dim(`… +${changes.length - 40} more`));
+    }
+  }
+  return frameSection("modification", body, pal);
+}
+
+/**
  * Resolve color from report config.
  * @param {{ color?: boolean }} styleOpts
  * @param {object|null|undefined} reportCfg
@@ -975,6 +1030,23 @@ export function formatTextReport(report, styleOpts = {}) {
   const aiExplain = report.results["ai-explain"];
   if (opts.explain && aiExplain) {
     push("ai-explain", formatAiExplainSection(aiExplain, pal));
+  }
+
+  const modification = report.results.modification;
+  const wantMod =
+    opts.format ||
+    opts.sortImports ||
+    opts.fixImports ||
+    opts.fixExports ||
+    opts.stripComments ||
+    opts.commentBanner ||
+    opts.installDeps ||
+    opts.aiModify ||
+    opts.undo ||
+    opts.apply ||
+    opts.dryRun;
+  if (wantMod && modification) {
+    push("modification", formatModificationSection(modification, pal));
   }
 
   if (report.prerequisiteErrors?.length) {

@@ -11,7 +11,7 @@ source: handbook/roadmap/stages/06-quality-ai.md, docs/50-cli/interface.md
 
 Зафиксировать operation-флаги этапа **S06** (quality F + AI explain I) в правилах S01–S05: long/short, pipeline/`results`, schematic help/text.
 
-Версия пакета остаётся `0.0.39` (не повышать без approve).
+Версия пакета остаётся `0.0.47` (не повышать без approve).
 
 ## Правила short
 

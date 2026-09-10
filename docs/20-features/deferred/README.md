@@ -25,11 +25,12 @@ source: .dep/.blueprint/20-features
 | visualization | E | [S05](../../../handbook/roadmap/stages/05-visualization-config.md) | Спека: [analysis/visualization.md](../analysis/visualization.md); CLI: [s05-flags.md](../../50-cli/s05-flags.md); `-m`/`-gr`/`-vj` |
 | metadata | U | [S05](../../../handbook/roadmap/stages/05-visualization-config.md) | Спека: [analysis/metadata.md](../analysis/metadata.md); short `-me` |
 | code-quality-analysis | F | [S06](../../../handbook/roadmap/stages/06-quality-ai.md) | Спека: [analysis/code-quality-analysis.md](../analysis/code-quality-analysis.md); CLI: [s06-flags.md](../../50-cli/s06-flags.md); short `-q` |
-| file-enhancement-functions | E/I/F | [S07](../../../handbook/roadmap/stages/07-modifications.md) | Усовершенствование (обзор) |
+| file-enhancement-functions | E/I/F | [S07](../../../handbook/roadmap/stages/07-modifications.md) | Спека: [modifications/README.md](../modifications/README.md); CLI: [s07-flags.md](../../50-cli/s07-flags.md) |
 
 ## Модификации
 
-Вся подсистема [modifications/](../../../.dep/.blueprint/20-features/modifications/README.md) → этап **[S07](../../../handbook/roadmap/stages/07-modifications.md)** (safety, AI mods, imports/exports ops, comments, environment, …).
+Подсистема [modifications/](../../../.dep/.blueprint/20-features/modifications/README.md) → этап **[S07](../../../handbook/roadmap/stages/07-modifications.md)**.  
+Рабочие спеки: [`docs/20-features/modifications/`](../modifications/README.md) (safety, code/imports/env/comments ops, AI mods); CLI: [s07-flags.md](../../50-cli/s07-flags.md).
 
 ## Пользовательский UI
 

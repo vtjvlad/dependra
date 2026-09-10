@@ -20,6 +20,24 @@
  * @property {boolean} metadata
  * @property {boolean} quality
  * @property {boolean} explain
+ * @property {boolean} format
+ * @property {boolean} sortImports
+ * @property {boolean} fixImports
+ * @property {boolean} fixExports
+ * @property {boolean} stripComments
+ * @property {boolean} commentBanner
+ * @property {boolean} installDeps
+ * @property {boolean} aiModify
+ * @property {boolean} apply
+ * @property {boolean} dryRun
+ * @property {boolean} backup
+ * @property {boolean} noBackup
+ * @property {boolean} undo
+ * @property {string|null} [undoSession]
+ * @property {string[]} [changeIds]
+ * @property {string|null} [pm]
+ * @property {string|null} [installPackage]
+ * @property {string|null} [aimInstruction]
  * @property {boolean} json
  * @property {"name"|"relative"|"absolute"} pathMode
  * @property {number|null} [level]

@@ -1,6 +1,7 @@
 import { getInspector } from "./registry.js";
 import { ensureTargetSourceFile, ParserError } from "../parsers/index.js";
 import { runAiExplain } from "../ai/explain.js";
+import { hasMutateOp, runModifications } from "../modifications/index.js";
 import { PACKAGE_VERSION } from "../version.js";
 
 /**
@@ -98,7 +99,9 @@ export async function runPipeline(ctx) {
     options.validate ||
     options.mermaid ||
     options.graphviz ||
-    options.vizJson;
+    options.vizJson ||
+    options.fixImports ||
+    options.fixExports;
   const reportImportExport = options.imports || options.exports;
   const needAst = needImportExport || options.entities || options.io;
   const needViz =
@@ -130,7 +133,7 @@ export async function runPipeline(ctx) {
       importExportResult = parserErrorResult(ID_IMPORT_EXPORT, loadError);
       if (reportImportExport) {
         results[ID_IMPORT_EXPORT] = importExportResult;
-      } else if (options.graph || options.validate || needViz) {
+      } else if (options.graph || options.validate || needViz || options.fixImports || options.fixExports) {
         prerequisiteErrors.push(
           `${ID_IMPORT_EXPORT}: ${loadError.message}`,
         );
@@ -150,7 +153,7 @@ export async function runPipeline(ctx) {
           data,
         };
       } else if (
-        (options.graph || options.validate || needViz) &&
+        (options.graph || options.validate || needViz || options.fixImports || options.fixExports) &&
         importExportResult.status === "error"
       ) {
         prerequisiteErrors.push(
@@ -239,6 +242,17 @@ export async function runPipeline(ctx) {
     results[ID_AI_EXPLAIN] = await runAiExplain(ctx, results);
   }
 
+  const wantModification =
+    hasMutateOp(options) ||
+    options.undo ||
+    options.apply ||
+    options.dryRun ||
+    options.backup;
+
+  if (wantModification) {
+    results.modification = await runModifications(ctx, results);
+  }
+
   /** @type {AnalysisReport} */
   const report = {
     version: PACKAGE_VERSION,
@@ -263,6 +277,19 @@ export async function runPipeline(ctx) {
       metadata: Boolean(options.metadata),
       quality: Boolean(options.quality),
       explain: Boolean(options.explain),
+      format: Boolean(options.format),
+      sortImports: Boolean(options.sortImports),
+      fixImports: Boolean(options.fixImports),
+      fixExports: Boolean(options.fixExports),
+      stripComments: Boolean(options.stripComments),
+      commentBanner: Boolean(options.commentBanner),
+      installDeps: Boolean(options.installDeps),
+      aiModify: Boolean(options.aiModify),
+      apply: Boolean(options.apply),
+      dryRun: Boolean(options.dryRun),
+      backup: Boolean(options.backup),
+      noBackup: Boolean(options.noBackup),
+      undo: Boolean(options.undo),
       pathMode: options.pathMode,
       level: options.level ?? null,
       profile: options.profile ?? null,
