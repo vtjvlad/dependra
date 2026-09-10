@@ -4,6 +4,7 @@
 
 import { createRequire } from "node:module";
 import { getTheme } from "./theme.js";
+import { enableScreenMouse } from "./mouse.js";
 import { createFileBrowser } from "./screens/file-browser.js";
 import { openInspectorPicker } from "./popups/inspector-picker.js";
 import { openTextResult } from "./popups/text-result.js";
@@ -51,6 +52,7 @@ export async function startApp(opts = {}) {
     smartCSR: true,
     title: "dependra",
     fullUnicode: true,
+    mouse: true,
   });
   // Share blessed constructor with child widgets
   screen.__blessed = blessed;
@@ -74,7 +76,7 @@ export async function startApp(opts = {}) {
     tags: true,
     style: { fg: theme.dim, bg: theme.bg },
     content: session.prefs.showKeyHints
-      ? `{${theme.dim}-fg}hjkl navigate · Enter open · / filter · s settings · : cmd · q quit{/}`
+      ? `{${theme.dim}-fg}hjkl/mouse navigate · Enter open · / filter · s settings · : cmd · q quit{/}`
       : "",
   });
 
@@ -82,6 +84,22 @@ export async function startApp(opts = {}) {
     status.setContent(`{${theme.dim}-fg}${msg}{/}`);
     screen.render();
   }
+
+  let mouseSeen = false;
+  enableScreenMouse(screen, {
+    onMouse(data) {
+      if (mouseSeen) return;
+      if (
+        data.action === "wheelup" ||
+        data.action === "wheeldown" ||
+        data.action === "mousedown" ||
+        data.action === "mousemove"
+      ) {
+        mouseSeen = true;
+        setStatus(`mouse ok · ${data.action}`);
+      }
+    },
+  });
 
   function closePopup() {
     if (activePopup) {
@@ -150,7 +168,7 @@ export async function startApp(opts = {}) {
         theme = getTheme(session.prefs.theme);
         hints.setContent(
           session.prefs.showKeyHints
-            ? `{${theme.dim}-fg}hjkl navigate · Enter open · / filter · s settings · : cmd · q quit{/}`
+            ? `{${theme.dim}-fg}hjkl/mouse navigate · Enter open · / filter · s settings · : cmd · q quit{/}`
             : "",
         );
         hints.height = session.prefs.showKeyHints ? 1 : 0;

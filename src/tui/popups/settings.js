@@ -5,6 +5,7 @@
 import { listThemeNames } from "../theme.js";
 import { saveTuiPrefs } from "../state/session.js";
 import { join } from "node:path";
+import { wireListMouse } from "../mouse.js";
 import {
   OPERATION_KEYS,
   resolveUserConfPath,
@@ -78,12 +79,18 @@ export function openSettings(screen, theme, session, handlers) {
     vi: true,
     mouse: true,
     tags: true,
+    scrollbar: {
+      ch: "│",
+      style: { fg: theme.dim },
+    },
     style: {
       fg: theme.fg,
       bg: theme.popupBg,
       selected: { fg: theme.selectedFg, bg: theme.selectedBg },
     },
   });
+
+  wireListMouse(body, screen);
 
   const footer = blessed.box({
     parent: box,
@@ -92,7 +99,7 @@ export function openSettings(screen, theme, session, handlers) {
     right: 1,
     height: 1,
     tags: true,
-    content: `{${theme.dim}-fg}Tab switch · Space/Enter edit · w save · Esc close{/}`,
+    content: `{${theme.dim}-fg}Tab switch · Space/click edit · wheel scroll · w save · Esc close{/}`,
   });
 
   /** @type {{ id: string, label: string, get: () => string, cycle?: () => void, toggle?: () => void }[]} */

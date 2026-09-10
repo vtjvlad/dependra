@@ -2,10 +2,12 @@
  * Inspector / operation multi-select popup.
  */
 
+import { wireListMouse } from "../mouse.js";
+
 /**
  * @param {import('neo-blessed').Widgets.Screen} screen
  * @param {object} theme
- * @param {import('../bridge.js').listOperations extends Function ? ReturnType<import('../bridge.js').listOperations> : never} operations
+ * @param {ReturnType<import('../bridge.js').listOperations>} operations
  * @param {{
  *   onRun: (keys: string[], applyMutate: boolean) => void,
  *   onCancel: () => void,
@@ -43,7 +45,7 @@ export function openInspectorPicker(screen, theme, operations, handlers) {
     right: 1,
     height: 2,
     tags: true,
-    content: `{${theme.dim}-fg}Space toggle · a all S01 · c clear · A apply-mutate · r/Enter run · Esc cancel{/}`,
+    content: `{${theme.dim}-fg}Space/click toggle · wheel scroll · a S01 · c clear · A apply · r/Enter run · Esc{/}`,
   });
 
   const list = blessed.list({
@@ -56,12 +58,18 @@ export function openInspectorPicker(screen, theme, operations, handlers) {
     vi: true,
     mouse: true,
     tags: true,
+    scrollbar: {
+      ch: "│",
+      style: { fg: theme.dim },
+    },
     style: {
       fg: theme.fg,
       bg: theme.popupBg,
       selected: { fg: theme.selectedFg, bg: theme.selectedBg },
     },
   });
+
+  wireListMouse(list, screen);
 
   function rowLabel(op) {
     const mark = selected.has(op.key) ? `{${theme.accent}-fg}[x]{/}` : "[ ]";

@@ -2,6 +2,8 @@
  * Scrollable text result popup.
  */
 
+import { bindWheelScroll } from "../mouse.js";
+
 /**
  * @param {import('neo-blessed').Widgets.Screen} screen
  * @param {object} theme
@@ -27,6 +29,7 @@ export function openTextResult(screen, theme, text, handlers) {
     mouse: true,
     scrollbar: {
       ch: "│",
+      track: { bg: theme.popupBg },
       style: { fg: theme.dim },
     },
     style: {
@@ -39,6 +42,8 @@ export function openTextResult(screen, theme, text, handlers) {
     content: text || "(empty report)",
   });
 
+  bindWheelScroll(box, screen, { step: 3 });
+
   const hint = blessed.box({
     parent: screen,
     bottom: 0,
@@ -46,7 +51,7 @@ export function openTextResult(screen, theme, text, handlers) {
     width: "100%",
     height: 1,
     tags: true,
-    content: `{${theme.dim}-fg}j/k scroll · Esc/q close{/}`,
+    content: `{${theme.dim}-fg}j/k · mouse wheel scroll · Esc/q close{/}`,
   });
 
   function cleanup() {

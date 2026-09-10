@@ -4,6 +4,7 @@
 
 import { readdirSync, statSync } from "node:fs";
 import { basename, join, relative, resolve, sep } from "node:path";
+import { wireListMouse } from "../mouse.js";
 
 const SKIP = new Set(["node_modules", ".git"]);
 
@@ -112,9 +113,12 @@ export function createFileBrowser(screen, theme, session, handlers) {
     },
     scrollbar: {
       ch: "│",
-      style: { fg: theme.dim },
+      track: { bg: theme.bg },
+      style: { fg: theme.dim, bg: theme.bg },
     },
   });
+
+  wireListMouse(list, screen);
 
   /** @type {{ label: string, path: string, isDir: boolean }[]} */
   let entries = [];
