@@ -1,6 +1,6 @@
 ---
 title: Environment operations
-status: review
+status: accepted
 mvp: false
 source: .dep/.blueprint/20-features/modifications/environment-operations.md
 tags: [P, U]

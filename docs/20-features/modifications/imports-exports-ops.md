@@ -1,6 +1,6 @@
 ---
 title: Imports / exports operations
-status: review
+status: accepted
 mvp: false
 source: .dep/.blueprint/20-features/modifications/imports-exports-operations.md
 tags: [M, D, E]

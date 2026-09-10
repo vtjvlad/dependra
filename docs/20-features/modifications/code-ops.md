@@ -1,6 +1,6 @@
 ---
 title: Code operations
-status: review
+status: accepted
 mvp: false
 source: .dep/.blueprint/20-features/modifications/code-operations.md
 tags: [E, F]

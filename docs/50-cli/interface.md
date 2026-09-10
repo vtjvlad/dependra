@@ -9,7 +9,7 @@ source: .dep/.blueprint/50-user/cli-flags.md
 
 ## Цель
 
-Минимальный командный интерфейс для запуска MVP-операций. Версия пакета: `0.0.39`.
+Минимальный командный интерфейс для запуска MVP-операций. Версия пакета: `0.0.47`.
 
 ## Entrypoint
 
@@ -45,7 +45,7 @@ dependra|fds|deps|dep <file> [options]
 | `--json` | `-j` | Вывод JSON вместо текста |
 | `--path-mode <name\|relative\|absolute>` | `-p <…>` | Режим путей для graph (default: `relative`) |
 | `--help` | `-h` | Справка |
-| `--version` | `-v` | Версия пакета: `Dependra v0.0.39` |
+| `--version` | `-v` | Версия пакета: `Dependra v0.0.47` |
 
 ### Короткие флаги
 
@@ -141,7 +141,7 @@ dependra|fds|deps|dep <file> [options]
 - [ ] Каждый флаг операции включает только свою **секцию отчёта** (кроме default-all)
 - [ ] `--imports` и `--exports` дают один ключ `import-export-analysis` с отфильтрованным `data`
 - [ ] `--graph` без `--imports` не добавляет import-export в `results`, но reverse/forward graph работает
-- [ ] `--version` / `-v` печатает `Dependra v0.0.39`
+- [ ] `--version` / `-v` печатает `Dependra v0.0.47`
 - [ ] `--json` / `-j` даёт валидный JSON по схеме отчёта
 - [ ] Короткие флаги `-b|-i|-e|-g|-j|-p` эквивалентны long-формам
 - [ ] Алгоритм short: при коллизии — вторая буква; S01 short стабильны (см. S02 `-en`)

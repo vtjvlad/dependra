@@ -11,7 +11,7 @@ source: handbook/roadmap/stages/05-visualization-config.md, docs/50-cli/interfac
 
 Зафиксировать флаги этапа **S05** (visualization E + config sugar + metadata U) в правилах S01–S04: long/short, pipeline/`results`, schematic help/text.
 
-Версия пакета остаётся `0.0.39` (не повышать без approve).
+Версия пакета остаётся `0.0.47` (не повышать без approve).
 
 ## Правила short
 

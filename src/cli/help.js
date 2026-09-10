@@ -145,6 +145,29 @@ export function formatHelp(opts = {}) {
 
   lines.push(
     ...frameSection(
+      "operations · s07",
+      [
+        flagRow("-f, --format", "normalize / format", col, pal),
+        flagRow("-si, --sort-imports", "sort import blocks", col, pal),
+        flagRow("-fi, --fix-imports", "fix unused/broken", col, pal),
+        flagRow("-fe, --fix-exports", "unused exports", col, pal),
+        flagRow("-sc, --strip-comments", "remove comments", col, pal),
+        flagRow("-id, --install-deps", "PM install (danger)", col, pal),
+        flagRow("-am, --ai-modify", "AI patch (opt)", col, pal),
+        "",
+        flagRow("-ap, --apply", "write/exec", col, pal),
+        flagRow("-dr, --dry-run", "no write (wins)", col, pal),
+        flagRow("-u, --undo", "restore backup", col, pal),
+        "",
+        pal.dim("default = preview; не default-all / не level"),
+      ],
+      pal,
+    ),
+    "",
+  );
+
+  lines.push(
+    ...frameSection(
       "config · s05",
       [
         flagRow("-l, --level <1..5>", "сахар над операциями", col, pal),

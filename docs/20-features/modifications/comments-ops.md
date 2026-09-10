@@ -1,6 +1,6 @@
 ---
 title: Comments operations
-status: review
+status: accepted
 mvp: false
 source: .dep/.blueprint/20-features/modifications/comments-operations.md
 tags: [E, I]

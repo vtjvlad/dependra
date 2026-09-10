@@ -1,6 +1,6 @@
 ---
 title: Подсистема модификации (S07)
-status: review
+status: accepted
 mvp: false
 source: .dep/.blueprint/20-features/modifications, file-enhancement-functions---E--I--F
 tags: [E, I, F]

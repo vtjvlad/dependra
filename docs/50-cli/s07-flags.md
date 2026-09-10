@@ -1,6 +1,6 @@
 ---
 title: CLI флаги S07
-status: review
+status: accepted
 mvp: false
 source: handbook/roadmap/stages/07-modifications.md, docs/50-cli/interface.md
 ---
@@ -9,7 +9,7 @@ source: handbook/roadmap/stages/07-modifications.md, docs/50-cli/interface.md
 
 ## Цель
 
-Зафиксировать флаги этапа **S07** (modifications / enhancement): safety-режимы + mutate-ops. Версия пакета остаётся `0.0.39` (не повышать без approve).
+Зафиксировать флаги этапа **S07** (modifications / enhancement): safety-режимы + mutate-ops. Версия пакета остаётся `0.0.47` (не повышать без approve).
 
 ## Правила short
 

@@ -15,7 +15,7 @@ source: .dep/.blueprint/50-user/cli-flags.md, 35-configurations/output-settings.
 
 ```json
 {
-  "version": "0.0.39",
+  "version": "0.0.47",
   "target": "/abs/path/to/file.js",
   "cwd": "/abs/cwd",
   "options": {
@@ -59,7 +59,7 @@ source: .dep/.blueprint/50-user/cli-flags.md, 35-configurations/output-settings.
 
 ```json
 {
-  "version": "0.0.39",
+  "version": "0.0.47",
   "target": "/abs/proj/src/app.js",
   "cwd": "/abs/proj",
   "options": {
@@ -101,7 +101,7 @@ source: .dep/.blueprint/50-user/cli-flags.md, 35-configurations/output-settings.
 Идея вывода:
 
 ```
-dependra 0.0.39 · schematic
+dependra 0.0.47 · schematic
 target  src/app.js
 cwd     /abs/proj
 
@@ -262,7 +262,7 @@ ANSI-цвет: только если stdout — TTY и не задан `NO_COLOR
 
 ## Acceptance criteria
 
-- [ ] JSON валиден и содержит `version: "0.0.39"`
+- [ ] JSON валиден и содержит `version: "0.0.47"`
 - [ ] stderr не ломает парсинг JSON из stdout
 - [ ] Text/JSON содержат секции только для включённых операций
 - [ ] При только `--imports` в `data` нет поля `exports`

@@ -1,6 +1,6 @@
 ---
 title: Safety модификаций
-status: review
+status: accepted
 mvp: false
 source: .dep/.blueprint/20-features/modifications/safety.md
 tags: [E, I, F]

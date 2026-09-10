@@ -4,8 +4,10 @@ import { existsSync, statSync } from "node:fs";
 import { isAbsolute, resolve } from "node:path";
 import { createAnalysisContext, runPipeline } from "../core/index.js";
 import { registerBuiltInInspectors } from "../inspectors/index.js";
+import { runUndo } from "../modifications/index.js";
+import { findProjectRoot } from "../inspectors/scan-js-files.js";
 import { formatReport } from "../reporters/index.js";
-import { formatCliVersion } from "../version.js";
+import { PACKAGE_VERSION, formatCliVersion } from "../version.js";
 import { formatHelp } from "./help.js";
 import { resolveCli } from "./resolve-cli.js";
 
@@ -38,13 +40,44 @@ async function main() {
     return 0;
   }
 
+  const cwd = process.cwd();
+
+  // Undo without requiring a target file
+  if (parsed.options.undo && !parsed.targetPath) {
+    const root = findProjectRoot(cwd, cwd);
+    const undone = runUndo(root, parsed.options.undoSession ?? null);
+    if (!undone.ok) {
+      process.stderr.write(`${undone.message}\n`);
+      return 1;
+    }
+    const report = {
+      version: PACKAGE_VERSION,
+      target: root,
+      cwd,
+      options: { undo: true, json: parsed.options.json },
+      results: {
+        modification: {
+          inspectorId: "modification",
+          status: "ok",
+          data: undone.report,
+        },
+      },
+    };
+    process.stdout.write(
+      formatReport(report, {
+        json: parsed.options.json,
+        report: parsed.options.report,
+      }),
+    );
+    return undone.report.summary.failed > 0 ? 1 : 0;
+  }
+
   if (!parsed.targetPath) {
     process.stderr.write("Укажите путь к файлу. См. --help\n");
     process.stdout.write(formatHelp());
     return 1;
   }
 
-  const cwd = process.cwd();
   const targetPath = isAbsolute(parsed.targetPath)
     ? parsed.targetPath
     : resolve(cwd, parsed.targetPath);

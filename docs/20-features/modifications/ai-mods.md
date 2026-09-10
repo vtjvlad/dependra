@@ -1,6 +1,6 @@
 ---
 title: AI modifications
-status: review
+status: accepted
 mvp: false
 source: .dep/.blueprint/20-features/modifications/ai-integration.md
 tags: [I]
