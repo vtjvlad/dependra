@@ -1,0 +1,227 @@
+import { PACKAGE_VERSION } from "../version.js";
+import {
+  createPalette,
+  formatBanner,
+  frameSection,
+  useColor,
+  visibleWidth,
+} from "../reporters/style.js";
+
+/**
+ * @param {string} flags
+ * @param {string} desc
+ * @param {number} col
+ * @param {ReturnType<typeof createPalette>} pal
+ * @returns {string}
+ */
+function flagRow(flags, desc, col, pal) {
+  const left = pal.bold(flags);
+  const gap = Math.max(2, col - visibleWidth(flags));
+  return `${left}${" ".repeat(gap)}${desc}`;
+}
+
+/**
+ * Schematic help для CLI.
+ *
+ * @param {{ color?: boolean }} [opts]
+ * @returns {string}
+ */
+export function formatHelp(opts = {}) {
+  const color =
+    opts.color === undefined ? useColor() : Boolean(opts.color);
+  const pal = createPalette(color);
+  const col = 28;
+
+  /** @type {string[]} */
+  const lines = [
+    `${pal.bold("dependra")} ${pal.dim(PACKAGE_VERSION)} ${pal.dim("·")} ${pal.cyan("schematic")}`,
+    `${pal.dim("cli")}     анализ одного JS-файла (ESM / CJS)`,
+    "",
+  ];
+
+  lines.push(
+    ...frameSection(
+      "usage",
+      [
+        `${pal.cyan("→")}  ${pal.bold("dependra")} ${pal.dim("<file>")} ${pal.dim("[options]")}`,
+        `${pal.cyan("→")}  ${pal.bold("fds")}${pal.dim("|")}${pal.bold("deps")}${pal.dim("|")}${pal.bold("dep")} ${pal.dim("<file> [options]")}`,
+        `${pal.cyan("→")}  node src/cli/index.js ${pal.dim("<file> [options]")}`,
+      ],
+      pal,
+    ),
+    "",
+  );
+
+  lines.push(
+    ...frameSection(
+      "operations",
+      [
+        flagRow("-b, --basic", "метаданные файла", col, pal),
+        flagRow("-i, --imports", "импорты (AST)", col, pal),
+        flagRow("-e, --exports", "экспорты (AST)", col, pal),
+        flagRow("-g, --graph", "imported-by  │  imports", col, pal),
+        "",
+        pal.dim("без operation-флагов → все четыре S01"),
+      ],
+      pal,
+    ),
+    "",
+  );
+
+  lines.push(
+    ...frameSection(
+      "operations · s02",
+      [
+        flagRow("-a, --additional", "пути, права, копии", col, pal),
+        flagRow("-en, --entities", "символы import/export", col, pal),
+        "",
+        pal.dim("только явное включение (не в default-all)"),
+      ],
+      pal,
+    ),
+    "",
+  );
+
+  lines.push(
+    ...frameSection(
+      "operations · s03",
+      [
+        flagRow("-va, --validate", "cycles, unused, broken", col, pal),
+        "",
+        pal.dim("только явное включение (не в default-all)"),
+      ],
+      pal,
+    ),
+    "",
+  );
+
+  lines.push(
+    ...frameSection(
+      "operations · s04",
+      [
+        flagRow("-env, --environment", "ссылки, скрипты, entry", col, pal),
+        flagRow("-c, --commands", "утилиты файла (PATH)", col, pal),
+        flagRow("-ec, --env-check", "наличие node/npm/…", col, pal),
+        flagRow("-r, --runtime", "чем запускать файл", col, pal),
+        flagRow("-io, --io", "fs read/write/… (AST)", col, pal),
+        "",
+        pal.dim("только явное включение (не в default-all)"),
+      ],
+      pal,
+    ),
+    "",
+  );
+
+  lines.push(
+    ...frameSection(
+      "operations · s05",
+      [
+        flagRow("-m, --mermaid", "Mermaid views", col, pal),
+        flagRow("-gr, --graphviz", "Graphviz DOT", col, pal),
+        flagRow("-vj, --viz-json", "JSON graph views", col, pal),
+        flagRow("-me, --metadata", "metadata extractors", col, pal),
+        "",
+        pal.dim("только явное / level / profile (не default-all)"),
+      ],
+      pal,
+    ),
+    "",
+  );
+
+  lines.push(
+    ...frameSection(
+      "operations · s06",
+      [
+        flagRow("-q, --quality", "code quality metrics", col, pal),
+        flagRow("-ex, --explain", "AI explanations (opt)", col, pal),
+        "",
+        pal.dim("quality offline; explain нужен ai.enabled+key"),
+        pal.dim("не default-all"),
+      ],
+      pal,
+    ),
+    "",
+  );
+
+  lines.push(
+    ...frameSection(
+      "operations · s07",
+      [
+        flagRow("-f, --format", "normalize / format", col, pal),
+        flagRow("-si, --sort-imports", "sort import blocks", col, pal),
+        flagRow("-fi, --fix-imports", "fix unused/broken", col, pal),
+        flagRow("-fe, --fix-exports", "unused exports", col, pal),
+        flagRow("-sc, --strip-comments", "remove comments", col, pal),
+        flagRow("-id, --install-deps", "PM install (danger)", col, pal),
+        flagRow("-am, --ai-modify", "AI patch (opt)", col, pal),
+        "",
+        flagRow("-ap, --apply", "write/exec", col, pal),
+        flagRow("-dr, --dry-run", "no write (wins)", col, pal),
+        flagRow("-u, --undo", "restore backup", col, pal),
+        "",
+        pal.dim("default = preview; не default-all / не level"),
+      ],
+      pal,
+    ),
+    "",
+  );
+
+  lines.push(
+    ...frameSection(
+      "config · s05",
+      [
+        flagRow("-l, --level <1..5>", "сахар над операциями", col, pal),
+        flagRow("-pr, --profile <name>", "профиль из dependra.conf", col, pal),
+        flagRow("-cf, --config <path>", "явный dependra.conf", col, pal),
+      ],
+      pal,
+    ),
+    "",
+  );
+
+  lines.push(
+    ...frameSection(
+      "output",
+      [
+        flagRow("-j, --json", "JSON вместо schematic text", col, pal),
+        flagRow(
+          "-p, --path-mode <mode>",
+          "name │ relative │ absolute",
+          col,
+          pal,
+        ),
+        pal.dim("default path-mode: relative"),
+      ],
+      pal,
+    ),
+    "",
+  );
+
+  lines.push(
+    ...frameSection(
+      "meta",
+      [
+        flagRow("-h, --help", "эта справка", col, pal),
+        flagRow("-v, --version", `Dependra v${PACKAGE_VERSION}`, col, pal),
+      ],
+      pal,
+    ),
+    "",
+  );
+
+  lines.push(
+    ...frameSection(
+      "examples",
+      [
+        `${pal.dim("$")} dependra src/app.js`,
+        `${pal.dim("$")} dependra src/app.js ${pal.cyan("-g")} ${pal.cyan("-p")} name`,
+        `${pal.dim("$")} dependra src/app.js ${pal.cyan("-i")} ${pal.cyan("-e")} ${pal.cyan("-j")}`,
+      ],
+      pal,
+    ),
+  );
+
+  lines.push(...formatBanner(pal, { tagline: "inspect · connect · understand" }));
+
+  return `${lines.join("\n").trimEnd()}\n`;
+}
