@@ -230,6 +230,27 @@ ANSI-цвет: только если stdout — TTY и не задан `NO_COLOR
 └────────────────────────────────────────────────┘
 ```
 
+## Секции S07
+
+Флаги и pipeline: [s07-flags.md](s07-flags.md).  
+Подсистема: [modifications/](../20-features/modifications/README.md).
+
+| options.* (mutate/safety) | results key | text title |
+|---------------------------|-------------|------------|
+| любой mutate-op / undo | `modification` | `modification` |
+
+- только при явном mutate/undo; **не** в default-all и **не** в `--level`
+- без `--apply` → preview (`mode: "preview"|"dry-run"`), файлы не меняются
+- `--dry-run` побеждает `--apply`
+- анализ-инспекторы по-прежнему read-only
+
+```
+┌─ modification ─────────────────────────────────┐
+│  mode · summary · changes (id/op/diff)         │
+│  backup · appliedIds | undo session            │
+└────────────────────────────────────────────────┘
+```
+
 ## Правила
 
 1. JSON — в stdout; диагностики CLI при `--json` — в stderr.
@@ -237,6 +258,7 @@ ANSI-цвет: только если stdout — TTY и не задан `NO_COLOR
 3. Имена полей зависимостей в graph: `isExternal` (не `external`) — единообразно с моделью.
 4. Форматы Mermaid/Graphviz/viz-json — спека S05: [visualization.md](../20-features/analysis/visualization.md).
 5. Quality / AI explain — спека S06: [code-quality-analysis.md](../20-features/analysis/code-quality-analysis.md), [ai-explain.md](../20-features/analysis/ai-explain.md).
+6. Modifications — спека S07: [modifications/safety.md](../20-features/modifications/safety.md), [s07-flags.md](s07-flags.md).
 
 ## Acceptance criteria
 
@@ -250,3 +272,4 @@ ANSI-цвет: только если stdout — TTY и не задан `NO_COLOR
 - [ ] Секции S04 появляются только при `-env`/`-c`/`-ec`/`-r`/`-io`
 - [ ] Секции S05 mermaid/graphviz/viz-json/metadata только при соответствующих флагах (или level/profile)
 - [ ] Секции S06 `quality` / `ai-explain` только при `-q` / `-ex` (или level/profile/`ai.explain`)
+- [ ] Секция S07 `modification` только при mutate/undo флагах; без `--apply` нет записи на диск

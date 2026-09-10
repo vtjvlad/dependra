@@ -39,7 +39,9 @@ source: .dep/.blueprint/40-development-guidelines/analysis-levels.md
 - Level **4** (S06): добавляет `quality` (`-q`); **не** включает `explain` / AI.
 - Level **5** включает **один** viz-формат по умолчанию (`mermaid`); `graphviz` / `viz-json` — только явными флагами.
 - S04 ops (`commands`, `envCheck`, `runtime`, `io`) и S06 `explain` в levels **не** входят — только явными флагами / профилем / `ai.explain`.
+- **S07 mutate-ops** (`format`, `fixImports`, `installDeps`, `aiModify`, …) и `--apply` в levels **не** входят — только явными флагами ([s07-flags.md](../50-cli/s07-flags.md)).
 - Спека quality / explain: [code-quality-analysis.md](../20-features/analysis/code-quality-analysis.md), [ai-explain.md](../20-features/analysis/ai-explain.md), [s06-flags.md](../50-cli/s06-flags.md).
+- Спека modifications: [modifications/README.md](../20-features/modifications/README.md).
 
 ### Правила
 

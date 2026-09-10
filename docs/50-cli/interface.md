@@ -63,7 +63,7 @@ dependra|fds|deps|dep <file> [options]
 
 **Не в MVP / не в S01:** `--level` (см. [analysis-levels.md](../40-development/analysis-levels.md); реализация сахара — S05 / [s05-flags.md](s05-flags.md)).
 
-Расширения следующих этапов: [s02-flags.md](s02-flags.md), [s03-flags.md](s03-flags.md), [s04-flags.md](s04-flags.md), [s05-flags.md](s05-flags.md), [s06-flags.md](s06-flags.md).
+Расширения следующих этапов: [s02-flags.md](s02-flags.md), [s03-flags.md](s03-flags.md), [s04-flags.md](s04-flags.md), [s05-flags.md](s05-flags.md), [s06-flags.md](s06-flags.md), [s07-flags.md](s07-flags.md).
 
 Если не указан ни один из `--basic|-b|--imports|-i|--exports|-e|--graph|-g`, по умолчанию: **все четыре операции S01**.  
 Операции S02+ в default-all **не** входят (только явный флаг).
