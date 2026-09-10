@@ -30,15 +30,16 @@ source: .dep/.blueprint/40-development-guidelines/analysis-levels.md
 | **1** | `basic` |
 | **2** | `basic`, `additional`, `environment` |
 | **3** | level **2** + `imports`, `exports`, `graph` |
-| **4** | level **3** + `entities`, `validate` |
+| **4** | level **3** + `entities`, `validate`, `quality` |
 | **5** | level **4** + `mermaid`, `metadata` |
 
 Пояснения:
 
 - Level **2** использует уже существующие S02/S04 ops (`additional`, `environment`), без noop.
-- Level **4** не тянет quality (S06) — когда появится S06, таблицу расширят отдельным approve.
+- Level **4** (S06): добавляет `quality` (`-q`); **не** включает `explain` / AI.
 - Level **5** включает **один** viz-формат по умолчанию (`mermaid`); `graphviz` / `viz-json` — только явными флагами.
-- S04 ops (`commands`, `envCheck`, `runtime`, `io`) в levels **не** входят (шумны) — только явными флагами / профилем.
+- S04 ops (`commands`, `envCheck`, `runtime`, `io`) и S06 `explain` в levels **не** входят — только явными флагами / профилем / `ai.explain`.
+- Спека quality / explain: [code-quality-analysis.md](../20-features/analysis/code-quality-analysis.md), [ai-explain.md](../20-features/analysis/ai-explain.md), [s06-flags.md](../50-cli/s06-flags.md).
 
 ### Правила
 
@@ -59,6 +60,7 @@ source: .dep/.blueprint/40-development-guidelines/analysis-levels.md
 - [ ] S01/MVP: без `--level` в старых AC — поведение сохранено, пока флаг не передан
 - [ ] `--level 1` → только basic (если нет других ops)
 - [ ] `--level 3` → basic+additional+environment+imports+exports+graph
+- [ ] `--level 4` включает quality (не explain)
 - [ ] `--level 5` включает mermaid+metadata
 - [ ] Инспекторы не ветвятся по номеру level
 - [ ] Неверный level → exit 1

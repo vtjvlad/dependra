@@ -1,5 +1,6 @@
 import { getInspector } from "./registry.js";
 import { ensureTargetSourceFile, ParserError } from "../parsers/index.js";
+import { runAiExplain } from "../ai/explain.js";
 import { PACKAGE_VERSION } from "../version.js";
 
 /**
@@ -21,6 +22,8 @@ const ID_RUNTIME = "runtime-dependency-analysis";
 const ID_IO = "file-operations";
 const ID_VISUALIZATION = "visualization";
 const ID_METADATA = "metadata";
+const ID_QUALITY = "code-quality-analysis";
+const ID_AI_EXPLAIN = "ai-explain";
 
 /**
  * @param {string} id
@@ -228,6 +231,14 @@ export async function runPipeline(ctx) {
     results[ID_METADATA] = await runInspector(ID_METADATA, ctx);
   }
 
+  if (options.quality) {
+    results[ID_QUALITY] = await runInspector(ID_QUALITY, ctx);
+  }
+
+  if (options.explain) {
+    results[ID_AI_EXPLAIN] = await runAiExplain(ctx, results);
+  }
+
   /** @type {AnalysisReport} */
   const report = {
     version: PACKAGE_VERSION,
@@ -250,6 +261,8 @@ export async function runPipeline(ctx) {
       graphviz: Boolean(options.graphviz),
       vizJson: Boolean(options.vizJson),
       metadata: Boolean(options.metadata),
+      quality: Boolean(options.quality),
+      explain: Boolean(options.explain),
       pathMode: options.pathMode,
       level: options.level ?? null,
       profile: options.profile ?? null,

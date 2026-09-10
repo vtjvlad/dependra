@@ -743,6 +743,91 @@ function formatMetadataSection(result, pal) {
 }
 
 /**
+ * @param {InspectorResult} result
+ * @param {Palette} pal
+ * @returns {string[]}
+ */
+function formatQualitySection(result, pal) {
+  if (result.status === "error") {
+    return frameSection(
+      "quality",
+      [pal.red(`✖ ${result.error?.code}: ${result.error?.message}`)],
+      pal,
+    );
+  }
+  const d = result.data ?? {};
+  const scores = d.scores ?? {};
+  const metrics = d.metrics ?? {};
+  const findings = Array.isArray(d.findings) ? d.findings : [];
+  const summary = d.summary ?? {};
+
+  /** @type {string[]} */
+  const body = [
+    `${pal.dim("scores")}   quality ${scores.quality ?? "—"} · style ${scores.style ?? "—"}  ${pal.dim(scores.method ?? "")}`,
+    `${pal.dim("metrics")}  code ${metrics.linesCode ?? 0} · comment ${metrics.linesComment ?? 0} · blank ${metrics.linesBlank ?? 0} · excess ${metrics.linesExcessBlank ?? 0}`,
+    `${pal.dim("locals")}   unused ${metrics.localsUnused ?? 0}/${metrics.localsDeclared ?? 0} · dup ${metrics.duplicateBlocks ?? 0}`,
+    `${pal.dim("summary")}  error ${summary.error ?? 0} · warning ${summary.warning ?? 0} · info ${summary.info ?? 0}`,
+  ];
+
+  if (findings.length === 0) {
+    body.push("", pal.dim("∅  none"));
+  } else {
+    body.push("");
+    for (const f of findings) {
+      const sev =
+        f.severity === "error"
+          ? pal.red("error")
+          : f.severity === "warning"
+            ? pal.yellow("warning")
+            : pal.dim("info");
+      const loc =
+        f.loc != null ? pal.dim(`:${f.loc.line}:${f.loc.column}`) : "";
+      const name = f.name ? ` ${f.name}` : "";
+      body.push(`${sev}  ${f.code}${name}${loc}  ${f.message ?? ""}`);
+    }
+  }
+
+  return frameSection("quality", body, pal);
+}
+
+/**
+ * @param {InspectorResult} result
+ * @param {Palette} pal
+ * @returns {string[]}
+ */
+function formatAiExplainSection(result, pal) {
+  if (result.status === "error") {
+    return frameSection(
+      "ai-explain",
+      [pal.red(`✖ ${result.error?.code}: ${result.error?.message}`)],
+      pal,
+    );
+  }
+  const d = result.data ?? {};
+  /** @type {string[]} */
+  const body = [
+    `${pal.dim("provider")}  ${d.provider ?? "—"}  ${pal.dim(d.model ?? "")}`,
+  ];
+
+  if (d.skipped) {
+    body.push(pal.yellow(`skipped  ${d.skipReason ?? "unknown"}`));
+  } else {
+    const explanations = Array.isArray(d.explanations) ? d.explanations : [];
+    if (explanations.length === 0) {
+      body.push(pal.dim("∅  none"));
+    } else {
+      for (const ex of explanations) {
+        const ref = ex.refCode ? `${ex.refCode} · ` : "";
+        body.push(`${pal.cyan("→")}  ${ref}${ex.summary ?? ""}`);
+        if (ex.detail) body.push(pal.dim(`     ${ex.detail}`));
+      }
+    }
+  }
+
+  return frameSection("ai-explain", body, pal);
+}
+
+/**
  * Resolve color from report config.
  * @param {{ color?: boolean }} styleOpts
  * @param {object|null|undefined} reportCfg
@@ -880,6 +965,16 @@ export function formatTextReport(report, styleOpts = {}) {
   const metadata = report.results.metadata;
   if (opts.metadata && metadata) {
     push("metadata", formatMetadataSection(metadata, pal));
+  }
+
+  const quality = report.results["code-quality-analysis"];
+  if (opts.quality && quality) {
+    push("quality", formatQualitySection(quality, pal));
+  }
+
+  const aiExplain = report.results["ai-explain"];
+  if (opts.explain && aiExplain) {
+    push("ai-explain", formatAiExplainSection(aiExplain, pal));
   }
 
   if (report.prerequisiteErrors?.length) {

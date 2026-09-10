@@ -206,12 +206,37 @@ ANSI-цвет: только если stdout — TTY и не задан `NO_COLOR
 └────────────────────────────────────────────────┘
 ```
 
+## Секции S06
+
+Флаги и pipeline: [s06-flags.md](s06-flags.md).
+
+| options.* | results key | text title |
+|-----------|-------------|------------|
+| `quality` | `code-quality-analysis` | `quality` |
+| `explain` | `ai-explain` | `ai-explain` |
+
+- только при явном флаге / level(quality) / profile / `ai.explain`; не в default-all
+- `-ex` OR-включает `quality`
+- explain может быть `skipped` без падения отчёта
+- quality **offline**; explain опционален ([ai-explain.md](../20-features/analysis/ai-explain.md))
+
+```
+┌─ quality ──────────────────────────────────────┐
+│  scores · metrics · findings                   │
+└────────────────────────────────────────────────┘
+
+┌─ ai-explain ───────────────────────────────────┐
+│  explanations | skipped: reason                │
+└────────────────────────────────────────────────┘
+```
+
 ## Правила
 
 1. JSON — в stdout; диагностики CLI при `--json` — в stderr.
 2. При ошибке инспектора в JSON возвращается объект с `status: "error"`.
 3. Имена полей зависимостей в graph: `isExternal` (не `external`) — единообразно с моделью.
 4. Форматы Mermaid/Graphviz/viz-json — спека S05: [visualization.md](../20-features/analysis/visualization.md).
+5. Quality / AI explain — спека S06: [code-quality-analysis.md](../20-features/analysis/code-quality-analysis.md), [ai-explain.md](../20-features/analysis/ai-explain.md).
 
 ## Acceptance criteria
 
@@ -224,3 +249,4 @@ ANSI-цвет: только если stdout — TTY и не задан `NO_COLOR
 - [ ] Секция S03 `diagnostics` / ключ `validation` только при `-va` / `--validate`
 - [ ] Секции S04 появляются только при `-env`/`-c`/`-ec`/`-r`/`-io`
 - [ ] Секции S05 mermaid/graphviz/viz-json/metadata только при соответствующих флагах (или level/profile)
+- [ ] Секции S06 `quality` / `ai-explain` только при `-q` / `-ex` (или level/profile/`ai.explain`)

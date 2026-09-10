@@ -95,10 +95,10 @@ source: .dep/.blueprint/80-roadmap/development-sequence.md, 00-project/main-rule
 
 ## S06 — Quality + AI explain (F+I)
 
-1. Спека code-quality
-2. Инспектор quality
-3. Опциональный AI-adapter (объяснения; ядро без AI)
-4. Тесты / approve
+1. Спека code-quality + AI explain — **сделано** (accepted)
+2. Инспектор quality — **сделано**
+3. Опциональный AI-adapter (объяснения; ядро без AI) — **сделано**
+4. Тесты / approve — **сделано**
 
 ## S07 — Modifications
 

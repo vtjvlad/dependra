@@ -9,6 +9,7 @@ import { fileEnvironmentAnalysisInspector } from "./file-environment-analysis.js
 import { fileOperationsInspector } from "./file-operations.js";
 import { importExportAnalysisInspector } from "./import-export-analysis.js";
 import { metadataInspector } from "./metadata.js";
+import { codeQualityAnalysisInspector } from "./code-quality-analysis.js";
 import { runtimeDependencyAnalysisInspector } from "./runtime-dependency-analysis.js";
 import { validationInspector } from "./validation.js";
 import { visualizationInspector } from "./visualization.js";
@@ -31,4 +32,5 @@ export function registerBuiltInInspectors() {
   registerInspector(fileOperationsInspector);
   registerInspector(visualizationInspector);
   registerInspector(metadataInspector);
+  registerInspector(codeQualityAnalysisInspector);
 }

@@ -154,4 +154,22 @@ describe("parseArgs short flags", () => {
     assert.equal(level.levelArg, 3);
     assert.equal(level.options.level, 3);
   });
+
+  it("S06 shorts and default-all exclusion", () => {
+    const parsed = parseArgs(["file.js"]);
+    assert.equal(parsed.options.quality, false);
+    assert.equal(parsed.options.explain, false);
+
+    const q = parseArgs(["file.js", "-q"]);
+    assert.equal(q.options.quality, true);
+    assert.equal(q.options.basic, false);
+
+    const ex = parseArgs(["file.js", "-ex"]);
+    assert.equal(ex.options.explain, true);
+    assert.equal(ex.options.quality, false);
+
+    const both = parseArgs(["file.js", "--quality", "--explain"]);
+    assert.equal(both.options.quality, true);
+    assert.equal(both.options.explain, true);
+  });
 });

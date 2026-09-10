@@ -1,5 +1,5 @@
 /**
- * Разбор argv CLI (docs/50-cli/interface.md, s02–s05-flags.md).
+ * Разбор argv CLI (docs/50-cli/interface.md, s02–s06-flags.md).
  *
  * @typedef {import('../core/types.js').AnalysisOptions} AnalysisOptions
  *
@@ -47,6 +47,8 @@ export function parseArgs(argv, opts = {}) {
       graphviz: false,
       vizJson: false,
       metadata: false,
+      quality: false,
+      explain: false,
       json: false,
       pathMode: "relative",
       level: null,
@@ -67,6 +69,7 @@ export function parseArgs(argv, opts = {}) {
   let sawS03Op = false;
   let sawS04Op = false;
   let sawS05Op = false;
+  let sawS06Op = false;
 
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
@@ -159,6 +162,16 @@ export function parseArgs(argv, opts = {}) {
       sawS05Op = true;
       continue;
     }
+    if (arg === "--quality" || arg === "-q") {
+      result.options.quality = true;
+      sawS06Op = true;
+      continue;
+    }
+    if (arg === "--explain" || arg === "-ex") {
+      result.options.explain = true;
+      sawS06Op = true;
+      continue;
+    }
     if (arg === "--json" || arg === "-j") {
       result.options.json = true;
       continue;
@@ -230,7 +243,7 @@ export function parseArgs(argv, opts = {}) {
   }
 
   const sawAnyOp =
-    sawS01Op || sawS02Op || sawS03Op || sawS04Op || sawS05Op;
+    sawS01Op || sawS02Op || sawS03Op || sawS04Op || sawS05Op || sawS06Op;
   result.sawAnyOp = sawAnyOp;
 
   if (!skipDefaultAll && !sawAnyOp) {

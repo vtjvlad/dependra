@@ -24,7 +24,7 @@ source: .dep/.blueprint/20-features
 | file-operations | U | [S04](../../../handbook/roadmap/stages/04-environment-runtime.md) | Спека: [analysis/file-operations.md](../analysis/file-operations.md); `-io` |
 | visualization | E | [S05](../../../handbook/roadmap/stages/05-visualization-config.md) | Спека: [analysis/visualization.md](../analysis/visualization.md); CLI: [s05-flags.md](../../50-cli/s05-flags.md); `-m`/`-gr`/`-vj` |
 | metadata | U | [S05](../../../handbook/roadmap/stages/05-visualization-config.md) | Спека: [analysis/metadata.md](../analysis/metadata.md); short `-me` |
-| code-quality-analysis | F | [S06](../../../handbook/roadmap/stages/06-quality-ai.md) | Качество кода |
+| code-quality-analysis | F | [S06](../../../handbook/roadmap/stages/06-quality-ai.md) | Спека: [analysis/code-quality-analysis.md](../analysis/code-quality-analysis.md); CLI: [s06-flags.md](../../50-cli/s06-flags.md); short `-q` |
 | file-enhancement-functions | E/I/F | [S07](../../../handbook/roadmap/stages/07-modifications.md) | Усовершенствование (обзор) |
 
 ## Модификации
@@ -41,7 +41,7 @@ CLI MVP — в [docs/50-cli](../../50-cli/interface.md) (S01).
 | Тема | Целевой этап |
 |------|--------------|
 | Config profiles / `--level` / report / flags / ai ([`.conf`](../../35-configuration/s05-config.md), [example](../../35-configuration/dependra.conf.example)) | [S05](../../../handbook/roadmap/stages/05-visualization-config.md) |
-| AI explain (без мутаций) | [S06](../../../handbook/roadmap/stages/06-quality-ai.md) |
+| AI explain (без мутаций) | [S06](../../../handbook/roadmap/stages/06-quality-ai.md) | Спека: [analysis/ai-explain.md](../analysis/ai-explain.md); short `-ex` |
 | Multi-language / LSP / Tree-sitter | [S09](../../../handbook/roadmap/stages/09-multilang.md) |
 | Platform / monorepo | [S10](../../../handbook/roadmap/stages/10-platform-monorepo.md) |
 | Build System / releases | [S11](../../../handbook/roadmap/stages/11-build-system.md) |
