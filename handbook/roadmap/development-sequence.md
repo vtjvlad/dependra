@@ -102,10 +102,10 @@ source: .dep/.blueprint/80-roadmap/development-sequence.md, 00-project/main-rule
 
 ## S07 — Modifications
 
-1. Спека safety (preview/backup/undo/dry-run)
-2. Safety-каркас
-3. Code/import ops → env installs → comments → AI mods
-4. Тесты / approve
+1. Спека safety (preview/backup/undo/dry-run) — **сделано**
+2. Safety-каркас — **сделано**
+3. Code/import ops → env installs → comments → AI mods — **сделано**
+4. Тесты / approve — **сделано**
 
 ## S08 — TUI и поверхности
 

@@ -11,7 +11,7 @@ source: handbook/roadmap/stages
 Детали, `dependsOn` и exit criteria — в [stages/](stages/) и [mvp-backlog.md](mvp-backlog.md).  
 При закрытии пункта синхронизируй статус в файле этапа / backlog.
 
-**Активный этап:** S07. S01–S06 — `завершено`.
+**Активный этап:** S08. S01–S07 — `завершено`.
 
 ---
 
@@ -161,23 +161,23 @@ source: handbook/roadmap/stages
 Детали: [stages/07-modifications.md](stages/07-modifications.md)
 
 ### S07-A — Спека
-- [ ] S07-001: спека safety (preview/backup/undo/dry-run)
-- [ ] S07-002: спека modification ops
+- [x] S07-001: спека safety (preview/backup/undo/dry-run)
+- [x] S07-002: спека modification ops
 
 ### S07-B — Safety-каркас
-- [ ] S07-003: safety-каркас в core
+- [x] S07-003: safety-каркас в core
 
 ### S07-C — Ops
-- [ ] S07-004: code ops
-- [ ] S07-005: imports/exports fix ops
-- [ ] S07-006: environment install ops (opt-in)
-- [ ] S07-007: comments ops
+- [x] S07-004: code ops
+- [x] S07-005: imports/exports fix ops
+- [x] S07-006: environment install ops (opt-in)
+- [x] S07-007: comments ops
 
 ### S07-D — AI mods + тесты
-- [ ] S07-008: AI modification provider (optional)
-- [ ] S07-009: фикстуры, rollback-тесты, approve
-- [ ] Default = no mutate без явного запроса
-- [ ] Exit criteria S07
+- [x] S07-008: AI modification provider (optional)
+- [x] S07-009: фикстуры, rollback-тесты, approve
+- [x] Default = no mutate без явного запроса
+- [x] Exit criteria S07
 
 ---
 
