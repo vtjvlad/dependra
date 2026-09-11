@@ -1,8 +1,19 @@
 import { readdirSync, statSync, existsSync } from "node:fs";
 import { dirname, extname, join } from "node:path";
+import { ensureBuiltInBackends, listExtensions } from "../parsers/index.js";
 
-const JS_EXTS = new Set([".js", ".mjs", ".cjs"]);
 const SKIP_DIRS = new Set(["node_modules", ".git"]);
+
+/**
+ * @returns {Set<string>}
+ */
+function sourceExts() {
+  ensureBuiltInBackends();
+  const exts = listExtensions();
+  return new Set(
+    exts.length > 0 ? exts : [".js", ".mjs", ".cjs", ".ts", ".tsx"],
+  );
+}
 
 /**
  * Ближайший каталог с package.json вверх от startDir, иначе fallbackCwd.
@@ -25,12 +36,14 @@ export function findProjectRoot(startDir, fallbackCwd) {
 }
 
 /**
- * Рекурсивно собирает .js/.mjs/.cjs под root (без node_modules/.git).
+ * Рекурсивно собирает исходники зарегистрированных языков под root
+ * (без node_modules/.git). Имя сохранено для совместимости S01–S08.
  *
  * @param {string} root
  * @returns {string[]}
  */
 export function listJavaScriptFiles(root) {
+  const EXTS = sourceExts();
   /** @type {string[]} */
   const out = [];
 
@@ -51,7 +64,7 @@ export function listJavaScriptFiles(root) {
         walk(full);
         continue;
       }
-      if (ent.isFile() && JS_EXTS.has(extname(ent.name).toLowerCase())) {
+      if (ent.isFile() && EXTS.has(extname(ent.name).toLowerCase())) {
         out.push(full);
       }
     }
@@ -60,7 +73,7 @@ export function listJavaScriptFiles(root) {
   try {
     const st = statSync(root);
     if (st.isFile()) {
-      if (JS_EXTS.has(extname(root).toLowerCase())) out.push(root);
+      if (EXTS.has(extname(root).toLowerCase())) out.push(root);
       return out;
     }
   } catch {

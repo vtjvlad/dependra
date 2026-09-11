@@ -1,6 +1,6 @@
 ---
 title: Language Backend (адаптер языка)
-status: review
+status: accepted
 mvp: false
 source: .dep/.blueprint/99-terminology/language-backend.md, handbook/roadmap/stages/09-multilang.md
 ---
@@ -173,8 +173,8 @@ src/parsers/
 
 ## Acceptance criteria
 
-- [ ] Контракт `LanguageBackend` + реестр описаны и согласованы с S09 exit criteria
-- [ ] JS-путь остаётся backend’ом; поведение S01–S08 не требует смены public API
-- [ ] TS подключается вторым backend без правок контракта инспектора
-- [ ] Providers optional и не ломают analyze при отсутствии
-- [ ] Инспекторы / core не импортируют API Acorn / typescript-estree напрямую
+- [x] Контракт `LanguageBackend` + реестр описаны и согласованы с S09 exit criteria
+- [x] JS-путь остаётся backend’ом; поведение S01–S08 не требует смены public API
+- [x] TS подключается вторым backend без правок контракта инспектора
+- [x] Providers optional и не ломают analyze при отсутствии
+- [x] Инспекторы / core не импортируют API Acorn / typescript-estree напрямую

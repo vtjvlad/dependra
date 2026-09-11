@@ -1,20 +1,22 @@
-import { readFile } from "node:fs/promises";
-import { existsSync, statSync } from "node:fs";
-import { extname, relative } from "node:path";
-import { parseJavaScript } from "./acorn-adapter.js";
+import { extname } from "node:path";
 import { ParserError } from "./errors.js";
-
-const JS_EXTENSIONS = new Set([".js", ".mjs", ".cjs"]);
+import {
+  ensureBuiltInBackends,
+  getBackendForPath,
+  listExtensions,
+} from "./registry.js";
 
 /**
  * @typedef {object} SourceFile
  * @property {string} path
  * @property {string} [relativePath]
- * @property {"javascript"} language
+ * @property {import('./registry.js').LanguageId} language
  * @property {"esm"|"cjs"|"unknown"} moduleKind
  * @property {string} [sourceText]
  * @property {object} [ast]
  */
+
+const JS_EXTENSIONS = new Set([".js", ".mjs", ".cjs"]);
 
 /**
  * @param {string} absPath
@@ -25,84 +27,35 @@ export function isSupportedJavaScriptPath(absPath) {
 }
 
 /**
- * Читает файл и строит SourceFile с AST (через адаптер Acorn).
+ * Любой зарегистрированный language-backend.
+ * @param {string} absPath
+ * @returns {boolean}
+ */
+export function isSupportedPath(absPath) {
+  ensureBuiltInBackends();
+  return getBackendForPath(absPath) != null;
+}
+
+/**
+ * Читает файл и строит SourceFile с AST через language-backend.
  *
  * @param {string} absPath Абсолютный путь
  * @param {string} cwd Для relativePath
  * @returns {Promise<SourceFile>}
  */
 export async function loadSourceFile(absPath, cwd) {
-  if (!existsSync(absPath)) {
-    throw new ParserError(
-      "FILE_NOT_FOUND",
-      `Файл не найден: ${absPath}`,
-      "validation",
-      { filePath: absPath },
-    );
-  }
-
-  let st;
-  try {
-    st = statSync(absPath);
-  } catch (err) {
-    throw new ParserError(
-      "READ_FAILED",
-      `Не удалось прочитать путь: ${absPath}`,
-      "execution",
-      {
-        filePath: absPath,
-        cause: err instanceof Error ? err.message : String(err),
-      },
-    );
-  }
-
-  if (!st.isFile()) {
-    throw new ParserError(
-      "FILE_NOT_FOUND",
-      `Не файл: ${absPath}`,
-      "validation",
-      { filePath: absPath },
-    );
-  }
-
-  if (!isSupportedJavaScriptPath(absPath)) {
+  ensureBuiltInBackends();
+  const backend = getBackendForPath(absPath);
+  if (!backend) {
+    const exts = listExtensions().join("/");
     throw new ParserError(
       "UNSUPPORTED_LANGUAGE",
-      `MVP поддерживает только JavaScript (.js/.mjs/.cjs): ${absPath}`,
+      `Неподдерживаемый язык или расширение (ожидаются ${exts || ".js/.mjs/.cjs/.ts/.tsx"}): ${absPath}`,
       "validation",
       { filePath: absPath, ext: extname(absPath) },
     );
   }
-
-  let sourceText;
-  try {
-    sourceText = await readFile(absPath, "utf8");
-  } catch (err) {
-    throw new ParserError(
-      "READ_FAILED",
-      `Не удалось прочитать файл: ${absPath}`,
-      "execution",
-      {
-        filePath: absPath,
-        cause: err instanceof Error ? err.message : String(err),
-      },
-    );
-  }
-
-  const ast = parseJavaScript(sourceText, { filePath: absPath });
-  const rel = relative(cwd, absPath);
-
-  /** @type {SourceFile} */
-  const sourceFile = {
-    path: absPath,
-    relativePath: rel.startsWith("..") ? absPath : rel,
-    language: "javascript",
-    moduleKind: "unknown",
-    sourceText,
-    ast,
-  };
-
-  return sourceFile;
+  return backend.loadSourceFile(absPath, { cwd, wantAst: true, wantSourceText: true });
 }
 
 /**

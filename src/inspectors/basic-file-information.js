@@ -9,7 +9,7 @@ import { basename, extname } from "node:path";
 
 /**
  * @param {string} ext lowercase with dot or ""
- * @returns {{ format: string, mimeType: string|null, language: "javascript"|"unknown", engine: "node"|null }}
+ * @returns {{ format: string, mimeType: string|null, language: "javascript"|"typescript"|"unknown", engine: "node"|null }}
  */
 function classifyByExt(ext) {
   switch (ext) {
@@ -20,6 +20,20 @@ function classifyByExt(ext) {
         format: "javascript",
         mimeType: "text/javascript",
         language: "javascript",
+        engine: "node",
+      };
+    case ".ts":
+      return {
+        format: "typescript",
+        mimeType: "text/typescript",
+        language: "typescript",
+        engine: "node",
+      };
+    case ".tsx":
+      return {
+        format: "tsx",
+        mimeType: "text/typescript",
+        language: "typescript",
         engine: "node",
       };
     case ".json":

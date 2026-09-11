@@ -23,13 +23,13 @@ source: .dep/.blueprint/90-context/project-context-spec.md
 | Ограничения проекта | Accepted | [limitations.md](../../docs/20-architecture/limitations.md) |
 | MVP scope | Accepted, S01 реализован | [mvp-scope.md](../../docs/20-features/mvp-scope.md) |
 | Полный roadmap (S01–S11) | S01–S08 `завершено` | [roadmap](../roadmap/README.md), [todo-checklist](../roadmap/todo-checklist.md) |
-| Текущие договорённости | Актуальны | S01–S08 `завершено`; активен **S09**; пакет = `0.0.47` |
+| Текущие договорённости | Актуальны | S01–S08 `завершено`; S09-A–C + тесты готовы (approve этапа); пакет = `0.0.47` |
 | Долгосрочные цели | В roadmap | [stages S02–S11](../roadmap/stages/README.md) |
 | Особенности реализации | Задокументировано | раздел ниже |
-| Требования к качеству | `npm test` (13 AC) | `tests/mvp-*.test.js`, `tests/fixtures/mvp/` |
-| Взаимодействие модулей | Accepted | [inspector-contract](../../docs/20-architecture/inspector-contract.md), [modules](../../docs/20-architecture/modules.md) |
+| Требования к качеству | `npm test` | `tests/mvp-*.test.js`, `tests/s09-typescript.test.js`, `tests/fixtures/` |
+| Взаимодействие модулей | Accepted | [inspector-contract](../../docs/20-architecture/inspector-contract.md), [modules](../../docs/20-architecture/modules.md), [language-backend](../../docs/20-architecture/language-backend.md) |
 | Требования к документации | Частично | docs = спека, handbook = процесс; blueprint = архив |
-| Принятые проектные решения (ADR) | ADR-0001 | [handbook/adr](../adr/README.md) |
+| Принятые проектные решения (ADR) | ADR-0001…0003 | [handbook/adr](../adr/README.md) |
 
 ## Реализация S01 (факт)
 

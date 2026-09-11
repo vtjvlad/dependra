@@ -29,8 +29,10 @@
   },
   "dependencies": {
     "@m234/nerd-fonts": "^0.5.2",
+    "@typescript-eslint/typescript-estree": "^8.70.0",
     "acorn": "^8.18.0",
     "devicons": "^2.0.1",
-    "neo-blessed": "^0.2.0"
+    "neo-blessed": "^0.2.0",
+    "typescript": "^6.0.3"
   }
 }

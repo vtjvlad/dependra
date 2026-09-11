@@ -1,6 +1,6 @@
 ---
 title: S09 — TypeScript как анализируемый язык
-status: review
+status: accepted
 mvp: false
 source: handbook/adr/ADR-0002-first-language-typescript.md, handbook/roadmap/stages/09-multilang.md
 ---
@@ -88,8 +88,8 @@ source: handbook/adr/ADR-0002-first-language-typescript.md, handbook/roadmap/sta
 
 ## Acceptance criteria
 
-- [ ] `.ts` / `.tsx` не дают `UNSUPPORTED_LANGUAGE` на минимуме инспекторов
-- [ ] JS `.js/.mjs/.cjs` путь без регрессии (существующие тесты зелёные)
-- [ ] Type-only imports не ломают schema (поле опционально)
-- [ ] Нет зависимости «сборки Dependra через tsc»; `typescript` только за adapter
-- [ ] Фикстуры s09 + тесты покрывают registry + imports
+- [x] `.ts` / `.tsx` не дают `UNSUPPORTED_LANGUAGE` на минимуме инспекторов
+- [x] JS `.js/.mjs/.cjs` путь без регрессии (существующие тесты зелёные)
+- [x] Type-only imports не ломают schema (поле опционально)
+- [x] Нет зависимости «сборки Dependra через tsc»; `typescript` только за adapter
+- [x] Фикстуры s09 + тесты покрывают registry + imports

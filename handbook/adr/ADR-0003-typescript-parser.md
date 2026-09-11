@@ -1,7 +1,7 @@
 ---
 id: ADR-0003
 title: Парсер TypeScript для S09
-status: Предложено
+status: Принято
 date: 2026-09-11
 replaces:
 replaced_by:

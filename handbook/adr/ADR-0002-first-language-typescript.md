@@ -1,7 +1,7 @@
 ---
 id: ADR-0002
 title: Первый язык beyond JS — TypeScript
-status: Предложено
+status: Принято
 date: 2026-09-11
 replaces:
 replaced_by:

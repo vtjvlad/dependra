@@ -10,7 +10,7 @@ source: .dep/.blueprint/10-technology, 30-architecture, 99-terminology/language-
 | Поле | Значение |
 |------|----------|
 | **ID** | S09 |
-| **Статус** | `в работе` (S09-A спека готова → approve) |
+| **Статус** | `в работе` (S09-B/C stubs/D тесты готовы → approve этапа) |
 | **dependsOn** | S08 |
 
 ## Цель / границы
@@ -39,22 +39,22 @@ source: .dep/.blueprint/10-technology, 30-architecture, 99-terminology/language-
 
 | ID | Название | Статус |
 |----|----------|--------|
-| S09-A | Спека adapters + выбор первого языка | `ожидает подтверждения` |
-| S09-B | Language-backend + инспекторы | `запланировано` |
-| S09-C | Tree-sitter / LSP (optional) | `запланировано` |
-| S09-D | Тесты / approve | `запланировано` |
+| S09-A | Спека adapters + выбор первого языка | `завершено` |
+| S09-B | Language-backend + инспекторы | `завершено` |
+| S09-C | Tree-sitter / LSP (optional) | `завершено` (null-object stubs) |
+| S09-D | Тесты / approve | `ожидает подтверждения` (тесты зелёные) |
 
 ## Задачи
 
 | ID | Название | Приоритет | dependsOn | Статус |
 |----|----------|-----------|-----------|--------|
-| S09-001 | ADR: первый язык beyond JS | высокий | S08 | `ожидает подтверждения` |
-| S09-002 | Спека language-backend adapter contract | высокий | S09-001 | `ожидает подтверждения` |
-| S09-003 | Реализация adapter + basic/import inspectors для языка | высокий | S09-002 | `запланировано` |
-| S09-004 | Регистрация в core без правок контракта ядра | высокий | S09-003 | `запланировано` |
-| S09-005 | Optional Tree-sitter provider | средний | S09-002 | `запланировано` |
-| S09-006 | Optional LSP provider | средний | S09-002 | `запланировано` |
-| S09-007 | Фикстуры multi-lang + approve | высокий | S09-004…006 | `запланировано` |
+| S09-001 | ADR: первый язык beyond JS | высокий | S08 | `завершено` |
+| S09-002 | Спека language-backend adapter contract | высокий | S09-001 | `завершено` |
+| S09-003 | Реализация adapter + basic/import inspectors для языка | высокий | S09-002 | `завершено` |
+| S09-004 | Регистрация в core без правок контракта ядра | высокий | S09-003 | `завершено` |
+| S09-005 | Optional Tree-sitter provider | средний | S09-002 | `завершено` (null stub) |
+| S09-006 | Optional LSP provider | средний | S09-002 | `завершено` (null stub) |
+| S09-007 | Фикстуры multi-lang + approve | высокий | S09-004…006 | `ожидает подтверждения` |
 
 ### S09-001 / S09-002 — артефакты
 
@@ -65,12 +65,12 @@ source: .dep/.blueprint/10-technology, 30-architecture, 99-terminology/language-
 
 ## Чеклист этапа
 
-- [x] S09-A: ADR языка + спека adapter *(черновик `review` / ADR `Предложено` — ждут approve)*
-- [ ] S09-B: минимум один язык beyond JS через adapter
-- [ ] S09-C: Tree-sitter/LSP optional за интерфейсом
-- [ ] S09-D: тесты + approve
-- [ ] Ядро не знает внутренностей конкретного языка
-- [ ] Exit criteria выполнены
+- [x] S09-A: ADR языка + спека adapter *(approve: ADR `Принято`, спеки `accepted`)*
+- [x] S09-B: минимум один язык beyond JS через adapter (TypeScript + typescript-estree)
+- [x] S09-C: Tree-sitter/LSP optional за интерфейсом *(null-object: `isAvailable() === false`)*
+- [x] S09-D: тесты `tests/s09-*.test.js` + fixtures/s09 *(approve этапа — владельцу)*
+- [x] Ядро не знает внутренностей конкретного языка
+- [ ] Exit criteria выполнены *(ждёт approve владельца → S10)*
 
 ## Exit criteria
 

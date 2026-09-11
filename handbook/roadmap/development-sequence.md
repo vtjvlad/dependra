@@ -114,11 +114,11 @@ source: .dep/.blueprint/80-roadmap/development-sequence.md, 00-project/main-rule
 3. Контракты future surfaces (Web/REST/IDE) без полной реализации всех UI — **сделано**
 4. Approve — **сделано** → S09
 
-## S09 — Multi-language + LSP/Tree-sitter (`в работе`)
+## S09 — Multi-language + LSP/Tree-sitter (`в работе` → approve этапа)
 
-1. Спека language-backend adapters + ADR TypeScript — **черновик** ([language-backend](../../docs/20-architecture/language-backend.md), [ADR-0002](../adr/ADR-0002-first-language-typescript.md)) → approve
-2. Первый язык beyond JS (TS) + опционально Tree-sitter/LSP
-3. Тесты / approve
+1. Спека language-backend adapters + ADR TypeScript — **approve** ([language-backend](../../docs/20-architecture/language-backend.md), [ADR-0002](../adr/ADR-0002-first-language-typescript.md))
+2. Первый язык beyond JS (TS) + null providers Tree-sitter/LSP — **сделано**
+3. Тесты — **сделано** (`tests/s09-typescript.test.js`); approve этапа — владельцу
 
 ## S10 — Platform / monorepo
 

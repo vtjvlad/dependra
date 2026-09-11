@@ -24,15 +24,17 @@ import {
   resolveModificationMode,
   runUndo,
 } from "../modifications/index.js";
+import { registerBuiltInBackends } from "../parsers/index.js";
 import { formatReport, formatTextReport } from "../reporters/index.js";
 
 let builtinsRegistered = false;
 
 /**
- * Register built-in inspectors (idempotent).
+ * Register built-in language backends + inspectors (idempotent).
  */
 export function registerBuiltins() {
   if (builtinsRegistered) return;
+  registerBuiltInBackends();
   registerBuiltInInspectors();
   builtinsRegistered = true;
 }

@@ -208,20 +208,20 @@ source: handbook/roadmap/stages
 Детали: [stages/09-multilang.md](stages/09-multilang.md)
 
 ### S09-A — Спека
-- [x] S09-001: ADR — первый язык beyond JS (TypeScript) — [ADR-0002](../adr/ADR-0002-first-language-typescript.md), парсер [ADR-0003](../adr/ADR-0003-typescript-parser.md) — *ожидает подтверждения*
-- [x] S09-002: спека language-backend adapter contract — [`language-backend.md`](../../docs/20-architecture/language-backend.md), [`s09-typescript.md`](../../docs/10-technology/s09-typescript.md) — *ожидает подтверждения*
+- [x] S09-001: ADR — первый язык beyond JS (TypeScript) — [ADR-0002](../adr/ADR-0002-first-language-typescript.md), парсер [ADR-0003](../adr/ADR-0003-typescript-parser.md) — `завершено` (approve)
+- [x] S09-002: спека language-backend adapter contract — [`language-backend.md`](../../docs/20-architecture/language-backend.md), [`s09-typescript.md`](../../docs/10-technology/s09-typescript.md) — `завершено` (approve)
 
 ### S09-B — Adapters
-- [ ] S09-003: adapter + inspectors для языка
-- [ ] S09-004: регистрация в core без ломки контракта
+- [x] S09-003: adapter + inspectors для языка (TypeScript / typescript-estree)
+- [x] S09-004: регистрация в core без ломки контракта (`registerBuiltInBackends`)
 
 ### S09-C — Optional providers
-- [ ] S09-005: Tree-sitter provider
-- [ ] S09-006: LSP provider
+- [x] S09-005: Tree-sitter provider — null-object stub (`isAvailable() === false`)
+- [x] S09-006: LSP provider — null-object stub (`isAvailable() === false`)
 
 ### S09-D — Тесты
-- [ ] S09-007: фикстуры multi-lang + approve
-- [ ] Exit criteria S09
+- [x] S09-007: фикстуры `tests/fixtures/s09/` + `tests/s09-typescript.test.js` *(approve этапа — владельцу)*
+- [ ] Exit criteria S09 *(approve → решение о S10)*
 
 ---
 

@@ -1,7 +1,17 @@
 import { existsSync, statSync } from "node:fs";
 import { dirname, extname, isAbsolute, join, normalize, resolve } from "node:path";
+import { ensureBuiltInBackends, listExtensions } from "../parsers/index.js";
 
-const TRY_EXTS = [".js", ".mjs", ".cjs"];
+/**
+ * @returns {string[]}
+ */
+function tryExts() {
+  ensureBuiltInBackends();
+  const fromRegistry = listExtensions();
+  return fromRegistry.length > 0
+    ? fromRegistry
+    : [".js", ".mjs", ".cjs", ".ts", ".tsx"];
+}
 
 /**
  * @param {string} candidate
@@ -21,6 +31,7 @@ function ifFile(candidate) {
 /**
  * Минимальный Node-like resolve для относительных/абсолютных спецификаторов.
  * Bare → { isExternal: true, resolvedPath: null }.
+ * Расширения берутся из language-backend registry (JS + TS).
  *
  * @param {string|null} specifier
  * @param {string} fromFileAbs абсолютный путь файла-импортёра
@@ -44,6 +55,7 @@ export function resolveSpecifier(specifier, fromFileAbs) {
 
   const baseDir = dirname(fromFileAbs);
   const raw = isAbs ? normalize(specifier) : resolve(baseDir, specifier);
+  const TRY_EXTS = tryExts();
 
   const direct = ifFile(raw);
   if (direct) return { isExternal: false, resolvedPath: direct };

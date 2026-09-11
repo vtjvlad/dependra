@@ -73,16 +73,32 @@ export function extractImportExport(ast, filePath) {
    * @param {string|null} source
    * @param {"static"|"dynamic"|"require"} kind
    * @param {object} node
+   * @param {"value"|"type"|"typeof"} [importKind="value"]
    */
-  function pushImport(source, kind, node) {
+  function pushImport(source, kind, node, importKind = "value") {
     const { isExternal, resolvedPath } = resolveSpecifier(source, filePath);
-    imports.push({
+    /** @type {Record<string, unknown>} */
+    const record = {
       source,
       kind,
       resolvedPath,
       isExternal,
       loc: locOf(node),
-    });
+    };
+    if (importKind !== "value") {
+      record.importKind = importKind;
+    }
+    imports.push(record);
+  }
+
+  /**
+   * @param {object} node
+   * @returns {"value"|"type"|"typeof"}
+   */
+  function importKindOf(node) {
+    const k = node?.importKind ?? node?.exportKind;
+    if (k === "type" || k === "typeof") return k;
+    return "value";
   }
 
   /**
@@ -105,7 +121,7 @@ export function extractImportExport(ast, filePath) {
           node.source?.type === "Literal" && typeof node.source.value === "string"
             ? node.source.value
             : null;
-        if (source != null) pushImport(source, "static", node);
+        if (source != null) pushImport(source, "static", node, importKindOf(node));
         break;
       }
       case "ExportNamedDeclaration": {
@@ -114,8 +130,9 @@ export function extractImportExport(ast, filePath) {
           node.source?.type === "Literal" && typeof node.source.value === "string"
             ? node.source.value
             : null;
+        const exportKind = importKindOf(node);
         if (from != null) {
-          pushImport(from, "static", node);
+          pushImport(from, "static", node, exportKind);
           if (Array.isArray(node.specifiers) && node.specifiers.length > 0) {
             for (const spec of node.specifiers) {
               const name =
@@ -127,6 +144,7 @@ export function extractImportExport(ast, filePath) {
                 name,
                 from,
                 loc: locOf(spec),
+                ...(exportKind !== "value" ? { exportKind } : {}),
               });
             }
           } else {
@@ -135,6 +153,7 @@ export function extractImportExport(ast, filePath) {
               name: null,
               from,
               loc: locOf(node),
+              ...(exportKind !== "value" ? { exportKind } : {}),
             });
           }
         } else if (Array.isArray(node.specifiers)) {
@@ -146,6 +165,7 @@ export function extractImportExport(ast, filePath) {
               name,
               from: null,
               loc: locOf(spec),
+              ...(exportKind !== "value" ? { exportKind } : {}),
             });
           }
         }
@@ -153,13 +173,17 @@ export function extractImportExport(ast, filePath) {
           const decl = node.declaration;
           if (
             decl.type === "FunctionDeclaration" ||
-            decl.type === "ClassDeclaration"
+            decl.type === "ClassDeclaration" ||
+            decl.type === "TSTypeAliasDeclaration" ||
+            decl.type === "TSInterfaceDeclaration" ||
+            decl.type === "TSEnumDeclaration"
           ) {
             pushExport({
               kind: "named",
               name: decl.id?.name ?? null,
               from: null,
               loc: locOf(decl),
+              ...(exportKind !== "value" ? { exportKind } : {}),
             });
           } else if (decl.type === "VariableDeclaration") {
             for (const d of decl.declarations) {
@@ -192,12 +216,14 @@ export function extractImportExport(ast, filePath) {
           node.source?.type === "Literal" && typeof node.source.value === "string"
             ? node.source.value
             : null;
-        if (from != null) pushImport(from, "static", node);
+        const exportKind = importKindOf(node);
+        if (from != null) pushImport(from, "static", node, exportKind);
         pushExport({
           kind: "all",
           name: node.exported?.name ?? null,
           from,
           loc: locOf(node),
+          ...(exportKind !== "value" ? { exportKind } : {}),
         });
         break;
       }
@@ -328,7 +354,7 @@ async function analyze(ctx) {
   );
 
   sourceFile.moduleKind = moduleKind;
-  sourceFile.language = "javascript";
+  // Preserve language from language-backend (javascript | typescript); do not overwrite.
   ctx.projectModel.files[ctx.targetPath] = sourceFile;
   ctx.projectModel.imports = imports;
   ctx.projectModel.exports = exports;
