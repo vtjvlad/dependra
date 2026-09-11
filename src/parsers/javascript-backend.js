@@ -5,7 +5,7 @@ import { assertReadableFile, readUtf8File } from "./file-io.js";
 import { nullTreeSitterProvider } from "./providers/tree-sitter.js";
 import { nullLspProvider } from "./providers/lsp.js";
 
-const EXTENSIONS = [".js", ".mjs", ".cjs"];
+const EXTENSIONS = [".js", ".mjs", ".cjs", ".jsx"];
 
 /**
  * @typedef {import('./registry.js').LanguageBackend} LanguageBackend
@@ -23,6 +23,7 @@ async function loadJavaScriptSourceFile(absPath, opts) {
   const wantAst = opts.wantAst !== false;
   const sourceText = wantText || wantAst ? await readUtf8File(absPath) : undefined;
   const rel = relative(opts.cwd, absPath);
+  const ext = extname(absPath).toLowerCase();
   /** @type {SourceFile} */
   const sourceFile = {
     path: absPath,
@@ -32,7 +33,10 @@ async function loadJavaScriptSourceFile(absPath, opts) {
   };
   if (wantText && sourceText != null) sourceFile.sourceText = sourceText;
   if (wantAst && sourceText != null) {
-    sourceFile.ast = parseJavaScript(sourceText, { filePath: absPath });
+    sourceFile.ast = parseJavaScript(sourceText, {
+      filePath: absPath,
+      jsx: ext === ".jsx",
+    });
   }
   return sourceFile;
 }

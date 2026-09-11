@@ -1,16 +1,22 @@
-import { parse as acornParse } from "acorn";
+import * as acorn from "acorn";
+import jsx from "acorn-jsx";
 import { ParserError } from "./errors.js";
 
+/** @type {typeof acorn.Parser} */
+const JsxParser = acorn.Parser.extend(jsx());
+
 /**
- * Единственная точка импорта Acorn (ADR-0001).
+ * Единственная точка импорта Acorn / acorn-jsx (ADR-0001, ADR-0004).
  *
  * @param {string} sourceText
- * @param {{ filePath?: string }} [options]
+ * @param {{ filePath?: string, jsx?: boolean }} [options]
  * @returns {object} ESTree Program
  */
 export function parseJavaScript(sourceText, options = {}) {
+  const useJsx = options.jsx === true;
+  const parser = useJsx ? JsxParser : acorn.Parser;
   try {
-    return acornParse(sourceText, {
+    return parser.parse(sourceText, {
       ecmaVersion: "latest",
       sourceType: "module",
       locations: true,

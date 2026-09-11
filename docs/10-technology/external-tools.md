@@ -22,7 +22,7 @@ source: .dep/.blueprint/10-technology/20-external-tools
 
 | Область | Решение |
 |---------|---------|
-| Парсинг JS (ESM/CJS) | **Acorn** ([ADR-0001](../../handbook/adr/ADR-0001-js-ast-parser.md)) |
+| Парсинг JS / JSX | **Acorn** + **`acorn-jsx`** для `.jsx` ([ADR-0001](../../handbook/adr/ADR-0001-js-ast-parser.md), [ADR-0004](../../handbook/adr/ADR-0004-jsx-javascript-backend.md)) |
 | FS / path / MIME | Стандартная библиотека Node.js (+ при необходимости узкая утилита) |
 | LSP / Tree-sitter | **Не обязательны** для MVP; `deferred` → S09-C |
 

@@ -1,6 +1,6 @@
 ---
 title: Анализ дополнительных языков (beyond JS/TS)
-status: review
+status: accepted
 mvp: false
 source: .dep/.blueprint/10-technology/30-interpreted-languages, docs/20-architecture/language-backend.md, handbook/roadmap/stages/09-multilang.md
 ---
@@ -232,9 +232,9 @@ Lua — следующим тикетом после стабилизации Py
 
 ## Acceptance criteria (рамка)
 
-- [ ] Очередь языков и capability levels согласованы с владельцем
-- [ ] Процесс «ADR → узкая спека → backend → фикстуры» описан и обязателен
-- [ ] Новый язык не требует изменения публичного `Inspector` / `analyze` контракта
-- [ ] JS/TS backends остаются регрессионно зелёными
-- [ ] Providers optional и не блокируют analyze
-- [ ] Первая узкая спека следующего языка (JSX или Python) заведена отдельным файлом до кодирования
+- [x] Очередь языков и capability levels согласованы с владельцем
+- [x] Процесс «ADR → узкая спека → backend → фикстуры» описан и обязателен
+- [x] Новый язык не требует изменения публичного `Inspector` / `analyze` контракта
+- [x] JS/TS backends остаются регрессионно зелёными
+- [x] Providers optional и не блокируют analyze
+- [x] Первая узкая спека следующего языка (JSX или Python) заведена отдельным файлом до кодирования

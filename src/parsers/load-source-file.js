@@ -16,7 +16,7 @@ import {
  * @property {object} [ast]
  */
 
-const JS_EXTENSIONS = new Set([".js", ".mjs", ".cjs"]);
+const JS_EXTENSIONS = new Set([".js", ".mjs", ".cjs", ".jsx"]);
 
 /**
  * @param {string} absPath

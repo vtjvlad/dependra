@@ -22,6 +22,13 @@ function classifyByExt(ext) {
         language: "javascript",
         engine: "node",
       };
+    case ".jsx":
+      return {
+        format: "jsx",
+        mimeType: "text/javascript",
+        language: "javascript",
+        engine: "node",
+      };
     case ".ts":
       return {
         format: "typescript",

@@ -230,9 +230,9 @@ source: handbook/roadmap/stages
 Рамка: [`docs/10-technology/additional-languages.md`](../../docs/10-technology/additional-languages.md) (`review`).  
 Не блокирует S10; каждый язык — ADR + узкая спека + approve до кода.
 
-- [ ] LANG-001: approve рамки additional-languages
-- [ ] LANG-002: ADR + узкая спека JSX (`.jsx`) → L1–L2
-- [ ] LANG-003: реализация JSX backend/расширение JS
+- [x] LANG-001: approve рамки additional-languages — [`additional-languages.md`](../../docs/10-technology/additional-languages.md) `accepted`
+- [x] LANG-002: ADR + узкая спека JSX (`.jsx`) → L1–L2 — [ADR-0004](../adr/ADR-0004-jsx-javascript-backend.md), [`jsx.md`](../../docs/10-technology/jsx.md)
+- [x] LANG-003: реализация JSX backend/расширение JS (`acorn-jsx`, `.jsx` в JS-backend)
 - [ ] LANG-004: ADR язык Python + ADR парсер/extractor
 - [ ] LANG-005: узкая спека Python + реализация L1→L2
 - [ ] LANG-006: ADR + спека + реализация Lua L1→L2
