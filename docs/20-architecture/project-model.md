@@ -86,7 +86,18 @@ source: .dep/.blueprint/20-features/unified-project-model.md, 99-terminology
 2. Повторное чтение / пересборка AST — только при необходимости.
 3. Инспекторы пишут в согласованные поля; reporters читают `results` + при необходимости модель.
 4. Имя флага внешнего модуля везде: **`isExternal`** (не `external`).
-5. LSP / Tree-sitter / полная семантика — **deferred**.
+5. LSP / Tree-sitter / полная семантика — **deferred** → optional providers в S09-C ([language-backend.md](language-backend.md)).
+
+## S09 — расширение языка
+
+После approve [ADR-0002](../../handbook/adr/ADR-0002-first-language-typescript.md):
+
+- `SourceFile.language`: `"javascript" | "typescript" | string` (через backend id)
+- `BasicFileInfo.language`: то же + `"unknown"`
+- Опционально `ImportRecord.importKind`: `"value" | "type" | "typeof"` (default `"value"`)
+- Детали TS: [s09-typescript.md](../10-technology/s09-typescript.md)
+
+JS MVP-схемы выше остаются валидным подмножеством.
 
 ## Пример фрагмента модели
 

@@ -22,7 +22,7 @@ src/
 ├── scanner/
 ├── inspectors/
 ├── analyzers/
-├── parsers/
+├── parsers/       # language-backend registry + AST adapters (S09: JS + TS)
 ├── dependency/
 ├── graph/
 ├── metadata/

@@ -10,7 +10,7 @@ source: .dep/.blueprint/10-technology, 30-architecture, 99-terminology/language-
 | Поле | Значение |
 |------|----------|
 | **ID** | S09 |
-| **Статус** | `запланировано` (открыт после закрытия S08) |
+| **Статус** | `в работе` (S09-A спека готова → approve) |
 | **dependsOn** | S08 |
 
 ## Цель / границы
@@ -29,14 +29,17 @@ source: .dep/.blueprint/10-technology, 30-architecture, 99-terminology/language-
 ## Источники
 
 - Blueprint tech: [`.dep/.blueprint/10-technology/`](../../../.dep/.blueprint/10-technology/README.md)
+- Рабочая спека adapter: [`docs/20-architecture/language-backend.md`](../../../docs/20-architecture/language-backend.md)
+- TS scope: [`docs/10-technology/s09-typescript.md`](../../../docs/10-technology/s09-typescript.md)
 - [`docs/10-technology/external-tools.md`](../../../docs/10-technology/external-tools.md)
+- ADR: [0002](../../adr/ADR-0002-first-language-typescript.md), [0003](../../adr/ADR-0003-typescript-parser.md)
 - Terminology: language-backend, inspector, provider в blueprint `99-terminology/`
 
 ## Подэтапы
 
 | ID | Название | Статус |
 |----|----------|--------|
-| S09-A | Спека adapters + выбор первого языка | `запланировано` |
+| S09-A | Спека adapters + выбор первого языка | `ожидает подтверждения` |
 | S09-B | Language-backend + инспекторы | `запланировано` |
 | S09-C | Tree-sitter / LSP (optional) | `запланировано` |
 | S09-D | Тесты / approve | `запланировано` |
@@ -45,17 +48,24 @@ source: .dep/.blueprint/10-technology, 30-architecture, 99-terminology/language-
 
 | ID | Название | Приоритет | dependsOn | Статус |
 |----|----------|-----------|-----------|--------|
-| S09-001 | ADR: первый язык beyond JS | высокий | S08 | `запланировано` |
-| S09-002 | Спека language-backend adapter contract | высокий | S09-001 | `запланировано` |
+| S09-001 | ADR: первый язык beyond JS | высокий | S08 | `ожидает подтверждения` |
+| S09-002 | Спека language-backend adapter contract | высокий | S09-001 | `ожидает подтверждения` |
 | S09-003 | Реализация adapter + basic/import inspectors для языка | высокий | S09-002 | `запланировано` |
 | S09-004 | Регистрация в core без правок контракта ядра | высокий | S09-003 | `запланировано` |
 | S09-005 | Optional Tree-sitter provider | средний | S09-002 | `запланировано` |
 | S09-006 | Optional LSP provider | средний | S09-002 | `запланировано` |
 | S09-007 | Фикстуры multi-lang + approve | высокий | S09-004…006 | `запланировано` |
 
+### S09-001 / S09-002 — артефакты
+
+| Задача | Артефакт |
+|--------|----------|
+| S09-001 | [ADR-0002](../../adr/ADR-0002-first-language-typescript.md) — TypeScript; парсер — [ADR-0003](../../adr/ADR-0003-typescript-parser.md) |
+| S09-002 | [`language-backend.md`](../../../docs/20-architecture/language-backend.md) + [`s09-typescript.md`](../../../docs/10-technology/s09-typescript.md) |
+
 ## Чеклист этапа
 
-- [ ] S09-A: ADR языка + спека adapter
+- [x] S09-A: ADR языка + спека adapter *(черновик `review` / ADR `Предложено` — ждут approve)*
 - [ ] S09-B: минимум один язык beyond JS через adapter
 - [ ] S09-C: Tree-sitter/LSP optional за интерфейсом
 - [ ] S09-D: тесты + approve

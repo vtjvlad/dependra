@@ -14,6 +14,8 @@ source: .dep/.blueprint/00-project/30-glossary, 99-terminology
 | **Inspector** | Независимый модуль анализа одной области (базовый файл, импорты, зависимости и т.д.) |
 | **Analyzer** | Компонент, выполняющий анализ поверх модели / AST |
 | **Parser** | Модуль разбора исходника в AST / промежуточное представление |
+| **Language Backend** | Адаптер языка (extensions, load/parse, optional providers); см. [language-backend](../20-architecture/language-backend.md) (S09) |
+| **Provider** | Optional источник данных за backend (Tree-sitter, LSP) |
 | **AST** | Abstract Syntax Tree — дерево синтаксиса исходного файла |
 | **SourceFile** | Сущность модели: путь, текст/метаданные, язык, представление |
 | **Import** | Зафиксированная зависимость «этот файл импортирует X» |

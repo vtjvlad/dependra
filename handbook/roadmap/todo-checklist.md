@@ -208,8 +208,8 @@ source: handbook/roadmap/stages
 Детали: [stages/09-multilang.md](stages/09-multilang.md)
 
 ### S09-A — Спека
-- [ ] S09-001: ADR — первый язык beyond JS
-- [ ] S09-002: спека language-backend adapter contract
+- [x] S09-001: ADR — первый язык beyond JS (TypeScript) — [ADR-0002](../adr/ADR-0002-first-language-typescript.md), парсер [ADR-0003](../adr/ADR-0003-typescript-parser.md) — *ожидает подтверждения*
+- [x] S09-002: спека language-backend adapter contract — [`language-backend.md`](../../docs/20-architecture/language-backend.md), [`s09-typescript.md`](../../docs/10-technology/s09-typescript.md) — *ожидает подтверждения*
 
 ### S09-B — Adapters
 - [ ] S09-003: adapter + inspectors для языка

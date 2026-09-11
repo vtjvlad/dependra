@@ -31,9 +31,9 @@ source: .dep/.blueprint/README.md
 ## Карта разделов
 
 - [00-project/](00-project/overview.md) — концепция, цели, правило, глоссарий
-- [10-technology/](10-technology/stack.md) — стек и внешние инструменты
+- [10-technology/](10-technology/stack.md) — стек и внешние инструменты ([S09 TypeScript](10-technology/s09-typescript.md))
 - [15-build-system/](15-build-system/README.md) — система сборки (`deferred`)
-- [20-architecture/](20-architecture/overview.md) — модули, контракты, модель ([public-api](20-architecture/public-api.md))
+- [20-architecture/](20-architecture/overview.md) — модули, контракты, модель ([public-api](20-architecture/public-api.md), [language-backend](20-architecture/language-backend.md))
 - [20-features/](20-features/mvp-scope.md) — MVP-фичи и отложенный функционал
 - [35-configuration/](35-configuration/overview.md) — конфигурация ([MVP](35-configuration/overview.md) + [S05 `.conf`](35-configuration/s05-config.md) + [example](35-configuration/dependra.conf.example))
 - [40-development/](40-development/coding-principles.md) — принципы разработки

@@ -28,6 +28,8 @@ Dependra строится как **модульная** система: масш
 - [modules.md](modules.md) — роли модулей
 - [inspector-contract.md](inspector-contract.md) — контракт инспектора
 - [project-model.md](project-model.md) — единая модель (MVP)
+- [language-backend.md](language-backend.md) — адаптеры языков (S09)
+- [public-api.md](public-api.md) — публичная поверхность CLI/TUI/library
 - [project-structure.md](project-structure.md) — дерево `src/`
 - [limitations.md](limitations.md) — запреты
 

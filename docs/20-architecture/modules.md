@@ -22,7 +22,7 @@ source: .dep/.blueprint/30-architecture/requirements/modules-and-responsibilitie
 | `scanner` | Обход FS / разрешение путей в рамках задачи |
 | `inspectors` | Независимые инспекторы (basic, imports, exports, graph, …) |
 | `analyzers` | Общая логика анализа поверх модели (если не в инспекторе) |
-| `parsers` | Построение AST / адаптер к внешнему парсеру |
+| `parsers` | Language-backend registry + AST-адаптеры к внешним парсерам ([language-backend.md](language-backend.md)) |
 | `dependency` | Построение и запрос зависимостей |
 | `graph` | Структуры графа и режимы отображения путей |
 | `metadata` | Метаданные файла/проекта (часть — deferred) |
