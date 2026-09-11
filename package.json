@@ -10,7 +10,13 @@
   "license": "ISC",
   "author": "vtjvlas",
   "type": "module",
-  "main": "src/cli/index.js",
+  "main": "src/api/index.js",
+  "exports": {
+    ".": "./src/api/index.js",
+    "./api": "./src/api/index.js",
+    "./cli": "./src/cli/index.js",
+    "./tui": "./src/tui/index.js"
+  },
   "bin": {
     "dependra": "./src/cli/index.js",
     "fds": "./src/cli/index.js",
@@ -22,6 +28,9 @@
     "test": "node --test tests/**/*.test.js"
   },
   "dependencies": {
-    "acorn": "^8.18.0"
+    "@m234/nerd-fonts": "^0.5.2",
+    "acorn": "^8.18.0",
+    "devicons": "^2.0.1",
+    "neo-blessed": "^0.2.0"
   }
 }

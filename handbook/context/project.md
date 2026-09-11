@@ -22,8 +22,8 @@ source: .dep/.blueprint/90-context/project-context-spec.md
 | Выбор AST-парсера | ADR-0001 (Acorn) | [ADR-0001](../adr/ADR-0001-js-ast-parser.md) |
 | Ограничения проекта | Accepted | [limitations.md](../../docs/20-architecture/limitations.md) |
 | MVP scope | Accepted, S01 реализован | [mvp-scope.md](../../docs/20-features/mvp-scope.md) |
-| Полный roadmap (S01–S11) | S01–S07 `завершено` | [roadmap](../roadmap/README.md), [todo-checklist](../roadmap/todo-checklist.md) |
-| Текущие договорённости | Актуальны | S01–S07 `завершено`; активен **S08**; пакет = `0.0.47` |
+| Полный roadmap (S01–S11) | S01–S08 `завершено` | [roadmap](../roadmap/README.md), [todo-checklist](../roadmap/todo-checklist.md) |
+| Текущие договорённости | Актуальны | S01–S08 `завершено`; активен **S09**; пакет = `0.0.47` |
 | Долгосрочные цели | В roadmap | [stages S02–S11](../roadmap/stages/README.md) |
 | Особенности реализации | Задокументировано | раздел ниже |
 | Требования к качеству | `npm test` (13 AC) | `tests/mvp-*.test.js`, `tests/fixtures/mvp/` |

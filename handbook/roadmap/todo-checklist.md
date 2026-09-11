@@ -11,7 +11,7 @@ source: handbook/roadmap/stages
 Детали, `dependsOn` и exit criteria — в [stages/](stages/) и [mvp-backlog.md](mvp-backlog.md).  
 При закрытии пункта синхронизируй статус в файле этапа / backlog.
 
-**Активный этап:** S08. S01–S07 — `завершено`.
+**Активный этап:** S09. S01–S08 — `завершено`.
 
 ---
 
@@ -186,20 +186,20 @@ source: handbook/roadmap/stages
 Детали: [stages/08-tui-surfaces.md](stages/08-tui-surfaces.md)
 
 ### S08-A — Спека
-- [ ] S08-001: спека TUI в docs
-- [ ] S08-002: public core API для UI
+- [x] S08-001: спека TUI в docs
+- [x] S08-002: public core API для UI
 
 ### S08-B — TUI MVP
-- [ ] S08-003: просмотр результатов analysis
-- [ ] S08-004: запуск ops + configurator
-- [ ] S08-005: save / presentation
+- [x] S08-003: просмотр результатов analysis
+- [x] S08-004: запуск ops + configurator
+- [x] S08-005: save / presentation
 
 ### S08-C — Future surfaces
-- [ ] S08-006: контракты REST / library / IDE hook
+- [x] S08-006: контракты REST / library / IDE hook
 
 ### S08-D — Тесты
-- [ ] S08-007: smoke-тесты TUI + approve
-- [ ] Exit criteria S08
+- [x] S08-007: smoke-тесты TUI + approve
+- [x] Exit criteria S08
 
 ---
 
@@ -208,8 +208,8 @@ source: handbook/roadmap/stages
 Детали: [stages/09-multilang.md](stages/09-multilang.md)
 
 ### S09-A — Спека
-- [ ] S09-001: ADR — первый язык beyond JS
-- [ ] S09-002: спека language-backend adapter contract
+- [x] S09-001: ADR — первый язык beyond JS (TypeScript) — [ADR-0002](../adr/ADR-0002-first-language-typescript.md), парсер [ADR-0003](../adr/ADR-0003-typescript-parser.md) — *ожидает подтверждения*
+- [x] S09-002: спека language-backend adapter contract — [`language-backend.md`](../../docs/20-architecture/language-backend.md), [`s09-typescript.md`](../../docs/10-technology/s09-typescript.md) — *ожидает подтверждения*
 
 ### S09-B — Adapters
 - [ ] S09-003: adapter + inspectors для языка

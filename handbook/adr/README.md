@@ -39,6 +39,8 @@ source: .dep/.blueprint/70-adr
 | ID | Заголовок | Статус | Дата |
 |----|-----------|--------|------|
 | [ADR-0001](ADR-0001-js-ast-parser.md) | Выбор JS AST-парсера для MVP (Acorn) | Принято | 2026-09-08 |
+| [ADR-0002](ADR-0002-first-language-typescript.md) | Первый язык beyond JS — TypeScript | Предложено | 2026-09-11 |
+| [ADR-0003](ADR-0003-typescript-parser.md) | Парсер TypeScript для S09 (typescript-estree) | Предложено | 2026-09-11 |
 
 ## Связь с blueprint
 

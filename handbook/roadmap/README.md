@@ -8,7 +8,7 @@ source: .dep/.blueprint/80-roadmap
 # Roadmap
 
 Полный процесс разработки Dependra: большие этапы `S01`–`S11`, подэтапы и задачи.  
-Активный этап сейчас: **S08 (TUI и поверхности)** (после S07). S01–S07 — `завершено`. Версию пакета **не повышать** (`0.0.47`), пока владелец не решит иначе.
+Активный этап сейчас: **S09 (Multi-language + LSP/Tree-sitter)**. S01–S08 — `завершено`. Версию пакета **не повышать** (`0.0.47`), пока владелец не решит иначе.
 
 ## Документы
 
@@ -31,8 +31,8 @@ source: .dep/.blueprint/80-roadmap
 | S05 | Visualization + config (E) | `завершено` | S03 | [stages/05-visualization-config.md](stages/05-visualization-config.md) |
 | S06 | Quality + AI explain (F+I) | `завершено` | S03 | [stages/06-quality-ai.md](stages/06-quality-ai.md) |
 | S07 | Modifications / enhancement | `завершено` | S05, S06 | [stages/07-modifications.md](stages/07-modifications.md) |
-| S08 | TUI и поверхности | `запланировано` | S07 | [stages/08-tui-surfaces.md](stages/08-tui-surfaces.md) |
-| S09 | Multi-language + LSP/Tree-sitter | `запланировано` | S08 | [stages/09-multilang.md](stages/09-multilang.md) |
+| S08 | TUI и поверхности | `завершено` | S07 | [stages/08-tui-surfaces.md](stages/08-tui-surfaces.md) |
+| S09 | Multi-language + LSP/Tree-sitter | `в работе` (S09-A → approve) | S08 | [stages/09-multilang.md](stages/09-multilang.md) |
 | S10 | Platform / monorepo | `запланировано` | S09 | [stages/10-platform-monorepo.md](stages/10-platform-monorepo.md) |
 | S11 | Build System | `запланировано` | S10 | [stages/11-build-system.md](stages/11-build-system.md) |
 

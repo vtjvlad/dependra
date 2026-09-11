@@ -107,17 +107,17 @@ source: .dep/.blueprint/80-roadmap/development-sequence.md, 00-project/main-rule
 3. Code/import ops → env installs → comments → AI mods — **сделано**
 4. Тесты / approve — **сделано**
 
-## S08 — TUI и поверхности
+## S08 — TUI и поверхности (`завершено`)
 
-1. Спека TUI над core API
-2. TUI MVP
-3. Контракты future surfaces (Web/REST/IDE) без полной реализации всех UI
-4. Approve
+1. Спека TUI над core API — **сделано**
+2. TUI MVP — **сделано** (`neo-blessed`, дерево+Devicons, мышь, темы, configurator)
+3. Контракты future surfaces (Web/REST/IDE) без полной реализации всех UI — **сделано**
+4. Approve — **сделано** → S09
 
-## S09 — Multi-language
+## S09 — Multi-language + LSP/Tree-sitter (`в работе`)
 
-1. Спека language-backend adapters
-2. Первый язык beyond JS + опционально Tree-sitter/LSP
+1. Спека language-backend adapters + ADR TypeScript — **черновик** ([language-backend](../../docs/20-architecture/language-backend.md), [ADR-0002](../adr/ADR-0002-first-language-typescript.md)) → approve
+2. Первый язык beyond JS (TS) + опционально Tree-sitter/LSP
 3. Тесты / approve
 
 ## S10 — Platform / monorepo

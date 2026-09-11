@@ -16,11 +16,13 @@ source: .dep/.blueprint/30-architecture/requirements/modules-and-responsibilitie
 | Модуль | Ответственность |
 |--------|-----------------|
 | `cli` | Разбор argv, флаги, коды выхода, запуск pipeline, печать отчёта |
+| `api` | Публичная поверхность для CLI/TUI/library ([public-api.md](public-api.md)) |
+| `tui` | Консольный UI (neo-blessed); только через `api` |
 | `core` | Оркестрация анализа, контекст запуска, регистрация инспекторов |
 | `scanner` | Обход FS / разрешение путей в рамках задачи |
 | `inspectors` | Независимые инспекторы (basic, imports, exports, graph, …) |
 | `analyzers` | Общая логика анализа поверх модели (если не в инспекторе) |
-| `parsers` | Построение AST / адаптер к внешнему парсеру |
+| `parsers` | Language-backend registry + AST-адаптеры к внешним парсерам ([language-backend.md](language-backend.md)) |
 | `dependency` | Построение и запрос зависимостей |
 | `graph` | Структуры графа и режимы отображения путей |
 | `metadata` | Метаданные файла/проекта (часть — deferred) |

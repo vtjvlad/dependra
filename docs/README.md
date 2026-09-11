@@ -31,13 +31,14 @@ source: .dep/.blueprint/README.md
 ## Карта разделов
 
 - [00-project/](00-project/overview.md) — концепция, цели, правило, глоссарий
-- [10-technology/](10-technology/stack.md) — стек и внешние инструменты
+- [10-technology/](10-technology/stack.md) — стек и внешние инструменты ([S09 TypeScript](10-technology/s09-typescript.md))
 - [15-build-system/](15-build-system/README.md) — система сборки (`deferred`)
-- [20-architecture/](20-architecture/overview.md) — модули, контракты, модель
+- [20-architecture/](20-architecture/overview.md) — модули, контракты, модель ([public-api](20-architecture/public-api.md), [language-backend](20-architecture/language-backend.md))
 - [20-features/](20-features/mvp-scope.md) — MVP-фичи и отложенный функционал
 - [35-configuration/](35-configuration/overview.md) — конфигурация ([MVP](35-configuration/overview.md) + [S05 `.conf`](35-configuration/s05-config.md) + [example](35-configuration/dependra.conf.example))
 - [40-development/](40-development/coding-principles.md) — принципы разработки
-- [50-cli/](50-cli/interface.md) — CLI (S01 + [s02](50-cli/s02-flags.md) + [s03](50-cli/s03-flags.md) + [s04](50-cli/s04-flags.md) + [s05](50-cli/s05-flags.md) + [s06](50-cli/s06-flags.md) + [s07](50-cli/s07-flags.md))
+- [50-cli/](50-cli/interface.md) — CLI (S01 + [s02](50-cli/s02-flags.md) + [s03](50-cli/s03-flags.md) + [s04](50-cli/s04-flags.md) + [s05](50-cli/s05-flags.md) + [s06](50-cli/s06-flags.md) + [s07](50-cli/s07-flags.md) + [s08](50-cli/s08-flags.md))
+- [50-tui/](50-tui/overview.md) — TUI S08 ([попапы](50-tui/popups.md), [future surfaces](50-tui/future-surfaces.md))
 
 Шаблон документа: [`_template.md`](_template.md).
 

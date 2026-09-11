@@ -14,10 +14,26 @@ import { resolveCli } from "./resolve-cli.js";
 registerBuiltInInspectors();
 
 /**
+ * @param {string[]} argv
+ * @returns {boolean}
+ */
+function wantsTui(argv) {
+  if (argv[0] === "tui") return true;
+  return argv.some((a) => a === "--tui" || a === "-t");
+}
+
+/**
  * @returns {Promise<number>}
  */
 async function main() {
-  const parsed = resolveCli(process.argv.slice(2));
+  const argv = process.argv.slice(2);
+
+  if (wantsTui(argv)) {
+    const { runTui } = await import("../tui/index.js");
+    return runTui({ cwd: process.cwd() });
+  }
+
+  const parsed = resolveCli(argv);
 
   if (parsed.warnings?.length) {
     for (const w of parsed.warnings) {

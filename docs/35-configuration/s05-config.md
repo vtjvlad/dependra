@@ -26,7 +26,7 @@ MVP-база: [overview.md](overview.md). Наглядный шаблон: [`dep
 ### Не входит
 
 - JSON / YAML / TOML / `.mjs` как форматы конфига
-- TUI-configurator (S08)
+- TUI-configurator — реализован в S08 ([docs/50-tui/overview.md](../50-tui/overview.md)); запись через `serializeConf` / `saveConf`
 - Global `/etc/dependra` (слот зарезервирован, S05 не читает)
 - Произвольные шаблоны отчётов (custom template engine)
 - Хранение API-ключей в файле (только `apiKeyEnv`)

@@ -28,7 +28,9 @@ source: .dep/.blueprint/10-technology/00-used-stack, 10-primary-development-stac
 
 ## Границы
 
-Стек описывает код Dependra. Анализируемые пользователем проекты могут быть на других языках (поддержка языков — поэтапно; MVP — JS).
+Стек описывает код Dependra. Анализируемые пользователем проекты могут быть на других языках (поддержка языков — поэтапно; MVP — JS; S09 — TypeScript как **анализируемый** язык, см. [s09-typescript.md](s09-typescript.md)).
+
+TypeScript **запрещён** как язык исходников Dependra; dependency на пакет `typescript` допускается только за language-backend adapter ([ADR-0003](../../handbook/adr/ADR-0003-typescript-parser.md)).
 
 ## Acceptance criteria
 
