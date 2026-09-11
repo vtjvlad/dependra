@@ -120,6 +120,8 @@ source: .dep/.blueprint/80-roadmap/development-sequence.md, 00-project/main-rule
 2. Первый язык beyond JS (TS) + null providers Tree-sitter/LSP — **сделано**
 3. Тесты — **сделано** (`tests/s09-typescript.test.js`); approve этапа — владельцу
 
+**После S09 (не блокер S10):** доп. языки по рамке [additional-languages.md](../../docs/10-technology/additional-languages.md) — JSX → Python → Lua; каждый язык через ADR + узкую спеку.
+
 ## S10 — Platform / monorepo
 
 1. Approve: monorepo действительно нужен

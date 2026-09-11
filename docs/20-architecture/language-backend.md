@@ -30,6 +30,8 @@ S09: минимум **JavaScript** (существующий путь) + **TypeS
 - Build System — S11
 - Новые языки beyond TS в S09
 
+Расширение после S09: [`additional-languages.md`](../10-technology/additional-languages.md) (очередь, capability levels, процесс ADR → backend).
+
 ## Термины
 
 | Термин | Смысл |
@@ -170,6 +172,7 @@ src/parsers/
 - [external-tools.md](../10-technology/external-tools.md) — парсеры / providers
 - [ADR-0002](../../handbook/adr/ADR-0002-first-language-typescript.md), [ADR-0003](../../handbook/adr/ADR-0003-typescript-parser.md)
 - [s09-typescript.md](../10-technology/s09-typescript.md) — продуктовый scope TS
+- [additional-languages.md](../10-technology/additional-languages.md) — языки beyond JS/TS (рамка)
 
 ## Acceptance criteria
 

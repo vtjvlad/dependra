@@ -225,6 +225,21 @@ source: handbook/roadmap/stages
 
 ---
 
+## После S09 — дополнительные языки
+
+Рамка: [`docs/10-technology/additional-languages.md`](../../docs/10-technology/additional-languages.md) (`review`).  
+Не блокирует S10; каждый язык — ADR + узкая спека + approve до кода.
+
+- [ ] LANG-001: approve рамки additional-languages
+- [ ] LANG-002: ADR + узкая спека JSX (`.jsx`) → L1–L2
+- [ ] LANG-003: реализация JSX backend/расширение JS
+- [ ] LANG-004: ADR язык Python + ADR парсер/extractor
+- [ ] LANG-005: узкая спека Python + реализация L1→L2
+- [ ] LANG-006: ADR + спека + реализация Lua L1→L2
+- [ ] LANG-007: опционально `languages.enabled` в dependra.conf
+
+---
+
 ## S10 — Platform / monorepo
 
 Детали: [stages/10-platform-monorepo.md](stages/10-platform-monorepo.md)

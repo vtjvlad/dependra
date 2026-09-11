@@ -35,6 +35,7 @@ source: .dep/.blueprint/10-technology/20-external-tools
 | Парсинг TypeScript / TSX | **`@typescript-eslint/typescript-estree`** ([ADR-0003](../../handbook/adr/ADR-0003-typescript-parser.md)) — *Предложено* |
 | Language backends | Контракт [language-backend.md](../20-architecture/language-backend.md) |
 | Scope TS | [s09-typescript.md](s09-typescript.md) |
+| Языки beyond JS/TS | [additional-languages.md](additional-languages.md) — очередь + процесс; инструмент выбирается ADR на язык |
 | LSP / Tree-sitter | Optional providers за backend; не обязательны для S09-B |
 
 Изоляция: инспекторы не импортируют API парсера; только `parsers` / language-backend registry.

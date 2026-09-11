@@ -44,6 +44,7 @@ CLI MVP — в [docs/50-cli](../../50-cli/interface.md) (S01).
 | Config profiles / `--level` / report / flags / ai ([`.conf`](../../35-configuration/s05-config.md), [example](../../35-configuration/dependra.conf.example)) | [S05](../../../handbook/roadmap/stages/05-visualization-config.md) |
 | AI explain (без мутаций) | [S06](../../../handbook/roadmap/stages/06-quality-ai.md) | Спека: [analysis/ai-explain.md](../analysis/ai-explain.md); short `-ex` |
 | Multi-language / LSP / Tree-sitter | [S09](../../../handbook/roadmap/stages/09-multilang.md) | Спека: [language-backend](../../20-architecture/language-backend.md), [s09-typescript](../../10-technology/s09-typescript.md); ADR-0002/0003 |
+| Доп. языки (JSX, Python, Lua, …) | после S09 | Рамка: [additional-languages](../../10-technology/additional-languages.md); узкая спека + ADR на каждый язык |
 | Platform / monorepo | [S10](../../../handbook/roadmap/stages/10-platform-monorepo.md) |
 | Build System / releases | [S11](../../../handbook/roadmap/stages/11-build-system.md) |
 
