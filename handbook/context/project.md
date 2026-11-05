@@ -30,6 +30,7 @@ source: .dep/.blueprint/90-context/project-context-spec.md
 | Взаимодействие модулей | Accepted | [inspector-contract](../../docs/20-architecture/inspector-contract.md), [modules](../../docs/20-architecture/modules.md), [language-backend](../../docs/20-architecture/language-backend.md) |
 | Требования к документации | Частично | docs = спека, handbook = процесс; blueprint = архив |
 | Принятые проектные решения (ADR) | ADR-0001…0003 | [handbook/adr](../adr/README.md) |
+| Bootstrap на новой машине | Скрипт (до S11) | [docs/40-development/bootstrap.md](../../docs/40-development/bootstrap.md), `scripts/install.sh` |
 
 ## Реализация S01 (факт)
 

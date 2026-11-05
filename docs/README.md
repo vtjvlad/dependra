@@ -36,7 +36,7 @@ source: .dep/.blueprint/README.md
 - [20-architecture/](20-architecture/overview.md) — модули, контракты, модель ([public-api](20-architecture/public-api.md), [language-backend](20-architecture/language-backend.md))
 - [20-features/](20-features/mvp-scope.md) — MVP-фичи и отложенный функционал
 - [35-configuration/](35-configuration/overview.md) — конфигурация ([MVP](35-configuration/overview.md) + [S05 `.conf`](35-configuration/s05-config.md) + [example](35-configuration/dependra.conf.example))
-- [40-development/](40-development/coding-principles.md) — принципы разработки
+- [40-development/](40-development/coding-principles.md) — принципы разработки ([bootstrap](40-development/bootstrap.md))
 - [50-cli/](50-cli/interface.md) — CLI (S01 + [s02](50-cli/s02-flags.md) + [s03](50-cli/s03-flags.md) + [s04](50-cli/s04-flags.md) + [s05](50-cli/s05-flags.md) + [s06](50-cli/s06-flags.md) + [s07](50-cli/s07-flags.md) + [s08](50-cli/s08-flags.md))
 - [50-tui/](50-tui/overview.md) — TUI S08 ([попапы](50-tui/popups.md), [future surfaces](50-tui/future-surfaces.md))
 
