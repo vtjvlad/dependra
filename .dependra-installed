@@ -1,0 +1,8 @@
+installed_at=2026-11-05T22:16:07Z
+install_dir=/home/vtjvlad/server/dependra
+folder_link=/home/vtjvlad/server/fds
+bin_dir=/home/vtjvlad/.local/bin
+repo=https://github.com/vtjvlad/dependra.git
+branch=dev
+version=0.0.47
+node=v22.23.4
